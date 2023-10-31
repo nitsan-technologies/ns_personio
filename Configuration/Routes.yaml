@@ -1,0 +1,31 @@
+routeEnhancers:
+  JobsPlugin:
+    type: Extbase
+    extension: NsPersonio
+    plugin: Pi2
+    routes:
+      -
+        routePath: '/{jobs-title}'
+        _controller: 'Jobs::detail'
+        _arguments:
+          jobs-title: job
+    aspects:
+      jobs-title:
+        type: PersistedAliasMapper
+        tableName: tx_nspersonio_domain_model_jobs
+        routeFieldName: slug
+  JobApplicationFormPlugin:
+    type: Extbase
+    extension: NsPersonio
+    plugin: Pi3
+    routes:
+      -
+        routePath: '/applicationform/{jobs-applicationform}'
+        _controller: 'Jobs::application'
+        _arguments:
+          jobs-applicationform: application
+    aspects:
+      jobs-applicationform:
+        type: PersistedAliasMapper
+        tableName: tx_nspersonio_domain_model_jobs
+        routeFieldName: slug

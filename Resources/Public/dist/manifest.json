@@ -1,0 +1,21 @@
+{
+  "./Resources/public/dist/JavaScript/app.js": "/Resources/Public/dist/JavaScript/app.js",
+  "./Resources/public/dist/Css/app.css": "/Resources/Public/dist/Css/app.css",
+  "./Resources/public/dist/Fonts/roboto/roboto-bold.woff": "/Resources/Public/dist/Fonts/roboto/roboto-bold.woff",
+  "./Resources/public/dist/fonts/roboto-bold.woff": "/Resources/Public/dist/fonts/roboto-bold.69e3130c.woff",
+  "./Resources/public/dist/Fonts/roboto/roboto-medium.woff": "/Resources/Public/dist/Fonts/roboto/roboto-medium.woff",
+  "./Resources/public/dist/fonts/roboto-medium.woff": "/Resources/Public/dist/fonts/roboto-medium.b8cf53a4.woff",
+  "./Resources/public/dist/Fonts/roboto/roboto-regular.woff": "/Resources/Public/dist/Fonts/roboto/roboto-regular.woff",
+  "./Resources/public/dist/fonts/roboto-regular.woff": "/Resources/Public/dist/fonts/roboto-regular.9518eec3.woff",
+  "./Resources/public/dist/Fonts/roboto/roboto-light.woff": "/Resources/Public/dist/Fonts/roboto/roboto-light.woff",
+  "./Resources/public/dist/fonts/roboto-light.woff": "/Resources/Public/dist/fonts/roboto-light.06093142.woff",
+  "./Resources/public/dist/Fonts/roboto/roboto-bold.woff2": "/Resources/Public/dist/Fonts/roboto/roboto-bold.woff2",
+  "./Resources/public/dist/fonts/roboto-bold.woff2": "/Resources/Public/dist/fonts/roboto-bold.b1a9cb20.woff2",
+  "./Resources/public/dist/Fonts/roboto/roboto-medium.woff2": "/Resources/Public/dist/Fonts/roboto/roboto-medium.woff2",
+  "./Resources/public/dist/fonts/roboto-medium.woff2": "/Resources/Public/dist/fonts/roboto-medium.b3e9de54.woff2",
+  "./Resources/public/dist/Fonts/roboto/roboto-regular.woff2": "/Resources/Public/dist/Fonts/roboto/roboto-regular.woff2",
+  "./Resources/public/dist/fonts/roboto-regular.woff2": "/Resources/Public/dist/fonts/roboto-regular.23e1e9de.woff2",
+  "./Resources/public/dist/Fonts/roboto/roboto-light.woff2": "/Resources/Public/dist/Fonts/roboto/roboto-light.woff2",
+  "./Resources/public/dist/fonts/roboto-light.woff2": "/Resources/Public/dist/fonts/roboto-light.04d6a28f.woff2",
+  "./Resources/public/dist/Images/Icons/arrow-icon.png": "/Resources/Public/dist/Images/Icons/arrow-icon.png"
+}

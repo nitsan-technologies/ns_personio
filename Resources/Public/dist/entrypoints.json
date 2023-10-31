@@ -1,0 +1,14 @@
+{
+  "entrypoints": {
+    "JavaScript/app": {
+      "js": [
+        "/Resources/Public/dist/JavaScript/app.js"
+      ]
+    },
+    "Css/app": {
+      "css": [
+        "/Resources/Public/dist/Css/app.css"
+      ]
+    }
+  }
+}

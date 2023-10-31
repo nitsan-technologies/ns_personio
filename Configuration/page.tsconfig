@@ -1,0 +1,38 @@
+mod {
+    wizards.newContentElement.wizardItems.plugins {
+        elements {
+            pi1 {
+                iconIdentifier = ns-personio-plugin
+                title = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi1.name
+                description = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi1.description
+                tt_content_defValues {
+                    CType = list
+                    list_type = nspersonio_pi1
+                }
+            }
+            pi2 {
+                iconIdentifier = ns-personio-plugin
+                title = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi2.name
+                description = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi2.description
+                tt_content_defValues {
+                    CType = list
+                    list_type = nspersonio_pi2
+                }
+            }
+            pi3 {
+                iconIdentifier = ns-personio-plugin
+                title = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi3.name
+                description = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi3.description
+                tt_content_defValues {
+                    CType = list
+                    list_type = nspersonio_pi3
+                }
+            }
+        }
+        show = *
+    }
+}
+
+mod.web_layout.tt_content.preview.list.nspersonio_pi1 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/List.html
+mod.web_layout.tt_content.preview.list.nspersonio_pi2 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/Details.html
+mod.web_layout.tt_content.preview.list.nspersonio_pi3 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/Application.html

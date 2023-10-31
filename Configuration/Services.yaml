@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  NITSAN\NsPersonio\:
+    resource: '../Classes/*'  
+  
+  NITSAN\NsPersonio\Command\FetchApiDataCommand:
+    tags:
+      - name: console.command
+        command: 'Fetch Personio API Data'
+        description: 'Fetch Personio API data and store into the database.'

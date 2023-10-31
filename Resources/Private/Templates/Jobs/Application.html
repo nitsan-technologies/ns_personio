@@ -1,0 +1,198 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+    <f:section name="content">
+        <div class="ns-personio-warp">
+            <div class="ns-personio-container">
+                <f:if condition="{job}">
+                    <f:then>
+                        <div class="ns-nspersonio-backto-list">
+                            <f:link.page pageUid="{settings.listPid}" class="jobs-list-btn ns-personio-btn">
+                                <svg viewBox="0 0 18 18" width="15" height="15" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M2.34 9l8.968-9L12.6 1.3 4.867 9.02l7.713 7.705L11.308 18z"/></svg>
+                                <span><f:translate key="tx_nspersonio_domain_model_jobs.seeAllPosition" extensionName="ns_personio" /></span>
+                            </f:link.page>
+                        </div>
+                        <div class="ns-nspersonio-detail-meta">
+                            <div class="ns-nspersonio-detail-head">
+                                <f:if condition="{job}">
+                                    <f:if condition="{job.name}">
+                                        <h2>{job.name}</h2>
+                                    </f:if>
+                                    <p>
+                                        <f:if condition="{job.employmentType}"><span>{job.employmentType},</span></f:if>
+                                        <f:if condition="{job.schedule}"><span>{job.schedule}</span></f:if>
+                                        <f:if condition="{job.office}"><span>, {job.office}</span></f:if>
+                                    </p>
+                                </f:if>
+                                <f:if condition="{settings.applicationMessage}">
+                                    <f:format.html>{settings.applicationMessage}</f:format.html>
+                                </f:if>
+                            </div>
+                        </div>
+                        <f:form method="POST" action="submitApplication" class="form ns-personio-form"  arguments="{jobId: jobId, jobUid: jobUid}" id="apply-form" enctype="multipart/form-data" >
+                            <f:variable name="fileProcessLink"><f:uri.action action="fileProcess"></f:uri.action></f:variable>
+                            <input type="hidden" value="{fileProcessLink}" id="fileProcessLink">
+                            <div class="form-row ns-personio-row">
+                                <div class="form-group ns-personio-col ns-personio-col-4">
+                                    <label for="gender" class="form-label">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.application.gender" extensionName="ns_personio" /><span>*</span>
+                                    </label>
+                                    <div id="gender" data-target-input="nearest">
+                                        <div class="select-wrapper">
+                                            <select class="form-control select-input" required="" data-target="#gender"
+                                                    name="gender">
+                                                <option selected="selected" value=""><f:translate key="tx_nspersonio_domain_model_jobs.application.pleaseSelect" extensionName="ns_personio" /></option>
+                                                <option value="male"><f:translate key="tx_nspersonio_domain_model_jobs.application.male" extensionName="ns_personio" /></option>
+                                                <option value="female"><f:translate key="tx_nspersonio_domain_model_jobs.application.female" extensionName="ns_personio" /></option>
+                                                <option value="diverse"><f:translate key="tx_nspersonio_domain_model_jobs.application.diverse" extensionName="ns_personio" /></option>
+                                                <option value="undefined"><f:translate key="tx_nspersonio_domain_model_jobs.application.undefined" extensionName="ns_personio" /></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
+                                </div>
+                                <div class="form-group ns-personio-col ns-personio-col-4">
+                                    <label for="first_name" class="form-label">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.application.name" extensionName="ns_personio" /> <span>*</span>
+                                    </label>
+                                    <input class="form-control" required placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.first', extensionName: 'ns_personio')}" name="first_name" type="text" value="" required>
+                                    <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
+                                </div>
+                                <div class="form-group ns-personio-col ns-personio-col-4">
+                                    <label for="last_name" class="form-label">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.application.last" extensionName="ns_personio" /> <span>*</span>
+                                    </label>
+                                    <input class="form-control" placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.last', extensionName: 'ns_personio')}" name="last_name" type="text" value="" required>
+                                    <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
+                                </div>
+                            </div>
+                            <div class="ns-personio-row">
+                                <div class="form-group ns-personio-col">
+                                    <label for="form-email" class="form-label">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.application.email" extensionName="ns_personio"/> <span>*</span>
+                                    </label>
+                                    <input class="form-control" required placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.emailex', extensionName: 'ns_personio')}" name="email" type="email" value="" required>
+                                    <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
+                                    <f:comment>
+                                        <div class="custome-email"> <f:translate key="tx_nspersonio_domain_model_jobs.application.requiredemail" extensionName="ns_personio" /></div>
+                                    </f:comment>
+                                </div>
+                            </div>
+                            <div class="ns-personio-row">
+                                <div class="form-group ns-personio-col">
+                                    <label for="phone" class="form-label">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.application.phone" extensionName="ns_personio" /><span>*</span>
+                                    </label>
+                                    <input class="form-control" required placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.phoneex', extensionName: 'ns_personio')}" name="phone" type="tel" value="">
+                                    <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
+                                    <f:comment>
+                                        <div class="custome-phone"> <f:translate key="tx_nspersonio_domain_model_jobs.application.requiredphone" extensionName="ns_personio" /></div>
+                                    </f:comment>
+                                </div>
+                            </div>
+                            <div class="ns-personio-row">
+                                <div class="form-group ns-personio-col-6 ns-personio-col">
+                                    <label for="available_from" class="form-label">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.application.availableFrom" extensionName="ns_personio" /><span>*</span>
+                                    </label>
+                                    <input class="form-control" required name="available_from" type="text" value="" >
+                                    <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
+                                </div>
+                                <div class="form-group ns-personio-col-6 ns-personio-col">
+                                    <label for="salary_expectations" class="form-label">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.application.expectedSalary" extensionName="ns_personio" />
+                                    </label>
+                                    <input name="salary_expectations" type="text" value="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="ns-personio-row">
+                                <div class="form-group ns-personio-col-6 ns-personio-col">
+                                    <label for="custom_attribute_939093" class="form-label">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.application.workingRights" extensionName="ns_personio" /><span>*</span>
+                                    </label>
+                                    <input class="form-control" required name="custom_attribute_939093" type="text" value="">
+                                    <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
+                                </div>
+                                <div class="form-group ns-personio-col-6 ns-personio-col">
+                                    <label for="custom_attribute_953566" class="form-label">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.application.whereDidYouHere" extensionName="ns_personio" /><span>*</span>
+                                    </label>
+                                    <div id="custom_attribute_953566" data-target-input="nearest">
+                                        <div class="select-wrapper">
+                                            <select class="form-control select-input" required=""
+                                                    data-target="#custom_attribute_953566" name="custom_attribute_953566">
+                                                <option selected="selected" value=""><f:translate key="tx_nspersonio_domain_model_jobs.application.pleaseSelect" extensionName="ns_personio" /></option>
+                                                <option value="custom_option_3232"><f:translate key="tx_nspersonio_domain_model_jobs.application.linkedin" extensionName="ns_personio" /></option>
+                                                <option value="custom_option_3233"><f:translate key="tx_nspersonio_domain_model_jobs.application.website" extensionName="ns_personio" /></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
+                                </div>
+                            </div>
+                            <div class="ns-personio-row">
+                                <div class="form-group ns-personio-col">
+                                    <label class="form-label">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.application.documents" extensionName="ns_personio" />
+                                    </label>
+                                    <h6><f:translate key="tx_nspersonio_domain_model_jobs.application.uploadCV" extensionName="ns_personio" /></h6>
+                                    <div id="document-categories" class="dropzone">
+                                        <div class="category">
+                                            <label for="document-dropzone-cv" class="form-label">
+                                                <f:translate key="tx_nspersonio_domain_model_jobs.application.CV" extensionName="ns_personio" /><span>*</span>
+                                            </label>
+                                            <div id="document-dropzone-cv"  data-category="cv" class="dropzone dz-clickable" data-required="true">
+                                                <div class="dz-message text-center">
+                                                    <input type="hidden"  name="cv-upload" id="cv-upload"/>
+                                                    <input type="hidden" id="hiddenArray" name="hiddenArray" class="hiddenArrays">
+                                                    <f:translate key="tx_nspersonio_domain_model_jobs.application.selectMultiple" extensionName="ns_personio" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="category">
+                                            <label for="document-dropzone-other" class="form-label">
+                                                <f:translate key="tx_nspersonio_domain_model_jobs.application.other" extensionName="ns_personio" />
+                                            </label>
+                                            <div id="document-dropzone-other" data-category="other" class="dropzone dz-clickable" data-required="false">
+                                                <div class="dz-message text-center">
+                                                    <input type="hidden" name="other-upload" id="other-upload" />
+                                                    <f:translate key="tx_nspersonio_domain_model_jobs.application.selectMultiple" extensionName="ns_personio" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="dropzone-error" class="dropzone-error"><f:translate key="tx_nspersonio_domain_model_jobs.application.uploadingfile" extensionName="ns_personio" /></div>
+                                </div>
+                            </div>
+                            <div class="ns-personio-row">
+                                <div class="ns-personio-col">
+                                    <div class="form-group">
+                                        <label class="form-check">
+                                            <input class="form-check-input" required="" type="checkbox" id="privacy-policy-acceptance" name="privacy-policy-acceptance">
+                                            <span class="checkmark"></span>
+                                            <f:translate key="tx_nspersonio_domain_model_jobs.application.confirmation" extensionName="ns_personio" />
+                                            <a href="{settings.privacyPolicyURL}" onclick="return !window.open(this.href, '', 'width=500,height=500')"
+                                               target="_blank" data-locale="en" class="privacy-policy-link">
+                                                <f:translate key="tx_nspersonio_domain_model_jobs.application.dataPrivacy" extensionName="ns_personio" />
+                                            </a>.<span>*</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="action-btn-wrapper">
+                                <div class=" conditionally-aligned">
+                                    <button type="submit" class="ns-personio-btn career-submit-application-btn remove-speed-boostar">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.application.sendApplication" extensionName="ns_personio" />
+                                    </button>
+                                </div>
+                            </div>
+                        </f:form>
+                    </f:then>
+                    <f:else>
+                        <f:translate key="tx_nspersonio_domain_model_jobs.list.noJobs" extensionName="ns_personio" />
+                    </f:else>
+                </f:if>
+
+            </div>
+        </div>
+    </f:section>
+</html>

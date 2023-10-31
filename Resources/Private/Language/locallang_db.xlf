@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:ns_personio/Resources/Private/Language/locallang_db.xlf" date="2023-09-05T07:07:25Z" product-name="ns_personio">
+		<header/>
+		<body>
+			<trans-unit id="tx_nspersonio_domain_model_jobs" resname="tx_nspersonio_domain_model_jobs">
+				<source>Jobs</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.description" resname="tx_nspersonio_domain_model_jobs.description">
+				<source>Jobs</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.jobid" resname="tx_nspersonio_domain_model_jobs.jobid">
+				<source>Jobid</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.jobid.description" resname="tx_nspersonio_domain_model_jobs.jobid.description">
+				<source>Jobid</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.subcompany" resname="tx_nspersonio_domain_model_jobs.subcompany">
+				<source>Subcompany</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.subcompany.description" resname="tx_nspersonio_domain_model_jobs.subcompany.description">
+				<source>Subcompany</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.office" resname="tx_nspersonio_domain_model_jobs.office">
+				<source>Office</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.office.description" resname="tx_nspersonio_domain_model_jobs.office.description">
+				<source>Office</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.recruitingcategory" resname="tx_nspersonio_domain_model_jobs.recruitingcategory">
+				<source>Recruitingcategory</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.recruitingcategory.description" resname="tx_nspersonio_domain_model_jobs.recruitingcategory.description">
+				<source>Recruitingcategory</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.name" resname="tx_nspersonio_domain_model_jobs.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.name.description" resname="tx_nspersonio_domain_model_jobs.name.description">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.descriptions" resname="tx_nspersonio_domain_model_jobs.descriptions">
+				<source>Descriptions</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.descriptions.description" resname="tx_nspersonio_domain_model_jobs.descriptions.description">
+				<source>Descriptions</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.employmenttype" resname="tx_nspersonio_domain_model_jobs.employmenttype">
+				<source>Employmenttype</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.employmenttype.description" resname="tx_nspersonio_domain_model_jobs.employmenttype.description">
+				<source>Employmenttype</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.seniority" resname="tx_nspersonio_domain_model_jobs.seniority">
+				<source>Seniority</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.seniority.description" resname="tx_nspersonio_domain_model_jobs.seniority.description">
+				<source>Seniority</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.schedule" resname="tx_nspersonio_domain_model_jobs.schedule">
+				<source>Schedule</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.schedule.description" resname="tx_nspersonio_domain_model_jobs.schedule.description">
+				<source>Schedule</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.experience" resname="tx_nspersonio_domain_model_jobs.experience">
+				<source>Experience</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.experience.description" resname="tx_nspersonio_domain_model_jobs.experience.description">
+				<source>Experience</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.occupation" resname="tx_nspersonio_domain_model_jobs.occupation">
+				<source>Occupation</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.occupation.description" resname="tx_nspersonio_domain_model_jobs.occupation.description">
+				<source>Occupation</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.occupationcategory" resname="tx_nspersonio_domain_model_jobs.occupationcategory">
+				<source>Occupationcategory</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.occupationcategory.description" resname="tx_nspersonio_domain_model_jobs.occupationcategory.description">
+				<source>Occupationcategory</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.createdat" resname="tx_nspersonio_domain_model_jobs.createdat">
+				<source>Createdat</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.createdat.description" resname="tx_nspersonio_domain_model_jobs.createdat.description">
+				<source>Createdat</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.department" resname="tx_nspersonio_domain_model_jobs.department">
+				<source>Department</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.department.description" resname="tx_nspersonio_domain_model_jobs.department.description">
+				<source>Department</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_jobs.language_code" resname="tx_nspersonio_domain_model_jobs.language_code">
+				<source>Language Code</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_department" resname="tx_nspersonio_domain_model_department">
+				<source>Department</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_department.description" resname="tx_nspersonio_domain_model_department.description">
+				<source>Department</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_department.name" resname="tx_nspersonio_domain_model_department.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_department.name.description" resname="tx_nspersonio_domain_model_department.name.description">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_nspersonio_domain_model_department.language_code" resname="tx_nspersonio_domain_model_department.language_code">
+				<source>Language Code</source>
+			</trans-unit>
+			<trans-unit id="tx_ns_personio_pi1.name" resname="tx_ns_personio_pi1.name">
+				<source>Personio Jobs List</source>
+			</trans-unit>
+			<trans-unit id="tx_ns_personio_pi2.name" resname="tx_ns_personio_pi2.name">
+				<source>Personio Jobs Details</source>
+			</trans-unit>
+			<trans-unit id="tx_ns_personio_pi3.name" resname="tx_ns_personio_pi3.name">
+				<source>Personio Jobs Application</source>
+			</trans-unit>
+			<trans-unit id="tx_ns_personio_pi1.description" resname="tx_ns_personio_pi1.description">
+				<source>This plugin is use for job listing</source>
+			</trans-unit>
+			<trans-unit id="tx_ns_personio_pi2.description" resname="tx_ns_personio_pi2.description">
+				<source>This plugin is use for display details of particular job</source>
+			</trans-unit>
+			<trans-unit id="tx_ns_personio_pi3.description" resname="tx_ns_personio_pi3.description">
+				<source>This plugin is use for submit the job application form</source>
+			</trans-unit>						
+			<trans-unit id="tx_ns_personio_pi1.pi_flexform.settings" resname="tx_ns_personio_pi1.pi_flexform.settings">
+				<source>Settings</source>
+			</trans-unit>
+
+			<trans-unit id="ns_personio.apiSettings.applicationApi" resname="ns_personio.apiSettings.applicationApi">
+				<source>Application Submit API</source>
+			</trans-unit>
+			<trans-unit id="ns_personio.apiSettings.documentApi" resname="ns_personio.apiSettings.documentApi">
+				<source>Document Submit API</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

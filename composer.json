@@ -1,0 +1,33 @@
+{
+    "name": "nitsan/ns-personio",
+    "type": "typo3-cms-extension",
+    "description": "",
+    "authors": [
+        {
+            "name": "Team NITSAN"
+        }
+    ],
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "typo3/cms-core": "^12",
+        "typo3/cms-scheduler": "^12"
+    },
+    "autoload": {
+        "psr-4": {
+            "NITSAN\\NsPersonio\\": "Classes"
+        }
+    },
+    "replace": {
+        "typo3-ter/ns-personio": "self.version"
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
+    },
+    "extra": {
+        "typo3/cms": {
+            "web-dir": ".Build/public",
+            "extension-key": "ns_personio"
+        }
+    }
+}

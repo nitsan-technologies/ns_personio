@@ -1,0 +1,94 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+<f:section name="content">
+    <div class="ns-personio-warp">
+        <div class="ns-personio-container">
+            <div class="jobs" id="jobData">
+                <f:if condition="{settings.listHeader} || {settings.listDescription}">
+                    <div class="ns-personio__headline">
+                        <f:if condition="{settings.listHeader}">
+                            <h2>{settings.listHeader}</h2>
+                        </f:if>
+                        <f:if condition="{settings.listDescription}">
+                            <f:format.raw>{settings.listDescription}</f:format.raw>
+                        </f:if>
+                    </div>
+                </f:if>
+                <div class="ns-personio-filter-form-wrap">
+                    <f:form action="list" id="filterForm" name="filterForm" pageType="875645123"  method="post" class="ns-personio-form">
+                        <f:render partial="Jobs/FilterFields" arguments="{_all}" />
+
+                        <div class="ns-personio-row">
+                            <div class="ns-personio-col">
+                                <div class="ns-personio__action">
+                                    <f:form.button type="reset" class="ns-personio-btn form-filter__reset-link" id="job_form-filter__reset-link">
+                                        <f:translate key="nspersonio_pi1.list.filterReset" />
+                                    </f:form.button>
+                                    <f:form.button class="ns-personio-btn jobs-filter__submit" id="job-filter">
+                                        <f:translate key="nspersonio_pi1.list.filterSubmit" />
+                                    </f:form.button>
+                                </div>
+                            </div>
+                        </div>
+                    </f:form>
+                </div>
+
+                <div class="jobs-tabs ns-personio-filter-btns" id="jobs-tabs">
+                    <a href="javascript:;" data-filter="*" class="ns-personio-filter-btn active" >
+                        <f:translate key="nspersonio_pi1.list.allCategory" />
+                    </a>
+                    <f:for each="{filterCategory}" as="category">
+                        <a class="ns-personio-filter-btn" href="javascript:;" data-filter=".category{category.uid}" data-value="{category.uid}">
+                            {category.name}
+                        </a>
+                    </f:for>
+                </div>
+
+                <div>
+                    <f:if condition="{jobs}">
+                        <f:then>
+                            <div class="job-data ns-personio-jobs ns-personio-jobs--list" id="jobs-results">
+                                <f:for each="{jobs}" as="jobData" iteration="i">
+                                    <div class="ns-personio-job-item category{jobData.department.uid}">
+                                        <div class="ns-personio-job {f:if(condition: '!{jobData.descriptions}', then: 'ns-personio-job-without-desc')} {f:if(condition: '{settings.applyNowBtn}', then: 'ns-personio-job--with-apply')}">
+                                            <f:link.action action="detail" pageUid="{settings.detailPid}" class="ns-personio-job-teaser"  arguments="{job: jobData}">
+                                                <f:render section="jobContent" arguments="{_all}" />
+                                            </f:link.action>
+                                        </div>
+                                    </div>
+                                </f:for>
+                            </div>
+                        </f:then>
+                        <f:else>
+                            <div class="job-data ns-personio-jobsns-personio-jobs--list" id="jobs-results">
+                                <f:translate key="tx_nspersonio_domain_model_jobs.list.noJobs" extensionName="ns_personio" />
+                            </div>
+                        </f:else>
+                    </f:if>
+                </div>
+            </div>
+
+            <f:section name="jobContent">
+                <f:if condition="{jobData.name} || {jobData.office} || {jobData.employmentType} || {jobData.department.name}">
+                    <div class="ns-personio-job__meta">
+                        <f:if condition="{jobData.name}">
+                            <h3>{jobData.name}</h3>
+                        </f:if>
+                        <div class="ns-personio-job__meta-info">
+                            <span>{jobData.office}</span>
+                            <span>{jobData.schedule}</span>
+                            <span>{jobData.employmentType}</span>
+                            <span>{jobData.department.name}</span>
+                        </div>
+                    </div>
+                </f:if>
+                <f:if condition="{jobData.descriptions}">
+                    <div class="jobs-content__description">
+                        <f:format.crop maxCharacters="120" append="..."><f:format.raw>{jobData.descriptions}</f:format.raw></f:format.crop>
+                    </div>
+                </f:if>
+            </f:section>
+        </div>
+    </div>
+</f:section>
+</html>

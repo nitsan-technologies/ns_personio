@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf" date="2023-09-05T07:07:25Z" product-name="ns_personio">
+		<header/>
+		<body>
+            <trans-unit id="ns_personio_pi1.settings" resname="ns_personio_pi1.settings">
+				<source>General</source>
+			</trans-unit>
+            <trans-unit id="ns_personio_pi1.listHeader" resname="ns_personio_pi1.listHeader">
+				<source>Heading</source>
+			</trans-unit>
+            <trans-unit id="ns_personio_pi1.listDescription" resname="ns_personio_pi1.listDescription">
+				<source>Description</source>
+			</trans-unit>
+            <trans-unit id="ns_personio_pi1.storagePage" resname="ns_personio_pi1.storagePage">
+                <source>Storage Page</source>
+            </trans-unit>
+            <trans-unit id="ns_personio_pi1.companyId" resname="ns_personio_pi1.companyId">
+				<source>Company ID</source>
+			</trans-unit>
+            <trans-unit id="ns_personio_pi1.accessToken" resname="ns_personio_pi1.accessToken">
+				<source>Access Token</source>
+			</trans-unit>
+            <trans-unit id="ns_personio_pi1.contentElementId" resname="ns_personio_pi1.contentElementId">
+				<source>Content Elements</source>
+			</trans-unit>
+			<trans-unit id="ns_personio_pi1.detailPid" resname="ns_personio_pi1.detailPid">
+				<source>Details Page</source>
+			</trans-unit>
+			<trans-unit id="ns_personio_pi1.applicationPid" resname="ns_personio_pi1.applicationPid">
+				<source>Application Page</source>
+			</trans-unit>
+			<trans-unit id="ns_personio_pi1.listPid" resname="ns_personio_pi1.listPid">
+				<source>List Page</source>
+			</trans-unit>
+			<trans-unit id="ns_personio_pi1.applicationMessage" resname="ns_personio_pi1.applicationMessage">
+				<source>Application Message</source>
+			</trans-unit>
+			<trans-unit id="ns_personio_pi1.successPID" resname="ns_personio_pi1.successPID">
+				<source>After Successful Application Redirect to Page</source>
+			</trans-unit>
+			<trans-unit id="ns_personio_pi1.failurPID" resname="ns_personio_pi1.failurPID">
+				<source>After Failed Application Redirect to Page</source>
+			</trans-unit>
+            <trans-unit id="ns_personio_pi1.listdetails" resname="ns_personio_pi1.listdetails">
+                <source>Details</source>
+            </trans-unit>
+            <trans-unit id="ns_personio_pi1.applyNow" resname="ns_personio_pi1.applyNow">
+                <source>Apply Now</source>
+            </trans-unit>
+            <trans-unit id="ns_personio_pi1.applicationView" resname="ns_personio_pi1.applicationView">
+                <source>View</source>
+            </trans-unit>
+            <trans-unit id="ns_personio_pi1.privacyPolicyURL" resname="ns_personio_pi1.privacyPolicyURL">
+                <source>Privacy Policy URL</source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>
