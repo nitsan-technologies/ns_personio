@@ -160,9 +160,21 @@ class FetchApiDataCommand extends Command
             }
             isset($job['recruitingCategory']) ? $jobObj->setRecruitingcategory($job['recruitingCategory']) : $jobObj->setRecruitingcategory('');
             isset($job['name']) ? $jobObj->setName($job['name']) : $jobObj->setName('');
-            if(isset($job['jobDescriptions']['jobDescription']['value'])){
-                $description = preg_replace('/ style=("|\')(.*?)("|\')/','',$job['jobDescriptions']['jobDescription']['value']);
+            if(is_array($job['jobDescriptions']['jobDescription'])) {
+                $fullDescription = '';
+                foreach($job['jobDescriptions']['jobDescription'] as $data) {
+                    if ($data['name'] != '') {
+                        $fullDescription .= '<h5 class="headline-with-list">'.$data['name'].'</h5>';
+                    }
+                    $fullDescription .= $data['value'];
+                }
+                $description = preg_replace('/ style=("|\')(.*?)("|\')/','',$fullDescription);
                 $jobObj->setDescriptions($description);
+            } else {
+                if(isset($job['jobDescriptions']['jobDescription']['value'])){
+                    $description = preg_replace('/ style=("|\')(.*?)("|\')/','',$job['jobDescriptions']['jobDescription']['value']);
+                    $jobObj->setDescriptions($description);
+                }
             }
             isset($job['employmentType']) ? $jobObj->setEmploymenttype($job['employmentType']) : $jobObj->setEmploymenttype('');
             isset($job['seniority']) ? $jobObj->setSeniority($job['seniority']) : $jobObj->setSeniority('');
