@@ -113,15 +113,6 @@ class JobsController extends ActionController
             $jobs = $this->jobsRepository->dataFilterAndSort($arguments, $storagePagesArray, $langId);
         }
 
-        if (isset($this->request->getParsedBody()['searchword'])) {
-            $word = $this->request->getParsedBody()['searchword'];
-            $department =  $this->departmentRepository->findBy(['name' => $word , 'sys_language_uid' => $langId]);
-            if ($department[0]) {
-                $jobs = $this->jobsRepository->findByDepartment($department[0]);
-            } else {
-                $jobs = $this->jobsRepository->findSearchJob($word, $langId, null,  $storagePagesArray);
-            }
-        }
         $filterCategory = [];
         foreach ($jobs as $key => $job) {
             if($job->getDepartment()) {
@@ -162,7 +153,7 @@ class JobsController extends ActionController
 
     /**
      * action application
-     * @param Jobs $application
+     * @param Jobs|null $application
      * @return ResponseInterface
      */
     public function applicationAction(Jobs $application = null): ResponseInterface
@@ -187,125 +178,125 @@ class JobsController extends ActionController
      * @throws GuzzleException
      */
     public function submitApplicationAction(): ResponseInterface
-{
-    $formErrors = [];
-    $successPid = (int) $this->settings['successPID'];
-    $failurPid = (int) $this->settings['failurPID'];
-    $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
-    $api = $globalConfiguration['applicationApi'];
-    if ($api === '') {
-        $formErrors[] = 'Application Api Required';
-    }
-    $companyId = (int) $this->settings['companyId'];
-    if ($companyId === '') {
-        $formErrors[] = 'Company ID Required';
-    }
-    $formData = $this->request->getParsedBody();
-    $token = $this->settings['accessToken'];
-    if ($token === '') {
-        $formErrors[] = 'Access Token Required';
-    }
-    $jobId = $this->request->getQueryParams()['tx_nspersonio_pi3']['jobId'];
-    if ($jobId === '') {
-        $formErrors[] = 'Job ID Required';
-    }
-    $cvData = json_decode($formData['cv-upload'], true);
-    $otherData = [];
-    if (!empty($formData['other-upload'])) {
-        $otherData = json_decode($formData['other-upload'], true);
-    }
-    if ($formData['first_name'] === '') {
-        $formErrors[] = 'First Name Required';
-    }
-    if ($formData['last_name'] === '') {
-        $formErrors[] = 'Last Name Required';
-    }
-    if ($formData['email'] === '') {
-        $formErrors[] = 'Email Required';
-    }
-    $uriBuilder = $this->uriBuilder;
-    if (empty($formErrors)) {
-        $params = [
-            "job_position_id" => $jobId,
-            "first_name" => $formData['first_name'],
-            "last_name" => $formData['last_name'],
-            "email" => $formData['email'],
-            "attributes" => [
-                [
-                    "id" => "gender",
-                    "value" => $formData['gender']
-                ],
-                [
-                    "id" => "phone",
-                    "value" => $formData['phone']
-                ],
-                [
-                    "id" => "available_from",
-                    "value" => $formData['available_from']
-                ],
-                [
-                    "id" => "salary_expectations",
-                    "value" => $formData['salary_expectations']
-                ],
-                [
-                    "id" => "custom_attribute_939093",
-                    "value" => $formData['custom_attribute_939093']
-                ],
-                [
-                    "id" => "custom_attribute_953566",
-                    "value" => $formData['custom_attribute_953566']
-                ],
-            ],
-        ];
-        if (!empty($cvData)) {
-            foreach ($cvData as $key => $value) {
-                $params['files'][$key] = [
-                    "uuid" => $value['uuid'],
-                    "original_filename" => $value['original_filename'],
-                    "category" => "cv"
-                ];
-            }
+    {
+        $formErrors = [];
+        $successPid = (int) $this->settings['successPID'];
+        $failurePid = (int) $this->settings['failurePid'];
+        $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
+        $api = $globalConfiguration['applicationApi'];
+        if ($api === '') {
+            $formErrors[] = 'Application Api Required';
         }
-        $lastKey = key(array_slice($params['files'], -1, 1, true)) + 1;
-        if (!empty($otherData)) {
-            foreach ($otherData as $key => $value) {
-                $params['files'][$key + $lastKey] = [
-                    "uuid" => $value['uuid'],
-                    "original_filename" => $value['original_filename'],
-                    "category" => "work-sample"
-                ];
-            }
+        $companyId = (int) $this->settings['companyId'];
+        if ($companyId === '') {
+            $formErrors[] = 'Company ID Required';
         }
-        $body = json_encode($params);
-        $options = [
-            'http_errors' => true,
-            'headers' => [
-                'Accept' => 'application/json',
-                'X-Company-ID' => $companyId,
-                'Authorization' => 'Bearer ' . $token,
-                'Content-Type' => 'application/json',
-            ],
-            'body' => $body,
-        ];
-        try {
-            $this->getClient()->post($api, $options)->getBody()->getContents();
+        $formData = $this->request->getParsedBody();
+        $token = $this->settings['accessToken'];
+        if ($token === '') {
+            $formErrors[] = 'Access Token Required';
+        }
+        $jobId = $this->request->getQueryParams()['tx_nspersonio_pi3']['jobId'];
+        if ($jobId === '') {
+            $formErrors[] = 'Job ID Required';
+        }
+        $cvData = json_decode($formData['cv-upload'], true);
+        $otherData = [];
+        if (!empty($formData['other-upload'])) {
+            $otherData = json_decode($formData['other-upload'], true);
+        }
+        if ($formData['first_name'] === '') {
+            $formErrors[] = 'First Name Required';
+        }
+        if ($formData['last_name'] === '') {
+            $formErrors[] = 'Last Name Required';
+        }
+        if ($formData['email'] === '') {
+            $formErrors[] = 'Email Required';
+        }
+        $uriBuilder = $this->uriBuilder;
+        if (empty($formErrors)) {
+            $params = [
+                "job_position_id" => $jobId,
+                "first_name" => $formData['first_name'],
+                "last_name" => $formData['last_name'],
+                "email" => $formData['email'],
+                "attributes" => [
+                    [
+                        "id" => "gender",
+                        "value" => $formData['gender']
+                    ],
+                    [
+                        "id" => "phone",
+                        "value" => $formData['phone']
+                    ],
+                    [
+                        "id" => "available_from",
+                        "value" => $formData['available_from']
+                    ],
+                    [
+                        "id" => "salary_expectations",
+                        "value" => $formData['salary_expectations']
+                    ],
+                    [
+                        "id" => "custom_attribute_939093",
+                        "value" => $formData['custom_attribute_939093']
+                    ],
+                    [
+                        "id" => "custom_attribute_953566",
+                        "value" => $formData['custom_attribute_953566']
+                    ],
+                ],
+            ];
+            if (!empty($cvData)) {
+                foreach ($cvData as $key => $value) {
+                    $params['files'][$key] = [
+                        "uuid" => $value['uuid'],
+                        "original_filename" => $value['original_filename'],
+                        "category" => "cv"
+                    ];
+                }
+            }
+            $lastKey = key(array_slice($params['files'], -1, 1, true)) + 1;
+            if (!empty($otherData)) {
+                foreach ($otherData as $key => $value) {
+                    $params['files'][$key + $lastKey] = [
+                        "uuid" => $value['uuid'],
+                        "original_filename" => $value['original_filename'],
+                        "category" => "work-sample"
+                    ];
+                }
+            }
+            $body = json_encode($params);
+            $options = [
+                'http_errors' => true,
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'X-Company-ID' => $companyId,
+                    'Authorization' => 'Bearer ' . $token,
+                    'Content-Type' => 'application/json',
+                ],
+                'body' => $body,
+            ];
+            try {
+                $this->getClient()->post($api, $options)->getBody()->getContents();
+                $uri = $uriBuilder
+                    ->setTargetPageUid($successPid)
+                    ->build();
+                return $this->redirectToURI($uri);
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                $uri = $uriBuilder
+                    ->setTargetPageUid($failurePid)
+                    ->build();
+                return $this->redirectToURI($uri);
+            }
+        } else {
             $uri = $uriBuilder
-                ->setTargetPageUid($successPid)
+                ->setTargetPageUid($failurePid)
                 ->build();
             return $this->redirectToURI($uri);
-        } catch (\GuzzleHttp\Exception\RequestException $e) {
-            $uri = $uriBuilder
-                ->setTargetPageUid($failurPid)
-                ->build();
-            return $this->redirectToURI($uri);
         }
-    } else {
-        $uri = $uriBuilder
-            ->setTargetPageUid($failurPid)
-            ->build();
-        return $this->redirectToURI($uri);
     }
-}
 
 
     /**

@@ -77,80 +77,25 @@ class JobsRepository extends Repository
     }
 
     /**
-     * findSearchJob
-     *
-     * @param string $word
-     * @param string $lang
-     * @param string|null $categoryUid
-     * @param array $storagePid
+     * @param array $arguments
+     * @param array $storagePages
+     * @param array $langId
      * @return array|QueryResultInterface
      * @throws InvalidQueryException
      */
-    public function findSearchJob(string $word, string $lang, ?string $categoryUid, array $storagePid): array|QueryResultInterface
+    public function dataFilterAndSort(array $arguments, array $storagePages, array $langId): array|QueryResultInterface
     {
         $query = $this->createQuery();
-        $constraints = [];
-        $serviceConstraints = [];
-
-        $constraints[] = $query->equals('sys_language_uid', $lang);
-
-        $serviceConstraints[] = $query->like('name', '%' . $word . '%');
-        $serviceConstraints[] = $query->like('descriptions', '%' . $word . '%');
-
-        foreach ($storagePid as $pid) {
-            $serviceConstraints[] = $query->equals('pid', $pid);
-        }
-
-        if ($categoryUid) {
-            $serviceConstraints[] = $query->equals('department', strval($categoryUid));
-        }
-
-        $constraints[] = $query->logicalOr(...$serviceConstraints);
-
-        $query->matching($query->logicalAnd(...$constraints));
-
-        return $query->execute();
-    }
-
-    /**
-     * @param $arguments
-     * @param $storagePages
-     * @param $langId
-     * @return array|QueryResultInterface
-     * @throws InvalidQueryException
-     */
-    public function dataFilterAndSort($arguments, $storagePages, $langId): array|QueryResultInterface
-    {
-        $query = $this->createQuery();
-        $constraints = $filterLocationConstraints = $filterDepartmentConstraints = $searchConstraints = $storageConstraints = [];
+        $constraints = $searchConstraints = $storageConstraints = [];
         foreach ($storagePages as $index => $value) {
             $storageConstraints[] = $query->equals('pid', (int)$value);
         }
         $constraints[] = $query->logicalOr(...$storageConstraints);
-        $constraints[] = $query->equals('sys_language_uid', $langId);
-        if (!empty($arguments['tx_nspersonio_pi1']['location'])) {
-            // $location = GeneralUtility::trimExplode(',', $arguments['tx_nspersonio_pi1']['location']);
-            $location =$arguments['tx_nspersonio_pi1']['location'];
-            foreach ($location as $index => $value) {
-                $filterLocationConstraints[] = $query->equals('office', $value);
-            }
-            $constraints[] = $query->logicalOr(...$filterLocationConstraints);
-        }
-        if (!empty($arguments['tx_nspersonio_pi1']['category'])) {
-            // $category = GeneralUtility::trimExplode(',', $arguments['tx_nspersonio_pi1']['category']);
-            $category = $arguments['tx_nspersonio_pi1']['category'];
-            foreach ($category as $index => $value) {
-                $filterDepartmentConstraints[] = $query->equals('department', (int)$value);
-            }
-            $constraints[] = $query->logicalOr(...$filterDepartmentConstraints);
-        }
+
         if (!empty($arguments['tx_nspersonio_pi1']['search-word'])) {
             $searchConstraints[] = $query->like('name', '%' . $arguments['tx_nspersonio_pi1']['search-word'] . '%');
              $searchConstraints[] = $query->like('descriptions', '%' . $arguments['tx_nspersonio_pi1']['search-word'] . '%');
             $constraints[] = $query->logicalOr(...$searchConstraints);
-        }
-        if (!empty($arguments['tx_nspersonio_pi1']['schedules'])) {
-            $constraints[] = $query->equals('schedule', $arguments['tx_nspersonio_pi1']['schedules']);
         }
         $query->matching($query->logicalAnd(...$constraints));
         return $query->execute();

@@ -60,10 +60,10 @@
 						</TCEforms>
 					</settings.successPID>
 
-                    <settings.failurPID>
+                    <settings.failurePid>
 						<TCEforms>
 							<label>
-                                LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.failurPID
+                                LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.failurePid
                             </label>
 							<config>
 								<type>group</type>
@@ -74,7 +74,7 @@
                                 <required>true</required>
 							</config>
 						</TCEforms>
-					</settings.failurPID>
+					</settings.failurePid>
 
                 </el>
             </ROOT>

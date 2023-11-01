@@ -65,10 +65,9 @@ class FetchApiDataCommand extends Command
     {
         $language = (int)$input->getArgument('languageUid');
         $api = trim($input->getArgument('api'));
-        $validateApi = $this->validatePersonioAPi($api);
         $pageId = (int)$input->getArgument('pageId');
         
-        if($validateApi != 1) {
+        if($api == '') {
             return Command::FAILURE;
         }else{
             try {
@@ -83,31 +82,27 @@ class FetchApiDataCommand extends Command
                 }
                 $categories = []; 
                 foreach($apiData['position'] as $item){
-                    $category = isset($item['department'])?$item['department']:'';
+                    $category = $item['department'] ?? '';
                     if($category != NULL || $category!=''){
-                        array_push($categories,$category);
+                        $categories[] = $category;
                     }
                 }
                 $uniqueCategories = array_unique($categories);
     
                 // Get existing categories(departments)
                 $departmentResult = $departmentRepository->findAll()->toArray();
-                if(empty($departmentResult)){
-                    $this->addCategories($uniqueCategories, $language, $pageId);
-                }else {
+                if(!empty($departmentResult)) {
                     $departmentRepository->deleteAllDepartments($language, $pageId);
-                    $this->addCategories($uniqueCategories, $language, $pageId);
                 }
-    
+                $this->addCategories($uniqueCategories, $language, $pageId);
+
                 // Get existing Jobs
                 $jobsResult = $jobsRepository->findAll()->toArray();
-                if(empty($jobsResult)){
-                    $this->addJobs($apiData['position'], $language, $pageId);
-                }else {
+                if(!empty($jobsResult)) {
                     $jobsRepository->deleteAllJobs($language, $pageId);
-                    $this->addJobs($apiData['position'], $language, $pageId);
                 }
-    
+                $this->addJobs($apiData['position'], $language, $pageId);
+
                 return Command::SUCCESS;
             }catch (Exception $e){
                 return Command::FAILURE;
@@ -236,19 +231,5 @@ class FetchApiDataCommand extends Command
             $fieldConfig
         );
         return $slugHelper->generate($record, $pid);
-    }
-
-
-    /**
-     * validatePersonioAPi
-     *
-     * @param string $api
-     * @return int
-     */
-    public function validatePersonioAPi(string $api): int
-    {
-        $pattern = '/^https:\/\/[a-zA-Z0-9_-]+\.jobs\.personio\.de\/xml\?language=[a-zA-Z]+$/';
-        $result =  preg_match($pattern, $api);
-        return $result;
     }
 }

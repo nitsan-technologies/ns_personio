@@ -39,7 +39,7 @@
 			<trans-unit id="ns_personio_pi1.successPID" resname="ns_personio_pi1.successPID">
 				<source>After Successful Application Redirect to Page</source>
 			</trans-unit>
-			<trans-unit id="ns_personio_pi1.failurPID" resname="ns_personio_pi1.failurPID">
+			<trans-unit id="ns_personio_pi1.failurePid" resname="ns_personio_pi1.failurePid">
 				<source>After Failed Application Redirect to Page</source>
 			</trans-unit>
             <trans-unit id="ns_personio_pi1.listdetails" resname="ns_personio_pi1.listdetails">
