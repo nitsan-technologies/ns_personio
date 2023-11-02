@@ -32,10 +32,11 @@
                                 <f:if condition="{settings.contentElements}">
                                     <f:cObject typoscriptObjectPath="lib.commonContent"  data="{contentId:settings.contentElements}"  />
                                 </f:if>
-
-                                <f:link.action action="application" pageUid="{applicationPid}" arguments="{application: job.uid}" class="ns-personio-btn career-submit-application-btn remove-speed-boostar">
-                                    <f:translate key="tx_nspersonio_domain_model_jobs.details.applyBtn" extensionName="ns_personio" />
-                                </f:link.action>
+                                <f:if condition="{settings.showApplyButton}">
+                                    <f:link.action action="application" pageUid="{settings.applicationPid}" arguments="{job: job.uid}" class="ns-personio-btn career-submit-application-btn remove-speed-boostar">
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.details.applyBtn" extensionName="ns_personio" />
+                                    </f:link.action>
+                                </f:if>
                             </div>
                         </f:if>
                     </div>

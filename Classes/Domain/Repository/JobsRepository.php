@@ -79,11 +79,11 @@ class JobsRepository extends Repository
     /**
      * @param array $arguments
      * @param array $storagePages
-     * @param array $langId
+     * @param int $langId
      * @return array|QueryResultInterface
      * @throws InvalidQueryException
      */
-    public function dataFilterAndSort(array $arguments, array $storagePages, array $langId): array|QueryResultInterface
+    public function dataFilterAndSort(array $arguments, array $storagePages, int $langId): array|QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = $searchConstraints = $storageConstraints = [];

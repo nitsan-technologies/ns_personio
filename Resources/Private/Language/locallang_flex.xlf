@@ -27,6 +27,12 @@
 			<trans-unit id="ns_personio_pi1.detailPid" resname="ns_personio_pi1.detailPid">
 				<source>Details Page</source>
 			</trans-unit>
+			<trans-unit id="ns_personio_pi1.showApplyButton" resname="ns_personio_pi1.showApplyButton">
+				<source>Show Apply Button</source>
+			</trans-unit>
+			<trans-unit id="ns_personio_pi1.showHeader" resname="ns_personio_pi1.showHeader">
+				<source>Show Header</source>
+			</trans-unit>
 			<trans-unit id="ns_personio_pi1.applicationPid" resname="ns_personio_pi1.applicationPid">
 				<source>Application Page</source>
 			</trans-unit>

@@ -1,11 +1,16 @@
 {
     "name": "nitsan/ns-personio",
     "type": "typo3-cms-extension",
-    "description": "",
+    "description": "This TYPO3 CMS extension seamlessly integrates a job portal from the Personio Recruiting API into TYPO3. It offers a range of features, including job listing, customizable layouts and designs, robust search and filtering options, and a user-friendly application form etc. Explore more https://t3planet.com/typo3-personio-extension",
     "authors": [
         {
             "name": "Team NITSAN"
         }
+    ],
+    "keywords": [
+        "TYPO3",
+        "personio",
+        "API"
     ],
     "license": "GPL-2.0-or-later",
     "require": {

@@ -30,7 +30,7 @@ class FetchApiDataCommand extends Command
 
     /**
      * Configure the command by defining the name, options and arguments
-     * 
+     *
      * @return void
      */
     protected function configure(): void
@@ -66,29 +66,29 @@ class FetchApiDataCommand extends Command
         $language = (int)$input->getArgument('languageUid');
         $api = trim($input->getArgument('api'));
         $pageId = (int)$input->getArgument('pageId');
-        
+
         if($api == '') {
             return Command::FAILURE;
         }else{
             try {
                 $departmentRepository = GeneralUtility::makeInstance(DepartmentRepository::class);
                 $jobsRepository = GeneralUtility::makeInstance(JobsRepository::class);
-    
+
                 $apiData = $this->getApiData($api);
                 if(isset($apiData['position']['id'])){
                     $tempData = $apiData['position'];
                     $apiData['position'] = [];
                     $apiData['position'][0] = $tempData;
                 }
-                $categories = []; 
+                $categories = [];
                 foreach($apiData['position'] as $item){
                     $category = $item['department'] ?? '';
                     if($category != NULL || $category!=''){
-                        $categories[] = $category;
+                        array_push($categories,$category);
                     }
                 }
                 $uniqueCategories = array_unique($categories);
-    
+
                 // Get existing categories(departments)
                 $departmentResult = $departmentRepository->findAll()->toArray();
                 if(!empty($departmentResult)) {
@@ -114,6 +114,8 @@ class FetchApiDataCommand extends Command
      * addCategories
      *
      * @param array $uniqueCategories
+     * @param int $language
+     * @param int $pageId
      * @return void
      * @throws IllegalObjectTypeException
      */
@@ -135,7 +137,11 @@ class FetchApiDataCommand extends Command
      * addJobs
      *
      * @param array $jobs
+     * @param int $language
+     * @param int $pageId
      * @return void
+     * @throws IllegalObjectTypeException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function addJobs(array $jobs, int $language, int $pageId): void
     {
@@ -143,7 +149,7 @@ class FetchApiDataCommand extends Command
         $jobsRepository = GeneralUtility::makeInstance(JobsRepository::class);
         $persistenceManager = GeneralUtility::makeInstance(PersistenceManager ::class);
         foreach($jobs as $job){
-            
+
             $jobObj = GeneralUtility::makeInstance(Jobs::class);
             $jobObj->setJobid($job['id']);
             isset($job['subcompany']) ? $jobObj->setSubcompany($job['subcompany']) : $jobObj->setSubcompany('');
@@ -155,20 +161,22 @@ class FetchApiDataCommand extends Command
             }
             isset($job['recruitingCategory']) ? $jobObj->setRecruitingcategory($job['recruitingCategory']) : $jobObj->setRecruitingcategory('');
             isset($job['name']) ? $jobObj->setName($job['name']) : $jobObj->setName('');
-            if(is_array($job['jobDescriptions']['jobDescription'])) {
-                $fullDescription = '';
-                foreach($job['jobDescriptions']['jobDescription'] as $data) {
-                    if ($data['name'] != '') {
-                        $fullDescription .= '<h5 class="headline-with-list">'.$data['name'].'</h5>';
+            if (isset($job['jobDescriptions']['jobDescription'])) {
+                if(is_array($job['jobDescriptions']['jobDescription'])) {
+                    $fullDescription = '';
+                    foreach($job['jobDescriptions']['jobDescription'] as $data) {
+                        if ($data['name'] != '') {
+                            $fullDescription .= '<h5 class="headline-with-list">'.$data['name'].'</h5>';
+                        }
+                        $fullDescription .= $data['value'];
                     }
-                    $fullDescription .= $data['value'];
-                }
-                $description = preg_replace('/ style=("|\')(.*?)("|\')/','',$fullDescription);
-                $jobObj->setDescriptions($description);
-            } else {
-                if(isset($job['jobDescriptions']['jobDescription']['value'])){
-                    $description = preg_replace('/ style=("|\')(.*?)("|\')/','',$job['jobDescriptions']['jobDescription']['value']);
+                    $description = preg_replace('/ style=("|\')(.*?)("|\')/','',$fullDescription);
                     $jobObj->setDescriptions($description);
+                }   else {
+                    if(isset($job['jobDescriptions']['jobDescription']['value'])){
+                        $description = preg_replace('/ style=("|\')(.*?)("|\')/','',$job['jobDescriptions']['jobDescription']['value']);
+                        $jobObj->setDescriptions($description);
+                    }
                 }
             }
             isset($job['employmentType']) ? $jobObj->setEmploymenttype($job['employmentType']) : $jobObj->setEmploymenttype('');

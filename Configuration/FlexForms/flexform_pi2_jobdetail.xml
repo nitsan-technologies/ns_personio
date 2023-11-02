@@ -10,6 +10,17 @@
                 </sheetTitle>
                 <type>array</type>
                 <el>
+                    <settings.showApplyButton>
+                        <label>
+                            LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.showApplyButton
+                        </label>
+                        <config>
+                            <type>check</type>
+                            <renderType>checkboxToggle</renderType>
+                            <default>1</default>
+                        </config>
+                    </settings.showApplyButton>
+
                     <settings.listPid>
 						<TCEforms>
 							<label>LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.listPid</label>

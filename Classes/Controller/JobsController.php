@@ -156,13 +156,19 @@ class JobsController extends ActionController
      * @param Jobs|null $application
      * @return ResponseInterface
      */
-    public function applicationAction(Jobs $application = null): ResponseInterface
+    public function applicationAction(Jobs $job = null): ResponseInterface
     {
-        if ($application) {
+        $jobUid = isset($this->request->getQueryParams()['tx_nspersonio_pi2']) ? $this->request->getQueryParams()['tx_nspersonio_pi2']['job'] : null;
+        if($job==null) {
+            if($jobUid){
+                $job = $this->jobsRepository->findByUid($jobUid) ;
+            }
+        }
+        if ($job) {
             $this->view->assignMultiple([
-                'jobId' => $application->getJobid(),
-                'jobUid' => $application->getUid(),
-                'job' => $application,
+                'jobId' => $job->getJobid(),
+                'jobUid' => $job->getUid(),
+                'job' => $job,
                 'settings' => $this->settings,
             ]);
         }
@@ -237,14 +243,6 @@ class JobsController extends ActionController
                     [
                         "id" => "salary_expectations",
                         "value" => $formData['salary_expectations']
-                    ],
-                    [
-                        "id" => "custom_attribute_939093",
-                        "value" => $formData['custom_attribute_939093']
-                    ],
-                    [
-                        "id" => "custom_attribute_953566",
-                        "value" => $formData['custom_attribute_953566']
                     ],
                 ],
             ];
