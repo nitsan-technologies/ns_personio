@@ -64,7 +64,7 @@ class DepartmentRepository extends Repository
      * @return int|null
      * @throws Exception
      */
-    public function getUid(string $departmentName, int $language_code) : int|null
+    public function getUid(string $departmentName, int $language_code)
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_nspersonio_domain_model_department');
         return $queryBuilder

@@ -15,15 +15,12 @@
                     </div>
                 </f:if>
                 <div class="ns-personio-filter-form-wrap">
-                    <f:form action="list" id="filterForm" name="filterForm" pageType="875645123"  method="post" class="ns-personio-form">
+                    <f:form action="list" id="filterForm" name="filterForm" pageType="875645123"  method="post" class="ns-personio-form ns-personio-form--with-search">
                         <f:render partial="Jobs/FilterFields" arguments="{_all}" />
 
                         <div class="ns-personio-row">
                             <div class="ns-personio-col">
                                 <div class="ns-personio__action">
-                                    <f:form.button type="reset" class="ns-personio-btn form-filter__reset-link" id="job_form-filter__reset-link">
-                                        <f:translate key="nspersonio_pi1.list.filterReset" />
-                                    </f:form.button>
                                     <f:form.button class="ns-personio-btn jobs-filter__submit" id="job-filter">
                                         <f:translate key="nspersonio_pi1.list.filterSubmit" />
                                     </f:form.button>
