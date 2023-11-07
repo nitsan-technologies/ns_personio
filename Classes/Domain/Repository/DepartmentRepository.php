@@ -76,4 +76,24 @@ class DepartmentRepository extends Repository
         )
         ->executeQuery()->fetchOne();
     }
+
+    /**
+     * @param int $languageUid
+     * @param array $storagePid
+     * @return array|object[]|QueryResultInterface
+     */
+    public function fetchAll($lang, $storagePid)
+    {
+        $query = $this->createQuery();
+        $constraints = [];
+        $constraints[] = $query->equals('sys_language_uid', $lang);
+        $conditions = [];
+        foreach ($storagePid as $pid) {
+            $conditions[] =  $query->equals('pid', $pid);
+        }
+        $constraints[] = $query->logicalOr(...array_values($conditions));
+        $query->matching($query->logicalAnd(...array_values($constraints)));
+        return $query->execute();
+    }
+
 }

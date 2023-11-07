@@ -23,7 +23,7 @@ routeEnhancers:
         routePath: '/applicationform/{jobs-applicationform}'
         _controller: 'Jobs::application'
         _arguments:
-          jobs-applicationform: application
+          jobs-applicationform: job
     aspects:
       jobs-applicationform:
         type: PersistedAliasMapper

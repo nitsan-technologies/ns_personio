@@ -47,9 +47,9 @@ class FetchApiDataCommand extends Command
                 'Language Uid'
             )
             ->addArgument(
-                'pageId',
+                'storagePageId',
                 InputArgument::OPTIONAL,
-                'Page Uid',
+                'Storage Page Uid',
                 0
             );
     }
@@ -65,7 +65,7 @@ class FetchApiDataCommand extends Command
     {
         $language = (int)$input->getArgument('languageUid');
         $api = trim($input->getArgument('api'));
-        $pageId = (int)$input->getArgument('pageId');
+        $pageId = (int)$input->getArgument('storagePageId');
 
         if($api == '') {
             return Command::FAILURE;
@@ -188,7 +188,7 @@ class FetchApiDataCommand extends Command
             isset($job['createdAt']) ? $jobObj->setCreatedat($job['createdAt']) : $jobObj->setCreatedat('');
             $jobObj->setPid($pageId);
             $jobObj->set_languageUid($language);
-            $slug = $this->getJobSlug($job,0);
+            $slug = $this->getJobSlug($job,$pageId);
             $jobObj->setSlug($slug);
             $jobsRepository->add($jobObj);
             $persistenceManager->persistAll();

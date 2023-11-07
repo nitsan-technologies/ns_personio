@@ -87,7 +87,7 @@ class JobsController extends ActionController
         $categories = [];
         $locations = [];
         $schedules = [];
-        $allCategories = $this->departmentRepository->findAll();
+        $allCategories = $this->departmentRepository->fetchAll($langId, $storagePagesArray);
         $allJobs = $this->jobsRepository->fetchJobs($langId, $storagePagesArray);
         if ($allJobs) {
             foreach ($allJobs as $key => $job) {
