@@ -48,6 +48,7 @@
                                                 <option value="diverse"><f:translate key="tx_nspersonio_domain_model_jobs.application.diverse" extensionName="ns_personio" /></option>
                                                 <option value="undefined"><f:translate key="tx_nspersonio_domain_model_jobs.application.undefined" extensionName="ns_personio" /></option>
                                             </select>
+                                            <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
                                         </div>
                                     </div>
                                     <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
@@ -96,14 +97,15 @@
                                     <label for="available_from" class="form-label">
                                         <f:translate key="tx_nspersonio_domain_model_jobs.application.availableFrom" extensionName="ns_personio" /><span>*</span>
                                     </label>
-                                    <input class="form-control" required name="available_from" type="text" value="" >
+                                    <input class="form-control" required name="available_from" type="date" value="" >
                                     <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
                                 </div>
                                 <div class="form-group ns-personio-col-6 ns-personio-col">
                                     <label for="salary_expectations" class="form-label">
                                         <f:translate key="tx_nspersonio_domain_model_jobs.application.expectedSalary" extensionName="ns_personio" />
                                     </label>
-                                    <input name="salary_expectations" type="text" value="" class="form-control">
+                                    <input name="salary_expectations" placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.expectedSalary', extensionName: 'ns_personio')}" type="number" value="" class="form-control">
+                                    <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" extensionName="ns_personio"/></div>
                                 </div>
                             </div>
                             <f:comment>

@@ -166,9 +166,9 @@ class FetchApiDataCommand extends Command
                     $fullDescription = '';
                     foreach($job['jobDescriptions']['jobDescription'] as $data) {
                         if ($data['name'] != '') {
-                            $fullDescription .= '<h5 class="headline-with-list">'.$data['name'].'</h5>';
+                            $fullDescription .= '<h3 class="headline-with-list">'.$data['name'].'</h3>';
                         }
-                        $fullDescription .= $data['value'];
+                        $fullDescription .= '<p class="ns-nspersonio-detail-desc">'.$data['value'].'</p>';
                     }
                     $description = preg_replace('/ style=("|\')(.*?)("|\')/','',$fullDescription);
                     $jobObj->setDescriptions($description);
