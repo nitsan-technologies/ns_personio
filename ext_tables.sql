@@ -13,11 +13,9 @@ CREATE TABLE tx_nspersonio_domain_model_jobs (
 	occupationcategory varchar(255) NOT NULL DEFAULT '',
 	createdat varchar(255) NOT NULL DEFAULT '',
 	department int(11) unsigned DEFAULT '0',
-	language_code varchar(255) NOT NULL DEFAULT '',
 	slug varchar(255) NOT NULL DEFAULT '',
 );
 
 CREATE TABLE tx_nspersonio_domain_model_department (
 	name varchar(255) NOT NULL DEFAULT '',
-	language_code varchar(255) NOT NULL DEFAULT '',
 );

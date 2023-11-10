@@ -8,8 +8,6 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use NITSAN\NsPersonio\Domain\Model\Jobs;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\DataHandling\SlugHelper;
 use NITSAN\NsPersonio\Domain\Model\Department;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -19,6 +17,7 @@ use NITSAN\NsPersonio\Domain\Repository\JobsRepository;
 use NITSAN\NsPersonio\Domain\Repository\DepartmentRepository;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class FetchApiDataCommand extends Command
 {
@@ -27,6 +26,38 @@ class FetchApiDataCommand extends Command
      * @var Client
      */
     protected Client $client;
+
+    /**
+     * DepartmentRepository
+     *
+     * @var DepartmentRepository
+     */
+    protected DepartmentRepository $departmentRepository;
+
+
+    /**
+     * JobsRepository
+     *
+     * @var JobsRepository
+     */
+    protected JobsRepository $jobsRepository;
+
+    /**
+     * objectManager
+     */
+    protected $objectManager = null;
+
+    /**
+     * Initializes the command after the input has been bound and before the input is validated.
+     *
+     * @see InputInterface::input()
+     * @see InputInterface::output()
+     */
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        // Initiate Global Object Manager
+        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
+    }
 
     /**
      * Configure the command by defining the name, options and arguments
@@ -47,9 +78,9 @@ class FetchApiDataCommand extends Command
                 'Language Uid'
             )
             ->addArgument(
-                'storagePageId',
+                'pageId',
                 InputArgument::OPTIONAL,
-                'Storage Page Uid',
+                'Page Uid',
                 0
             );
     }
@@ -65,14 +96,13 @@ class FetchApiDataCommand extends Command
     {
         $language = (int)$input->getArgument('languageUid');
         $api = trim($input->getArgument('api'));
-        $pageId = (int)$input->getArgument('storagePageId');
-
+        $pageId = (int)$input->getArgument('pageId');
         if($api == '') {
-            return Command::FAILURE;
+            return 1;
         }else{
             try {
-                $departmentRepository = GeneralUtility::makeInstance(DepartmentRepository::class);
-                $jobsRepository = GeneralUtility::makeInstance(JobsRepository::class);
+               $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
+               $jobsRepository = $this->objectManager->get(JobsRepository::class);
 
                 $apiData = $this->getApiData($api);
                 if(isset($apiData['position']['id'])){
@@ -88,24 +118,22 @@ class FetchApiDataCommand extends Command
                     }
                 }
                 $uniqueCategories = array_unique($categories);
-
                 // Get existing categories(departments)
                 $departmentResult = $departmentRepository->findAll()->toArray();
                 if(!empty($departmentResult)) {
                     $departmentRepository->deleteAllDepartments($language, $pageId);
                 }
                 $this->addCategories($uniqueCategories, $language, $pageId);
-
                 // Get existing Jobs
                 $jobsResult = $jobsRepository->findAll()->toArray();
                 if(!empty($jobsResult)) {
                     $jobsRepository->deleteAllJobs($language, $pageId);
                 }
                 $this->addJobs($apiData['position'], $language, $pageId);
-
-                return Command::SUCCESS;
+                return 0;
             }catch (Exception $e){
-                return Command::FAILURE;
+                \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($e,__FILE__.''.__LINE__);die;
+                return 1;
             }
         }
     }
@@ -121,10 +149,10 @@ class FetchApiDataCommand extends Command
      */
     public function addCategories(array $uniqueCategories, int $language, int $pageId): void
     {
-        $departmentRepository = GeneralUtility::makeInstance(DepartmentRepository::class);
-        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager ::class);
+        $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
+        $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(PersistenceManager ::class);
         foreach($uniqueCategories as $category){
-            $departmentObj = GeneralUtility::makeInstance(Department::class);
+            $departmentObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Department::class);
             $departmentObj->setName($category);
             $departmentObj->setPid($pageId);
             $departmentObj->set_languageUid($language);
@@ -145,19 +173,20 @@ class FetchApiDataCommand extends Command
      */
     public function addJobs(array $jobs, int $language, int $pageId): void
     {
-        $departmentRepository = GeneralUtility::makeInstance(DepartmentRepository::class);
-        $jobsRepository = GeneralUtility::makeInstance(JobsRepository::class);
-        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager ::class);
+        $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
+        $jobsRepository = $this->objectManager->get(JobsRepository::class);
+        $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(PersistenceManager ::class);
         foreach($jobs as $job){
-
-            $jobObj = GeneralUtility::makeInstance(Jobs::class);
+            $jobObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Jobs::class);
             $jobObj->setJobid($job['id']);
             isset($job['subcompany']) ? $jobObj->setSubcompany($job['subcompany']) : $jobObj->setSubcompany('');
             isset($job['office']) ? $jobObj->setOffice($job['office']) : $jobObj->setOffice('');
             if(isset($job['department'])){
                 $department = $departmentRepository->getUid($job['department'],$language);
                 $dept = $departmentRepository->findByUid($department);
-                $jobObj->setDepartment($dept);
+                if ($dept) {
+                    $jobObj->setDepartment($dept);
+                }
             }
             isset($job['recruitingCategory']) ? $jobObj->setRecruitingcategory($job['recruitingCategory']) : $jobObj->setRecruitingcategory('');
             isset($job['name']) ? $jobObj->setName($job['name']) : $jobObj->setName('');
@@ -232,8 +261,8 @@ class FetchApiDataCommand extends Command
     public function getJobSlug($record, $pid): string
     {
         $fieldConfig = $GLOBALS['TCA']['tx_nspersonio_domain_model_jobs']['columns']['slug']['config'];
-        $slugHelper = GeneralUtility::makeInstance(
-            SlugHelper::class,
+        $slugHelper = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Core\DataHandling\SlugHelper::class,
             'tx_nspersonio_domain_model_jobs',
             $record['name'],
             $fieldConfig
@@ -241,3 +270,4 @@ class FetchApiDataCommand extends Command
         return $slugHelper->generate($record, $pid);
     }
 }
+

@@ -74,10 +74,9 @@ class JobsController extends ActionController
     /**
      * action list
      *
-     * @return ResponseInterface
      * @throws AspectNotFoundException|InvalidQueryException
      */
-    public function listAction(): ResponseInterface
+    public function listAction()
     {
         $storagePages = $this->settings['storagePage'];
         $storagePagesArray = explode (",", $storagePages);
@@ -106,8 +105,8 @@ class JobsController extends ActionController
         $uniqueLocations = array_unique($locations);
         $uniqueSchedules = array_unique($schedules);
 
-        $arguments = $this->request->getParsedBody();
-        if (empty($arguments['tx_nspersonio_pi1']['search-word'])) {
+        $arguments = GeneralUtility::_GP('tx_nspersonio_pi1');
+        if (empty($arguments['search-word'])) {
             $jobs = $this->jobsRepository->fetchJobs($langId, $storagePagesArray);
         } else {
             $jobs = $this->jobsRepository->dataFilterAndSort($arguments, $storagePagesArray, $langId);
@@ -129,15 +128,13 @@ class JobsController extends ActionController
             'locations' => $uniqueLocations,
             'schedules' => $uniqueSchedules,
         ]);
-        return $this->htmlResponse();
     }
 
     /**
      * action detail
      * @param Jobs|null $job
-     * @return ResponseInterface
      */
-    public function detailAction(Jobs $job = null): ResponseInterface
+    public function detailAction(Jobs $job = null)
     {
         if($job) {
             $listPid = $this->settings['listPid'];
@@ -148,17 +145,15 @@ class JobsController extends ActionController
                 'listPid' => $listPid
             ]);
         }
-        return $this->htmlResponse();
     }
 
     /**
      * action application
      * @param Jobs|null $application
-     * @return ResponseInterface
      */
-    public function applicationAction(Jobs $job = null): ResponseInterface
+    public function applicationAction(Jobs $job = null)
     {
-        $jobUid = isset($this->request->getQueryParams()['tx_nspersonio_pi2']) ? $this->request->getQueryParams()['tx_nspersonio_pi2']['job'] : null;
+        $jobUid = isset(GeneralUtility::_GP('tx_nspersonio_pi2')['job']) ? GeneralUtility::_GP('tx_nspersonio_pi2')['job'] : null;
         if($job==null) {
             if($jobUid){
                 $job = $this->jobsRepository->findByUid($jobUid) ;
@@ -172,7 +167,6 @@ class JobsController extends ActionController
                 'settings' => $this->settings,
             ]);
         }
-        return $this->htmlResponse();
     }
 
     /**
@@ -183,28 +177,39 @@ class JobsController extends ActionController
      * @throws ExtensionConfigurationPathDoesNotExistException
      * @throws GuzzleException
      */
-    public function submitApplicationAction(): ResponseInterface
+    public function submitApplicationAction()
     {
-        $formErrors = [];
+        $formValid = true;
         $successPid = (int) $this->settings['successPID'];
         $failurePid = (int) $this->settings['failurePid'];
         $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
         $api = $globalConfiguration['applicationApi'];
         if ($api === '') {
-            $formErrors[] = 'Application Api Required';
+            $formValid = false;
         }
         $companyId = (int) $this->settings['companyId'];
         if ($companyId === '') {
-            $formErrors[] = 'Company ID Required';
+            $formValid = false;
         }
-        $formData = $this->request->getParsedBody();
+        $formData = [
+            'jobId' => $this->request->getArgument('jobId'),
+            'cv-upload' => GeneralUtility::_GP('cv-upload'),
+            'other-upload' => GeneralUtility::_GP('other-upload'),
+            'first_name' => GeneralUtility::_GP('first_name'),
+            'last_name' => GeneralUtility::_GP('last_name'),
+            'email' => GeneralUtility::_GP('email'),
+            'gender' => GeneralUtility::_GP('gender'),
+            'phone' => GeneralUtility::_GP('phone'),
+            'available_from' => GeneralUtility::_GP('available_from'),
+            'salary_expectations' => GeneralUtility::_GP('salary_expectations'),
+        ];
         $token = $this->settings['accessToken'];
         if ($token === '') {
-            $formErrors[] = 'Access Token Required';
+            $formValid = false;
         }
-        $jobId = $this->request->getQueryParams()['tx_nspersonio_pi3']['jobId'];
+        $jobId =$formData['jobId'];
         if ($jobId === '') {
-            $formErrors[] = 'Job ID Required';
+            $formValid = false;
         }
         $cvData = json_decode($formData['cv-upload'], true);
         $otherData = [];
@@ -212,16 +217,16 @@ class JobsController extends ActionController
             $otherData = json_decode($formData['other-upload'], true);
         }
         if ($formData['first_name'] === '') {
-            $formErrors[] = 'First Name Required';
+            $formValid = false;
         }
         if ($formData['last_name'] === '') {
-            $formErrors[] = 'Last Name Required';
+            $formValid = false;
         }
         if ($formData['email'] === '') {
-            $formErrors[] = 'Email Required';
+            $formValid = false;
         }
         $uriBuilder = $this->uriBuilder;
-        if (empty($formErrors)) {
+        if ($formValid) {
             $params = [
                 "job_position_id" => $jobId,
                 "first_name" => $formData['first_name'],

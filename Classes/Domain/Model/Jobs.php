@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace NITSAN\NsPersonio\Domain\Model;
 
-use NITSAN\NsPersonio\Domain\Model\Department;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 
@@ -26,7 +25,7 @@ class Jobs extends AbstractEntity
      * _languageUid
      * @var int<-1, max>|null
      */
-    protected int|null $_languageUid = null;
+    protected $_languageUid = null;
 
     /**
      * languageCode
@@ -136,9 +135,9 @@ class Jobs extends AbstractEntity
     /**
      * department
      *
-     * @var Department
+     * @var \NITSAN\NsPersonio\Domain\Model\Department
      */
-    protected $department = '';
+    protected $department = null;
 
     /**
      * @param int $_languageUid
@@ -163,7 +162,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getJobid() : string
+    public function getJobid(): string
     {
         return $this->jobid;
     }
@@ -174,7 +173,7 @@ class Jobs extends AbstractEntity
      * @param string $jobid
      * @return void
      */
-    public function setJobid(string $jobid) : void 
+    public function setJobid(string $jobid): void
     {
         $this->jobid = $jobid;
     }
@@ -184,7 +183,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getSubcompany() : string
+    public function getSubcompany(): string
     {
         return $this->subcompany;
     }
@@ -195,7 +194,7 @@ class Jobs extends AbstractEntity
      * @param string $subcompany
      * @return void
      */
-    public function setSubcompany(string $subcompany) : void
+    public function setSubcompany(string $subcompany): void
     {
         $this->subcompany = $subcompany;
     }
@@ -205,7 +204,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getOffice() : string
+    public function getOffice(): string
     {
         return $this->office;
     }
@@ -216,7 +215,7 @@ class Jobs extends AbstractEntity
      * @param string $office
      * @return void
      */
-    public function setOffice(string $office) : void
+    public function setOffice(string $office): void
     {
         $this->office = $office;
     }
@@ -226,7 +225,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getRecruitingcategory() : string
+    public function getRecruitingcategory(): string
     {
         return $this->recruitingcategory;
     }
@@ -237,7 +236,7 @@ class Jobs extends AbstractEntity
      * @param string $recruitingcategory
      * @return void
      */
-    public function setRecruitingcategory(string $recruitingcategory) : void
+    public function setRecruitingcategory(string $recruitingcategory): void
     {
         $this->recruitingcategory = $recruitingcategory;
     }
@@ -247,7 +246,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getSlug() : string
+    public function getSlug(): string
     {
         return $this->slug;
     }
@@ -258,7 +257,7 @@ class Jobs extends AbstractEntity
      * @param string $slug
      * @return void
      */
-    public function setSlug(string $slug) : void
+    public function setSlug(string $slug): void
     {
         $this->slug = $slug;
     }
@@ -268,7 +267,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -279,7 +278,7 @@ class Jobs extends AbstractEntity
      * @param string $name
      * @return void
      */
-    public function setName(string $name) : void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -289,7 +288,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getDescriptions() : string
+    public function getDescriptions(): string
     {
         return $this->descriptions;
     }
@@ -300,7 +299,7 @@ class Jobs extends AbstractEntity
      * @param string $descriptions
      * @return void
      */
-    public function setDescriptions(string $descriptions) : void
+    public function setDescriptions(string $descriptions): void
     {
         $this->descriptions = $descriptions;
     }
@@ -310,7 +309,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getEmploymenttype() : string
+    public function getEmploymenttype(): string
     {
         return $this->employmenttype;
     }
@@ -321,7 +320,7 @@ class Jobs extends AbstractEntity
      * @param string $employmenttype
      * @return void
      */
-    public function setEmploymenttype(string $employmenttype) : void
+    public function setEmploymenttype(string $employmenttype): void
     {
         $this->employmenttype = $employmenttype;
     }
@@ -331,7 +330,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getSeniority() : string
+    public function getSeniority(): string
     {
         return $this->seniority;
     }
@@ -342,7 +341,7 @@ class Jobs extends AbstractEntity
      * @param string $seniority
      * @return void
      */
-    public function setSeniority(string $seniority) : void
+    public function setSeniority(string $seniority): void
     {
         $this->seniority = $seniority;
     }
@@ -352,7 +351,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getSchedule() : string
+    public function getSchedule(): string
     {
         return $this->schedule;
     }
@@ -363,7 +362,7 @@ class Jobs extends AbstractEntity
      * @param string $schedule
      * @return void
      */
-    public function setSchedule(string $schedule) : void
+    public function setSchedule(string $schedule): void
     {
         $this->schedule = $schedule;
     }
@@ -373,7 +372,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getExperience() : string
+    public function getExperience(): string
     {
         return $this->experience;
     }
@@ -384,7 +383,7 @@ class Jobs extends AbstractEntity
      * @param string $experience
      * @return void
      */
-    public function setExperience(string $experience) : void
+    public function setExperience(string $experience): void
     {
         $this->experience = $experience;
     }
@@ -394,7 +393,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getOccupation() : string
+    public function getOccupation(): string
     {
         return $this->occupation;
     }
@@ -405,7 +404,7 @@ class Jobs extends AbstractEntity
      * @param string $occupation
      * @return void
      */
-    public function setOccupation(string $occupation) : void
+    public function setOccupation(string $occupation): void
     {
         $this->occupation = $occupation;
     }
@@ -415,7 +414,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getOccupationcategory() : string
+    public function getOccupationcategory(): string
     {
         return $this->occupationcategory;
     }
@@ -426,7 +425,7 @@ class Jobs extends AbstractEntity
      * @param string $occupationcategory
      * @return void
      */
-    public function setOccupationcategory(string $occupationcategory) : void
+    public function setOccupationcategory(string $occupationcategory): void
     {
         $this->occupationcategory = $occupationcategory;
     }
@@ -436,7 +435,7 @@ class Jobs extends AbstractEntity
      *
      * @return string
      */
-    public function getCreatedat() : string
+    public function getCreatedat(): string
     {
         return $this->createdat;
     }
@@ -447,7 +446,7 @@ class Jobs extends AbstractEntity
      * @param string $createdat
      * @return void
      */
-    public function setCreatedat(string $createdat) : void
+    public function setCreatedat(string $createdat): void
     {
         $this->createdat = $createdat;
     }
@@ -455,9 +454,9 @@ class Jobs extends AbstractEntity
     /**
      * Returns the department
      *
-     * @return Department|string
+     * @return \NITSAN\NsPersonio\Domain\Model\Department
      */
-    public function getDepartment() : Department|string
+    public function getDepartment()
     {
         return $this->department;
     }
@@ -465,33 +464,11 @@ class Jobs extends AbstractEntity
     /**
      * Sets the department
      *
-     * @param Department $department
+     * @param \NITSAN\NsPersonio\Domain\Model\Department $department
      * @return void
      */
-    public function setDepartment(Department $department) : void
+    public function setDepartment(\NITSAN\NsPersonio\Domain\Model\Department $department): void
     {
         $this->department = $department;
-    }
-
-
-    /**
-     * setLanguageCode
-     * 
-     * @param string $languageCode
-     * @return void
-     */
-    public function setLanguageCode(string $languageCode) : void
-    {
-        $this->languageCode = $languageCode;
-    }
-
-    /**
-     * getLanguageCode
-     * 
-     * @return string
-     */
-    public function getLanguageCode() : string
-    {
-        return $this->languageCode;
     }
 }

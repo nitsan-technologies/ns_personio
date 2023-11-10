@@ -16,6 +16,7 @@
                         </label>
                         <config>
                             <type>group</type>
+                            <internal_type>db</internal_type>
                             <allowed>pages</allowed>
                             <required>true</required>
                         </config>
@@ -26,6 +27,7 @@
                             <label>LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.detailPid</label>
                             <config>
                                 <type>group</type>
+                                <internal_type>db</internal_type>
                                 <allowed>pages</allowed>
                                 <size>1</size>
                                 <maxitems>1</maxitems>
@@ -40,6 +42,7 @@
                             <label>LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.applicationPid</label>
                             <config>
                                 <type>group</type>
+                                <internal_type>db</internal_type>
                                 <allowed>pages</allowed>
                                 <size>1</size>
                                 <maxitems>1</maxitems>

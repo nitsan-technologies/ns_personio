@@ -25,7 +25,7 @@ class Department extends AbstractEntity
      * _languageUid
      * @var int<-1, max>|null
      */
-    protected int|null $_languageUid = null;
+    protected $_languageUid = null;
 
     /**
      * languageCode
@@ -73,29 +73,8 @@ class Department extends AbstractEntity
      * @param string $name
      * @return void
      */
-    public function setName(string $name) : void
+    public function setName(string $name): void
     {
         $this->name = $name;
-    }
-
-        /**
-     * setLanguageCode
-     * 
-     * @param string $languageCode
-     * @return void
-     */
-    public function setLanguageCode(string $languageCode) : void
-    {
-        $this->languageCode = $languageCode;
-    }
-
-    /**
-     * getLanguageCode
-     * 
-     * @return string
-     */
-    public function getLanguageCode() : string
-    {
-        return $this->languageCode;
     }
 }

@@ -73,7 +73,7 @@ class JobsRepository extends Repository
             $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang)),
             $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId))
         )
-        ->executeStatement();
+        ->execute();
     }
 
     /**
@@ -92,9 +92,9 @@ class JobsRepository extends Repository
         }
         $constraints[] = $query->logicalOr(...$storageConstraints);
 
-        if (!empty($arguments['tx_nspersonio_pi1']['search-word'])) {
-            $searchConstraints[] = $query->like('name', '%' . $arguments['tx_nspersonio_pi1']['search-word'] . '%');
-             $searchConstraints[] = $query->like('descriptions', '%' . $arguments['tx_nspersonio_pi1']['search-word'] . '%');
+        if (!empty($arguments['search-word'])) {
+            $searchConstraints[] = $query->like('name', '%' . $arguments['search-word'] . '%');
+             $searchConstraints[] = $query->like('descriptions', '%' . $arguments['search-word'] . '%');
             $constraints[] = $query->logicalOr(...$searchConstraints);
         }
         $query->matching($query->logicalAnd(...$constraints));

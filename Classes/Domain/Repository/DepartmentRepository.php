@@ -53,7 +53,7 @@ class DepartmentRepository extends Repository
             $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang)),
             $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId))
         )
-        ->executeStatement();
+        ->execute();
     }
 
     /**
@@ -67,14 +67,17 @@ class DepartmentRepository extends Repository
     public function getUid(string $departmentName, int $language_code)
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_nspersonio_domain_model_department');
-        return $queryBuilder
+        $result = $queryBuilder
         ->select('uid')
         ->from('tx_nspersonio_domain_model_department')
         ->where(
             $queryBuilder->expr()->eq('name', $queryBuilder->createNamedParameter($departmentName)),
             $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language_code))
         )
-        ->executeQuery()->fetchOne();
+        ->execute()->fetch();
+        return $result['uid'] ?? 0;
+
+
     }
 
     /**
