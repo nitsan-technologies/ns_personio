@@ -78,9 +78,9 @@ class FetchApiDataCommand extends Command
                 'Language Uid'
             )
             ->addArgument(
-                'pageId',
+                'storagePageId',
                 InputArgument::OPTIONAL,
-                'Page Uid',
+                'Storage Page Uid',
                 0
             );
     }
@@ -96,7 +96,7 @@ class FetchApiDataCommand extends Command
     {
         $language = (int)$input->getArgument('languageUid');
         $api = trim($input->getArgument('api'));
-        $pageId = (int)$input->getArgument('pageId');
+        $pageId = (int)$input->getArgument('storagePageId');
         if($api == '') {
             return 1;
         }else{
@@ -132,7 +132,6 @@ class FetchApiDataCommand extends Command
                 $this->addJobs($apiData['position'], $language, $pageId);
                 return 0;
             }catch (Exception $e){
-                \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($e,__FILE__.''.__LINE__);die;
                 return 1;
             }
         }

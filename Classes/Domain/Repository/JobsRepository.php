@@ -91,7 +91,7 @@ class JobsRepository extends Repository
             $storageConstraints[] = $query->equals('pid', (int)$value);
         }
         $constraints[] = $query->logicalOr(...$storageConstraints);
-
+        $constraints[] = $query->equals('sys_language_uid', $langId);
         if (!empty($arguments['search-word'])) {
             $searchConstraints[] = $query->like('name', '%' . $arguments['search-word'] . '%');
              $searchConstraints[] = $query->like('descriptions', '%' . $arguments['search-word'] . '%');
