@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') || die();
+defined('TYPO3_MODE') || defined('TYPO3') || die();
 
 use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -12,14 +12,16 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
 
-if (version_compare($typo3VersionArray['version_main'], 10, '<')) {
+if (version_compare((string)$typo3VersionArray['version_main'], '10', '<')) {
     $jobsController = 'Jobs';
+    $extensionName = 'NITSAN.NsPersonio';
 } else {
     $jobsController = JobsController::class;
+    $extensionName = 'NsPersonio';
 }
 
 ExtensionUtility::configurePlugin(
-    'NITSAN.NsPersonio',
+    $extensionName,
     'Pi1',
     [
         $jobsController => 'list'
@@ -31,7 +33,7 @@ ExtensionUtility::configurePlugin(
 );
 
 ExtensionUtility::configurePlugin(
-    'NITSAN.NsPersonio',
+    $extensionName,
     'Pi2',
     [
         $jobsController => 'detail'
@@ -40,7 +42,7 @@ ExtensionUtility::configurePlugin(
 );
 
 ExtensionUtility::configurePlugin(
-    'NITSAN.NsPersonio',
+    $extensionName,
     'Pi3',
     [
         $jobsController => 'application, submitApplication, fileProcess'

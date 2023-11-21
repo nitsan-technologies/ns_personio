@@ -18,6 +18,7 @@ use NITSAN\NsPersonio\Domain\Repository\DepartmentRepository;
 use NITSAN\NsPersonio\Domain\Model\Jobs;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * This file is part of the "NsPersonio" Extension for TYPO3 CMS.
@@ -60,6 +61,13 @@ class JobsController extends ActionController
      */
     private ExtensionConfiguration $extensionConfiguration;
 
+    /**
+     * typo3VersionArray
+     *
+     * @var array
+     */
+    protected array $typo3VersionArray;
+
     public function __construct(
         JobsRepository $jobsRepository,
         DepartmentRepository $departmentRepository,
@@ -69,6 +77,7 @@ class JobsController extends ActionController
         $this->jobsRepository = $jobsRepository;
         $this->departmentRepository = $departmentRepository;
         $this->extensionConfiguration = $extensionConfiguration;
+        $this->typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
     }
 
     /**
@@ -128,6 +137,9 @@ class JobsController extends ActionController
             'locations' => $uniqueLocations,
             'schedules' => $uniqueSchedules,
         ]);
+        if (version_compare((string)$this->typo3VersionArray['version_main'], '12', '>=')) {
+            return $this->htmlResponse();
+        }
     }
 
     /**
@@ -144,6 +156,9 @@ class JobsController extends ActionController
                 'applicationPid' => $this->settings['applicationPid'],
                 'listPid' => $listPid
             ]);
+        }
+        if (version_compare((string)$this->typo3VersionArray['version_main'], '12', '>=')) {
+            return $this->htmlResponse();
         }
     }
 
@@ -166,6 +181,9 @@ class JobsController extends ActionController
                 'job' => $job,
                 'settings' => $this->settings,
             ]);
+        }
+        if (version_compare((string)$this->typo3VersionArray['version_main'], '12', '>=')) {
+            return $this->htmlResponse();
         }
     }
 

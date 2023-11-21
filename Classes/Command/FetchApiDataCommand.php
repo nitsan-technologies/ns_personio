@@ -18,6 +18,7 @@ use NITSAN\NsPersonio\Domain\Repository\DepartmentRepository;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 class FetchApiDataCommand extends Command
 {
@@ -55,8 +56,11 @@ class FetchApiDataCommand extends Command
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        // Initiate Global Object Manager
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+        if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
+            // Initiate Global Object Manager
+            $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
+        }
     }
 
     /**
@@ -94,6 +98,7 @@ class FetchApiDataCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
         $language = (int)$input->getArgument('languageUid');
         $api = trim($input->getArgument('api'));
         $pageId = (int)$input->getArgument('storagePageId');
@@ -101,8 +106,13 @@ class FetchApiDataCommand extends Command
             return 1;
         }else{
             try {
-               $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
-               $jobsRepository = $this->objectManager->get(JobsRepository::class);
+                if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
+                    $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
+                    $jobsRepository = $this->objectManager->get(JobsRepository::class);
+                } else {
+                    $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(DepartmentRepository::class);
+                    $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(JobsRepository::class);
+                }
 
                 $apiData = $this->getApiData($api);
                 if(isset($apiData['position']['id'])){
@@ -148,7 +158,12 @@ class FetchApiDataCommand extends Command
      */
     public function addCategories(array $uniqueCategories, int $language, int $pageId): void
     {
-        $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+        if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
+            $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
+        } else {
+            $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(DepartmentRepository::class);
+        }
         $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(PersistenceManager ::class);
         foreach($uniqueCategories as $category){
             $departmentObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Department::class);
@@ -172,8 +187,14 @@ class FetchApiDataCommand extends Command
      */
     public function addJobs(array $jobs, int $language, int $pageId): void
     {
-        $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
-        $jobsRepository = $this->objectManager->get(JobsRepository::class);
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+        if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
+            $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
+            $jobsRepository = $this->objectManager->get(JobsRepository::class);
+        } else {
+            $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(DepartmentRepository::class);
+            $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(JobsRepository::class);
+        }
         $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(PersistenceManager ::class);
         foreach($jobs as $job){
             $jobObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Jobs::class);
@@ -189,9 +210,9 @@ class FetchApiDataCommand extends Command
             }
             isset($job['recruitingCategory']) ? $jobObj->setRecruitingcategory($job['recruitingCategory']) : $jobObj->setRecruitingcategory('');
             isset($job['name']) ? $jobObj->setName($job['name']) : $jobObj->setName('');
-            if (isset($job['jobDescriptions']['jobDescription'])) {
+            if (isset($job['jobDescriptions']['jobDescription']) && !isset($job['jobDescriptions']['jobDescription']['name'])) {
+                $fullDescription = '';
                 if(is_array($job['jobDescriptions']['jobDescription'])) {
-                    $fullDescription = '';
                     foreach($job['jobDescriptions']['jobDescription'] as $data) {
                         if ($data['name'] != '') {
                             $fullDescription .= '<h3 class="headline-with-list">'.$data['name'].'</h3>';
@@ -202,9 +223,12 @@ class FetchApiDataCommand extends Command
                     $jobObj->setDescriptions($description);
                 }   else {
                     if(isset($job['jobDescriptions']['jobDescription']['value'])){
-                        $description = preg_replace('/ style=("|\')(.*?)("|\')/','',$job['jobDescriptions']['jobDescription']['value']);
-                        $jobObj->setDescriptions($description);
+                        if (isset($job['jobDescriptions']['jobDescription']['name'])) {
+                            $fullDescription .= '<h3 class="headline-with-list">'.$job['jobDescriptions']['jobDescription']['name'].'</h3>';
+                        }
+                        $fullDescription .= preg_replace('/ style=("|\')(.*?)("|\')/','',$job['jobDescriptions']['jobDescription']['value']);
                     }
+                    $jobObj->setDescriptions($fullDescription);
                 }
             }
             isset($job['employmentType']) ? $jobObj->setEmploymenttype($job['employmentType']) : $jobObj->setEmploymenttype('');

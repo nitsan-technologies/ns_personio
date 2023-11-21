@@ -25,7 +25,7 @@ class Jobs extends AbstractEntity
      * _languageUid
      * @var int<-1, max>|null
      */
-    protected $_languageUid = null;
+    protected ?int $_languageUid = null;
 
     /**
      * languageCode
