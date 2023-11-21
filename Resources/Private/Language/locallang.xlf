@@ -25,10 +25,10 @@
 				<source>Name</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.application.first" resname="tx_nspersonio_domain_model_jobs.application.first">
-				<source>First</source>
+				<source>First Name</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.application.last" resname="tx_nspersonio_domain_model_jobs.application.last">
-				<source>Last</source>
+				<source>Last Name</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.application.email" resname="tx_nspersonio_domain_model_jobs.application.email">
 				<source>Email</source>
@@ -40,7 +40,7 @@
 				<source>Phone</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.application.phoneex" resname="tx_nspersonio_domain_model_jobs.application.phoneex">
-				<source>+49 176 123 4455</source>
+				<source>+49 (000-000-00-00)</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.application.availableFrom" resname="tx_nspersonio_domain_model_jobs.application.availableFrom">
 				<source>Available from</source>

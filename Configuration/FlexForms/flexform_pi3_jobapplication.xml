@@ -15,7 +15,8 @@
                             LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.companyId
                         </label>
                         <config>
-                            <type>number</type>
+                            <type>input</type>
+                            <eval>int</eval>
                             <required>true</required>
                         </config>
                     </settings.companyId>
@@ -47,6 +48,7 @@
                             <config>
                                 <type>group</type>
                                 <allowed>pages</allowed>
+                                <internal_type>db</internal_type>
                                 <size>1</size>
                                 <maxitems>1</maxitems>
                                 <minitems>0</minitems>
@@ -63,6 +65,7 @@
 							<config>
 								<type>group</type>
 								<allowed>pages</allowed>
+                                <internal_type>db</internal_type>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<minitems>0</minitems>
@@ -79,6 +82,7 @@
 							<config>
 								<type>group</type>
 								<allowed>pages</allowed>
+                                <internal_type>db</internal_type>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<minitems>0</minitems>
@@ -86,7 +90,6 @@
 							</config>
 						</TCEforms>
 					</settings.failurePid>
-
                 </el>
             </ROOT>
         </sDEF>

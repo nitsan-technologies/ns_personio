@@ -1,25 +1,27 @@
 <?php
 
-defined('TYPO3') || die();
+defined('TYPO3_MODE') || defined('TYPO3') || die();
 
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-$signatures = [];
 $plugins = [
     ['Pi1', 'Personio Jobs List', 'flexform_pi1_joblisting'],
     ['Pi2', 'Personio Jobs Details', 'flexform_pi2_jobdetail'],
     ['Pi3', 'Personio Jobs Application', 'flexform_pi3_jobapplication']
 ];
 
+$signatures = [
+    'nspersonio_pi1',
+    'nspersonio_pi2',
+    'nspersonio_pi3'
+];
 foreach ($plugins as $plugin) {
-    $signature = ExtensionUtility::registerPlugin(
+    ExtensionUtility::registerPlugin(
         'NsPersonio',
         $plugin[0],
         $plugin[1]
     );
-
-    $signatures[] = $signature;
 }
 
 $config = [

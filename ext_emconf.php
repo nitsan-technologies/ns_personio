@@ -11,8 +11,8 @@ $EM_CONF['ns_personio'] = [
     'version' => '12.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '12.4.0-12.5.99',
-            'scheduler' => '12.0.0-12.5.99',
+            'typo3' => '9.5.0-12.5.99',
+            'scheduler' => '9.5.0-12.5.99',
         ],
         'conflicts' => [],
         'suggests' => [],

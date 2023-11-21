@@ -19,9 +19,9 @@
                                             <h2>{job.name}</h2>
                                         </f:if>
                                         <p>
-                                            <f:if condition="{job.employmentType}"><span>{job.employmentType},</span></f:if>
-                                            <f:if condition="{job.schedule}"><span>{job.schedule}</span></f:if>
-                                            <f:if condition="{job.office}"><span>, {job.office}</span></f:if>
+                                            <f:if condition="{job.employmentType}"><span>{job.employmentType}, </span></f:if>
+                                                <f:if condition="{job.schedule}"><span>{job.schedule}, </span></f:if>
+                                                <f:if condition="{job.office}"><span>{job.office}</span></f:if>
                                         </p>
                                     </f:if>
                                     <f:if condition="{settings.applicationMessage}">
