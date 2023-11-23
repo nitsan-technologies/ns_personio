@@ -169,7 +169,7 @@ class FetchApiDataCommand extends Command
             $departmentObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Department::class);
             $departmentObj->setName($category);
             $departmentObj->setPid($pageId);
-            $departmentObj->set_languageUid($language);
+            $departmentObj->setSysLanguageUid($language);
             $departmentRepository->add($departmentObj);
             $persistenceManager->persistAll();
         }
@@ -210,9 +210,9 @@ class FetchApiDataCommand extends Command
             }
             isset($job['recruitingCategory']) ? $jobObj->setRecruitingcategory($job['recruitingCategory']) : $jobObj->setRecruitingcategory('');
             isset($job['name']) ? $jobObj->setName($job['name']) : $jobObj->setName('');
-            if (isset($job['jobDescriptions']['jobDescription']) && !isset($job['jobDescriptions']['jobDescription']['name'])) {
+            if (isset($job['jobDescriptions']['jobDescription'])) {
                 $fullDescription = '';
-                if(is_array($job['jobDescriptions']['jobDescription'])) {
+                if(is_array($job['jobDescriptions']['jobDescription']) && !isset($job['jobDescriptions']['jobDescription']['name'])) {
                     foreach($job['jobDescriptions']['jobDescription'] as $data) {
                         if ($data['name'] != '') {
                             $fullDescription .= '<h3 class="headline-with-list">'.$data['name'].'</h3>';
@@ -239,7 +239,7 @@ class FetchApiDataCommand extends Command
             isset($job['occupationCategory']) ? $jobObj->setOccupationcategory($job['occupationCategory']) : $jobObj->setOccupationcategory('');
             isset($job['createdAt']) ? $jobObj->setCreatedat($job['createdAt']) : $jobObj->setCreatedat('');
             $jobObj->setPid($pageId);
-            $jobObj->set_languageUid($language);
+            $jobObj->setSysLanguageUid($language);
             $slug = $this->getJobSlug($job,$pageId);
             $jobObj->setSlug($slug);
             $jobsRepository->add($jobObj);

@@ -22,16 +22,9 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Department extends AbstractEntity
 {
     /**
-     * _languageUid
-     * @var int<-1, max>|null
+     * @var int
      */
-    protected ?int $_languageUid = null;
-
-    /**
-     * languageCode
-     * @var string
-     */
-    protected string $languageCode = '';
+    protected $sysLanguageUid = 0;
 
     /**
      * name
@@ -41,18 +34,21 @@ class Department extends AbstractEntity
     protected string $name = '';
 
     /**
-     * @param int $_languageUid
-     * @return void
+     * Set sys language
+     *
+     * @param int $sysLanguageUid
      */
-    public function set_languageUid(int $_languageUid): void
+    public function setSysLanguageUid($sysLanguageUid): void
     {
-        $this->_languageUid = $_languageUid;
+        $this->_languageUid = $sysLanguageUid;
     }
 
     /**
+     * Get sys language
+     *
      * @return int
      */
-    public function get_languageUid(): ?int
+    public function getSysLanguageUid(): int
     {
         return $this->_languageUid;
     }
