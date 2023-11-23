@@ -31,16 +31,15 @@
                         </config>
                     </settings.accessToken>
 
-                    <settings.showHeader>
+                    <settings.showFormHeader>
                         <label>
                             LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.showHeader
                         </label>
                         <config>
                             <type>check</type>
                             <renderType>checkboxToggle</renderType>
-                            <default>1</default>
                         </config>
-                    </settings.showHeader>
+                    </settings.showFormHeader>
 
                     <settings.listPid>
                         <TCEforms>
