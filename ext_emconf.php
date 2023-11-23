@@ -13,6 +13,7 @@ $EM_CONF['ns_personio'] = [
         'depends' => [
             'typo3' => '9.5.0-12.5.99',
             'scheduler' => '9.5.0-12.5.99',
+            'php' => '7.4.0-8.2.99',
         ],
         'conflicts' => [],
         'suggests' => [],
