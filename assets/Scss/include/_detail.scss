@@ -1,0 +1,84 @@
+/*******************************************************************************
+* Listing
+*******************************************************************************/
+.ns-nspersonio-backto-list {
+  margin-bottom: 30px;
+  position: relative;
+
+  .ns-personio-btn {
+    align-items: center;
+    display: inline-flex;
+  }
+
+  .ns-personio-btn svg { 
+    margin-right: 10px;
+  }
+}
+
+.ns-nspersonio-detail-meta {
+  border-bottom: 1px solid $brand-color-gray;
+  margin-bottom: 25px;
+  padding-bottom: 30px;
+  
+  .ns-personio-warp--dark & {
+    border-color: rgba($white, 0.5);
+  }
+
+  @media (min-width: 768px) {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+  }
+}
+
+.ns-nspersonio-detail-head {
+  h2 {
+    margin-bottom: 0;
+  }
+
+  span {
+    text-transform: capitalize;
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.ns-nspersonio-detail-meta--apply {
+  .ns-nspersonio-detail-head {
+    margin-bottom: 30px;
+  }
+
+  @media (min-width: 768px) {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    
+    .ns-nspersonio-detail-head {
+      margin-bottom: 0;
+      padding-right: 20px;
+      width: calc(100% - 18%);
+    }
+  }
+
+  @media (min-width: 993px) {
+    .ns-nspersonio-detail-head {
+      width: calc(100% - 15%);
+    } 
+  }
+}
+
+.ns-personio-btn-apply-btn-bottom {
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+
+.ns-personio-warp:not(.ns-personio-warp--dark) {
+  .job-details__content {
+    .headline-with-list {
+      color: $black;
+    }
+  }
+}

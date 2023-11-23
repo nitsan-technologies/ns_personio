@@ -1,0 +1,40 @@
+/*******************************************************************************
+* Button
+*******************************************************************************/
+.ns-personio-btn {
+  @include transition(all, 0.2s, ease, 0s);
+  @include inline-block();
+  @include font-size($font-sizes16);
+  background-color: transparent;
+  border: 1px solid $brand-color-gray;
+  border-radius: 6px;
+  box-shadow: none;
+  color: $text-color;
+  cursor: pointer;
+  margin: 0;
+  outline: 0;
+  padding: 6px 15px;
+  white-space: normal;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $black;
+    border-color: $black;
+    color: $white;
+  }
+
+  .ns-personio-warp--dark  & {
+    background-color: $brand-color-light-gray;
+    color: $black;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: transparent;
+      border-color: $brand-color-light-gray;
+      color: $white;
+    }
+  }
+}
+

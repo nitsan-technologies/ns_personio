@@ -1,0 +1,52 @@
+$breakpoints: (
+  small : 576px,
+  medium: 768px,
+  large : 992px,
+  x-large : 1200px,
+  xx-large : 1400px
+);
+
+$font-sizes36: (
+  null : (30px, 36px),
+  large : (32px, 38px),
+  xx-large : (36px, 46px)
+);
+
+$font-sizes30: (
+  null : (26px, 32px),
+  large : (28px, 34px),
+  xx-large : (30px, 40px)
+);
+
+$font-sizes24: (
+  null : (20px, 26px),
+  large : (22px, 28px),
+  x-large : (24px, 32px)
+);
+
+$font-sizes22: (
+  null : (18px, 26px),
+  large : (20px, 28px),
+  x-large : (22px, 32px)
+);
+
+$font-sizes20: (
+  null : (17px, 25px),
+  large : (19px, 27px),
+  x-large : (20px, 30px)
+);
+
+$font-sizes18: (
+  null : (16px, 24px),
+  large : (18px, 26px)
+);
+
+$font-sizes16: (
+  null : (15px, 23px),
+  large : (16px, 25px)
+);
+
+$font-sizes14: (
+  null : (12px, 17px),
+  large : (14px, 25px)
+);

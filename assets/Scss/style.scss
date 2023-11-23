@@ -1,0 +1,31 @@
+//* This is the main application stylesheet. It should include or import all
+//* custom and vendor stylesheets.
+
+//****************************************************************************
+//  Include our own variables and the ones that override the Bootstrap variables
+//  Always include this file first
+//***************************************************************************/
+@import './base/variables';
+
+//****************************************************************************
+//  Include a Plugin SCSS files.
+//***************************************************************************/
+@import 'tom-select/dist/css/tom-select.bootstrap5.min.css';
+
+//****************************************************************************
+//  Include base styles
+//***************************************************************************/
+@import 'mixins/mixins';
+@import 'base/font-size';
+@import 'base/typography';
+
+//****************************************************************************
+//  Include our custom styles
+//***************************************************************************/
+@import 'include/general';
+@import 'include/button';
+@import 'include/form';
+@import 'include/listing';
+@import 'include/detail';
+@import 'include/pagination';
+

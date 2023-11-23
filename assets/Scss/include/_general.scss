@@ -1,0 +1,49 @@
+/*******************************************************************************
+* General
+*******************************************************************************/
+.bg-img {
+  @include bg-img;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-inline-flex {
+  display: flex;
+}
+
+.ns-personio-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.ns-personio-col {
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+}
+
+.ns-personio-container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+@media (min-width: 768px) {
+  .ns-personio-col-6 {
+    width: 50%;
+  }
+  
+  .ns-personio-col-4 {
+    width: 33.33%;
+  }
+
+  .ns-personio-col-3 {
+    width: 25%;
+  }
+}
+
+

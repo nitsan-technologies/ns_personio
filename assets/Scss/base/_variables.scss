@@ -1,0 +1,34 @@
+//****************************************************************************
+//  Bootsrap variables overrides
+//***************************************************************************/
+$font-family-sans-serif: 'Roboto', Arial, Helvetica, sans-serif;
+$font-primary: $font-family-sans-serif;
+$btn-box-shadow: none;
+
+//****************************************************************************
+//  Custom variables
+//***************************************************************************/
+
+$primary-color: #3a85e6;
+$secondary-color: #04122d;
+$text-color: #757575;
+$text-muted-color: #4e6177;
+$brand-color: $primary-color;
+$white: #fff;
+$black: #000;
+
+$body-color: $text-color;
+$brand-color-gray: #e3e3e3;
+$brand-color-light-gray: #f5f8fb;
+$brand-color-extra-light-gray: #e1e1e1;
+$brand-color-dark-gray: #3b3b3b;
+$table-hover-bg: $brand-color-gray;
+$input-color: $body-color;
+$input-error-color: #dd4967;
+
+//****************************************************************************
+//  Font Weight
+//***************************************************************************/
+$light-weight: 300;
+$regular-weight: 400;
+$bold-weight: 700;

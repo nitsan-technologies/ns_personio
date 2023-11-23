@@ -1,0 +1,338 @@
+/*******************************************************************************
+* Listing
+*******************************************************************************/
+.ns-personio__headline {
+  margin-bottom: 30px;
+  position: relative;
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.ns-personio-filter-form-wrap {
+  margin-bottom: 25px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 40px;
+  }
+}
+
+.ns-personio__action {
+  align-items: center;
+  display: flex;
+  margin-bottom: 25px;
+
+  .ns-personio-btn:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+
+.ns-personio-filter-btns {
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    @include transition(all, 0.2s, ease, 0s);
+    font-size: 15px;
+    border: 1px solid $black;
+    border-radius: 4px;
+    color: $secondary-color;
+    margin-bottom: 15px;
+    padding: 6px 15px;
+
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+
+    &:hover,
+    &.active,
+    &:focus {
+      background-color: $secondary-color;
+      color: $white;
+    }
+  }
+}
+
+.ns-personio-jobs {
+  margin-bottom: 40px;
+}
+
+.ns-personio-job,
+.ns-personio-job-teaser {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.ns-personio-job {
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.ns-personio-job-teaser {
+  &,
+  &:hover {
+    text-decoration: none;
+  }
+
+  @media (min-width: 993px) {
+    flex-direction: row;
+  }
+}
+
+.ns-personio-job__meta-info {
+  display: flex;
+  flex-wrap: wrap;
+  text-transform: capitalize;
+
+  h3 {
+    @include transition(all, 0.3s, ease, 0s);
+  }
+
+  span {
+    font-size: 14px;
+    margin-right: 15px;
+    text-transform: uppercase;
+  } 
+}
+
+.jobs-content__description {
+  * {
+    @include font-size($font-sizes18);
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.ns-personio-jobs--list {
+  .ns-personio-job-item {
+    border-bottom: 1px solid $brand-color-gray;
+    padding: 30px 0;
+    width: 100%;
+  }
+
+  a.ns-personio-job-teaser {
+    h3:hover {
+      color: $black;
+    }
+  }
+}
+
+.ns-personio-load-more {
+  justify-content: center;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.ns-personio-job__apply-now,
+.jobs-content__description {
+  margin-top: 20px;
+}
+
+.jobs-content__description {
+  @media (min-width: 992px) {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .ns-personio-jobs--list {
+    .ns-personio-job {
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ns-personio-job:not(.ns-personio-job-without-desc) .jobs-content__description {
+      width: 40%;
+    }
+
+    .ns-personio-job__meta {
+      width: 60%;
+    }
+    
+    .ns-personio-job-teaser {
+      width: 100%;
+    }
+    
+    .ns-personio-job-teaser +  .ns-personio-job__apply-now {
+      width: 18%;
+    }
+
+    .ns-personio-job-without-desc {
+      .ns-personio-job__meta {
+        width: 100%;
+      }
+    }
+
+    .ns-personio-job--with-apply {
+      .ns-personio-job-teaser {
+        width: calc(100% - 15%);
+      }
+    }
+
+    .ns-personio-job__apply-now {
+      text-align: right;
+    }
+  }
+
+  .ns-personio-load-more {
+    margin-bottom: 40px;
+    margin-top: 40px;
+  }
+
+  .ns-personio-job__apply-now {
+    margin-top: 0;
+  }
+}
+
+.ns-personio-jobs--cards {
+  .ns-personio-job {
+    height: 100%;
+  }
+}
+
+.ns-personio-jobs--cards,
+.ns-personio-jobs--masonry {
+  .ns-personio-job-item {
+    margin-bottom: 30px;
+  }
+
+  .ns-personio-job,
+  .ns-personio-job-teaser {
+    flex-direction: column;
+  }
+
+  .ns-personio-job {
+    @include transition(all, 0.3s, ease, 0s);
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba($black, 0.15);
+    padding: 20px;
+
+    &:hover {
+      box-shadow: 0 0 10px rgba($black, 0.3);
+    }
+  }
+
+  .jobs-content__description {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .ns-personio-job__apply-now {
+    margin-top: auto;
+  }
+  
+  .ns-personio-job-without-desc {
+    .ns-personio-job__apply-now {
+      padding-top: 20px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+
+    .ns-personio-job-item {
+      padding: 0 15px;
+      width: 50%;
+    }
+
+    .ns-personio-job {
+      padding: 25px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .ns-personio-job-item {
+      width: 33.33%;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .ns-personio-jobs--list {
+    .ns-personio-job:not(.ns-personio-job-without-desc) .jobs-content__description {
+      width: 45%;
+    }
+
+    .ns-personio-job__meta {
+      width: 55%;
+    }
+  
+    .ns-personio-job-teaser +  .ns-personio-job__apply-now {
+      width: 13%;
+    }
+  }
+}
+
+.ns-personio-warp--dark {
+  .ns-personio-filter-btns {
+    a {
+      border-color: $white;
+      color: $white;
+  
+      &:hover,
+      &.active,
+      &:focus {
+        background-color: $white;
+        color: $black;
+      }
+    }
+  }
+  
+  .jobs-list-btn {
+    svg path {
+      fill: $black;
+    }
+
+    &:hover,
+    &:focus {
+      svg path {
+        fill: $white;
+      }
+    }
+  }
+
+  .ns-personio-jobs--list {
+    .ns-personio-job-item {
+      border-color: rgba($white, 0.2);
+    }
+
+    a.ns-personio-job-teaser {
+      h3:hover {
+        color: $brand-color-gray;
+      }
+    }
+  }
+
+  .ns-personio-jobs--cards,
+  .ns-personio-jobs--masonry {
+    .ns-personio-job {
+      background-color: $brand-color-gray;
+      box-shadow: 0 0 5px rgba($white, 0.15);
+      color: $black;
+
+      &:hover {
+        background-color: $white;
+      }
+    }
+
+    .ns-personio-btn {
+      background: transparent;
+      border-color: $black;
+      color: $black;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $black;
+        color: $white;
+      }
+    }
+  }
+}
