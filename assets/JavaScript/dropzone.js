@@ -132,7 +132,7 @@ window.onload = () => {
       maxFilesize: 20, // MB
       uploadMultiple: true,
       addRemoveLinks: true,
-      dictTotalUploadMessage: 'Upload-Größe überschritten,',
+      dictTotalUploadMessage: 'Upload size exceeded',
       acceptedFiles:
           '.pdf, .pptx, .xlsx, .docx, .doc, .xls, .ppt, .ods, .odt, .7z, .gz, .rar, .zip, .bmp, .gif, .jpg, .png, .tif, .csv, .txt, .rtf, .mp4, .3gp, .mov, .avi, .wmv',
       accept(file, done) {
@@ -230,7 +230,7 @@ window.onload = () => {
       // get cv uploaded files and generate json data for multiple files
       var cvFiles = document.getElementById("cv-upload");
       let allValues = [];
-      if (respondArr.length == 0 && flag == false) {
+      if ((respondArr.length == 0 && flag == false) || (cvDropzone.files.length == 0)) {
         e.preventDefault();
         document.getElementById('dropzone-error').style.display = "block";
         document.getElementById('document-dropzone-cv').classList.add('error');
