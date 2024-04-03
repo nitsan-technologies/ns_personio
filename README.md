@@ -1,5 +1,8 @@
-# ns_personio
+# Personio
 
-- LIVE demo: https://demo.t3planet.com/t3-extensions/personio
-- FREE version: You can download FREE version with basic-features at https://extensions.typo3.org/extension/ns_personio/
-- PRO version: You can download PRO version with more-features & free-support at https://t3planet.com/typo3-personio-extension
+- Live Frontend Demo: https://demo.t3planet.com/t3-extensions/pro/typo3-personio
+- Live Backend Demo: https://demo.t3terminal.com/live-typo3/t3t-extensions/typo3/?TYPO3_AUTOLOGIN_USER=editor-ns-personio
+- Free version: https://extensions.typo3.org/extension/ns_personio/
+- Premium version: https://t3planet.com/typo3-personio-extension
+- Documentation: https://docs.t3planet.com/en/latest/ExtNsPersonio/Index.html
+- Changelog: https://t3planet.com/typo3-personio-extension

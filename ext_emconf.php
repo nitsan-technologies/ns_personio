@@ -1,12 +1,14 @@
 <?php
 
 $EM_CONF['ns_personio'] = [
-    'title' => '[NITSAN] Personio',
-    'description' => 'This TYPO3 CMS extension seamlessly integrates a job portal from the Personio Recruiting API into TYPO3. It offers a range of features, including job listing, customizable layouts and designs, robust search and filtering options, and a user-friendly application form etc. Explore more https://t3planet.com/typo3-personio-extension',
+    'title' => 'Personio',
+    'description' => 'The extension offers various customization options for job listing, detail, and application pages on the frontend. Additionally, a scheduler ensures data synchronization. Directly list, view, and apply to Personio vacancies through the TYPO3 Backend. 
+    
+    *** Live Demo: https://demo.t3planet.com/t3-extensions/pro/typo3-personio/ *** Premium Version, Documentation & Free Support: https://t3planet.com/typo3-personio-extension',
     'category' => 'plugin',
     'author' => 'T3: Nilesh Malankiya, T3: Parth Parmar, T3: Rohan Parmar, QA: Krishna Dhapa',
     'author_email' => 'sanjay@nitsantech.com',
-    'author_company' => 'NITSAN Technologies Pvt Ltd',
+    'author_company' => 'T3Planet // NITSAN',
     'state' => 'stable',
     'version' => '1.0.0',
     'constraints' => [
