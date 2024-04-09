@@ -1,7 +1,7 @@
 {
     "name": "nitsan/ns-personio",
     "type": "typo3-cms-extension",
-    "description": "The extension offers various customization options for job listing, detail, and application pages on the frontend. Additionally, a scheduler ensures data synchronization. Directly list, view, and apply to Personio vacancies through the TYPO3 Backend. *** Live Demo: https://demo.t3planet.com/t3-extensions/pro/typo3-personio/ *** Premium Version, Documentation & Free Support: https://t3planet.com/typo3-personio-extension",
+    "description": "The extension offers various customization options for job listing, detail, and application pages on the frontend. Additionally, a scheduler ensures data synchronization. Directly list, view, and apply to Personio vacancies through the TYPO3 Backend.",
     "authors": [
         {
             "name": "Team NITSAN"
