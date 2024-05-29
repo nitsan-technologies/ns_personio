@@ -6,7 +6,6 @@ namespace NITSAN\NsPersonio\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
-
 /**
  * This file is part of the "NsPersonio" Extension for TYPO3 CMS.
  *

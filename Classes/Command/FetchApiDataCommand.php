@@ -28,20 +28,6 @@ class FetchApiDataCommand extends Command
      */
     protected Client $client;
 
-    /**
-     * DepartmentRepository
-     *
-     * @var DepartmentRepository
-     */
-    protected DepartmentRepository $departmentRepository;
-
-
-    /**
-     * JobsRepository
-     *
-     * @var JobsRepository
-     */
-    protected JobsRepository $jobsRepository;
 
     /**
      * objectManager
@@ -56,10 +42,14 @@ class FetchApiDataCommand extends Command
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
+            VersionNumberUtility::getCurrentTypo3Version()
+        );
         if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
             // Initiate Global Object Manager
-            $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
+            $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                ObjectManager::class
+            );
         }
     }
 
@@ -98,33 +88,44 @@ class FetchApiDataCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
+            VersionNumberUtility::getCurrentTypo3Version()
+        );
         $language = (int)$input->getArgument('languageUid');
         $api = trim($input->getArgument('api'));
         $pageId = (int)$input->getArgument('storagePageId');
         if($api == '') {
             return 1;
-        }else{
+        } else {
             try {
                 if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
                     $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
                     $jobsRepository = $this->objectManager->get(JobsRepository::class);
                 } else {
-                    $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(DepartmentRepository::class);
-                    $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(JobsRepository::class);
+                    $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                        DepartmentRepository::class
+                    );
+                    $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                        JobsRepository::class
+                    );
                 }
 
-                $apiData = $this->getApiData($api);
-                if(isset($apiData['position']['id'])){
+                try {
+                    $apiData = $this->getApiData($api);
+                } catch (GuzzleException $e) {
+                    return 1;
+                }
+
+                if(isset($apiData['position']['id'])) {
                     $tempData = $apiData['position'];
                     $apiData['position'] = [];
                     $apiData['position'][0] = $tempData;
                 }
                 $categories = [];
-                foreach($apiData['position'] as $item){
+                foreach($apiData['position'] as $item) {
                     $category = $item['department'] ?? '';
-                    if($category != NULL || $category!=''){
-                        array_push($categories,$category);
+                    if($category != '') {
+                        $categories[] = $category;
                     }
                 }
                 $uniqueCategories = array_unique($categories);
@@ -141,7 +142,7 @@ class FetchApiDataCommand extends Command
                 }
                 $this->addJobs($apiData['position'], $language, $pageId);
                 return 0;
-            }catch (Exception $e){
+            } catch (Exception $e) {
                 return 1;
             }
         }
@@ -158,14 +159,20 @@ class FetchApiDataCommand extends Command
      */
     public function addCategories(array $uniqueCategories, int $language, int $pageId): void
     {
-        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
+            VersionNumberUtility::getCurrentTypo3Version()
+        );
         if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
             $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
         } else {
-            $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(DepartmentRepository::class);
+            $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                DepartmentRepository::class
+            );
         }
-        $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(PersistenceManager ::class);
-        foreach($uniqueCategories as $category){
+        $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            PersistenceManager::class
+        );
+        foreach($uniqueCategories as $category) {
             $departmentObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Department::class);
             $departmentObj->setName($category);
             $departmentObj->setPid($pageId);
@@ -187,60 +194,106 @@ class FetchApiDataCommand extends Command
      */
     public function addJobs(array $jobs, int $language, int $pageId): void
     {
-        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
+            VersionNumberUtility::getCurrentTypo3Version()
+        );
         if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
             $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
             $jobsRepository = $this->objectManager->get(JobsRepository::class);
         } else {
-            $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(DepartmentRepository::class);
-            $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(JobsRepository::class);
+            $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                DepartmentRepository::class
+            );
+            $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                JobsRepository::class
+            );
         }
-        $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(PersistenceManager ::class);
-        foreach($jobs as $job){
+        $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(PersistenceManager::class);
+        foreach($jobs as $job) {
             $jobObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Jobs::class);
             $jobObj->setJobid($job['id']);
-            isset($job['subcompany']) ? $jobObj->setSubcompany($job['subcompany']) : $jobObj->setSubcompany('');
-            isset($job['office']) ? $jobObj->setOffice($job['office']) : $jobObj->setOffice('');
-            if(isset($job['department'])){
-                $department = $departmentRepository->getUid($job['department'],$language);
+            isset($job['subcompany'])
+                ? $jobObj->setSubcompany($job['subcompany'])
+                : $jobObj->setSubcompany('');
+
+            isset($job['office'])
+                ? $jobObj->setOffice($job['office'])
+                : $jobObj->setOffice('');
+
+            if(isset($job['department'])) {
+                $department = $departmentRepository->getUid($job['department'], $language);
                 $dept = $departmentRepository->findByUid($department);
                 if ($dept) {
                     $jobObj->setDepartment($dept);
                 }
             }
-            isset($job['recruitingCategory']) ? $jobObj->setRecruitingcategory($job['recruitingCategory']) : $jobObj->setRecruitingcategory('');
-            isset($job['name']) ? $jobObj->setName($job['name']) : $jobObj->setName('');
+            isset($job['recruitingCategory'])
+                ? $jobObj->setRecruitingcategory($job['recruitingCategory'])
+                : $jobObj->setRecruitingcategory('');
+
+            isset($job['name'])
+                ? $jobObj->setName($job['name'])
+                : $jobObj->setName('');
+
             if (isset($job['jobDescriptions']['jobDescription'])) {
                 $fullDescription = '';
-                if(is_array($job['jobDescriptions']['jobDescription']) && !isset($job['jobDescriptions']['jobDescription']['name'])) {
+                if(is_array($job['jobDescriptions']['jobDescription']) &&
+                    !isset($job['jobDescriptions']['jobDescription']['name'])
+                ) {
                     foreach($job['jobDescriptions']['jobDescription'] as $data) {
                         if ($data['name'] != '') {
                             $fullDescription .= '<h3 class="headline-with-list">'.$data['name'].'</h3>';
                         }
                         $fullDescription .= '<p class="ns-nspersonio-detail-desc">'.$data['value'].'</p>';
                     }
-                    $description = preg_replace('/ style=("|\')(.*?)("|\')/','',$fullDescription);
+                    $description = preg_replace('/ style=("|\')(.*?)("|\')/', '', $fullDescription);
                     $jobObj->setDescriptions($description);
-                }   else {
-                    if(isset($job['jobDescriptions']['jobDescription']['value'])){
+                } else {
+                    if(isset($job['jobDescriptions']['jobDescription']['value'])) {
                         if (isset($job['jobDescriptions']['jobDescription']['name'])) {
-                            $fullDescription .= '<h3 class="headline-with-list">'.$job['jobDescriptions']['jobDescription']['name'].'</h3>';
+                            $fullDescription .= '<h3 class="headline-with-list">'
+                                .$job['jobDescriptions']['jobDescription']['name'].'</h3>';
                         }
-                        $fullDescription .= preg_replace('/ style=("|\')(.*?)("|\')/','',$job['jobDescriptions']['jobDescription']['value']);
+                        $fullDescription .= preg_replace(
+                            '/ style=("|\')(.*?)("|\')/',
+                            '',
+                            $job['jobDescriptions']['jobDescription']['value']
+                        );
                     }
                     $jobObj->setDescriptions($fullDescription);
                 }
             }
-            isset($job['employmentType']) ? $jobObj->setEmploymenttype($job['employmentType']) : $jobObj->setEmploymenttype('');
-            isset($job['seniority']) ? $jobObj->setSeniority($job['seniority']) : $jobObj->setSeniority('');
-            isset($job['schedule']) ? $jobObj->setSchedule($job['schedule']) : $jobObj->setSchedule('');
-            isset($job['yearsOfExperience']) ? $jobObj->setExperience($job['yearsOfExperience']) : $jobObj->setExperience('');
-            isset($job['bookkeeping']) ? $jobObj->setOccupation($job['bookkeeping']) : $jobObj->setOccupation('');
-            isset($job['occupationCategory']) ? $jobObj->setOccupationcategory($job['occupationCategory']) : $jobObj->setOccupationcategory('');
-            isset($job['createdAt']) ? $jobObj->setCreatedat($job['createdAt']) : $jobObj->setCreatedat('');
+            isset($job['employmentType'])
+                ? $jobObj->setEmploymenttype($job['employmentType'])
+                : $jobObj->setEmploymenttype('');
+
+            isset($job['seniority'])
+                ? $jobObj->setSeniority($job['seniority'])
+                : $jobObj->setSeniority('');
+
+            isset($job['schedule'])
+                ? $jobObj->setSchedule($job['schedule'])
+                : $jobObj->setSchedule('');
+
+            isset($job['yearsOfExperience'])
+                ? $jobObj->setExperience($job['yearsOfExperience'])
+                : $jobObj->setExperience('');
+
+            isset($job['bookkeeping'])
+                ? $jobObj->setOccupation($job['bookkeeping'])
+                : $jobObj->setOccupation('');
+
+            isset($job['occupationCategory'])
+                ? $jobObj->setOccupationcategory($job['occupationCategory'])
+                : $jobObj->setOccupationcategory('');
+
+            isset($job['createdAt'])
+                ? $jobObj->setCreatedat($job['createdAt'])
+                : $jobObj->setCreatedat('');
+
             $jobObj->setPid($pageId);
             $jobObj->setSysLanguageUid($language);
-            $slug = $this->getJobSlug($job,$pageId);
+            $slug = $this->getJobSlug($job, $pageId);
             $jobObj->setSlug($slug);
             $jobsRepository->add($jobObj);
             $persistenceManager->persistAll();
@@ -252,7 +305,7 @@ class FetchApiDataCommand extends Command
      * Gets to guzzle client model
      * @return Client
      */
-    public function getClient() : Client
+    public function getClient(): Client
     {
         $this->client = new Client([]);
         return $this->client;
@@ -293,4 +346,3 @@ class FetchApiDataCommand extends Command
         return $slugHelper->generate($record, $pid);
     }
 }
-

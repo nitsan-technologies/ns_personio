@@ -30,7 +30,7 @@ class JobsRepository extends Repository
      *
      * @return void
      */
-    public function initializeObject() : void
+    public function initializeObject(): void
     {
         $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
         $querySettings->setRespectStoragePage(false);
@@ -64,9 +64,10 @@ class JobsRepository extends Repository
      * @param int $pageId
      * @return void
      */
-    public function deleteAllJobs(int $lang, int $pageId) : void
+    public function deleteAllJobs(int $lang, int $pageId): void
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_nspersonio_domain_model_jobs');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_nspersonio_domain_model_jobs');
         $queryBuilder
         ->delete('tx_nspersonio_domain_model_jobs')
         ->where(
@@ -87,14 +88,14 @@ class JobsRepository extends Repository
     {
         $query = $this->createQuery();
         $constraints = $searchConstraints = $storageConstraints = [];
-        foreach ($storagePages as $index => $value) {
+        foreach ($storagePages as $value) {
             $storageConstraints[] = $query->equals('pid', (int)$value);
         }
         $constraints[] = $query->logicalOr(...$storageConstraints);
         $constraints[] = $query->equals('sys_language_uid', $langId);
         if (!empty($arguments['search-word'])) {
             $searchConstraints[] = $query->like('name', '%' . $arguments['search-word'] . '%');
-             $searchConstraints[] = $query->like('descriptions', '%' . $arguments['search-word'] . '%');
+            $searchConstraints[] = $query->like('descriptions', '%' . $arguments['search-word'] . '%');
             $constraints[] = $query->logicalOr(...$searchConstraints);
         }
         $query->matching($query->logicalAnd(...$constraints));

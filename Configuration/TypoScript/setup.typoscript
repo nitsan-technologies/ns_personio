@@ -1,20 +1,27 @@
 plugin.tx_nspersonio_pi1 {
     view {
-        templateRootPaths.0 = EXT:ns_personio/Resources/Private/Templates/
-        templateRootPaths.1 = {$plugin.tx_nspersonio_pi1.view.templateRootPath}
-        partialRootPaths.0 = EXT:ns_personio/Resources/Private/Partials/
-        partialRootPaths.1 = {$plugin.tx_nspersonio_pi1.view.partialRootPath}
-        layoutRootPaths.0 = EXT:ns_personio/Resources/Private/Layouts/
-        layoutRootPaths.1 = {$plugin.tx_nspersonio_pi1.view.layoutRootPath}
+        templateRootPaths {
+            0 = EXT:ns_personio/Resources/Private/Templates/
+            1 = {$plugin.tx_nspersonio_pi1.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:ns_personio/Resources/Private/Partials/
+            1 = {$plugin.tx_nspersonio_pi1.view.partialRootPath}
+        }
+        layoutRootPaths {
+            0 = EXT:ns_personio/Resources/Private/Layouts/
+            1 = {$plugin.tx_nspersonio_pi1.view.layoutRootPath}
+        }
     }
 }
-
-lib.commonContent = RECORDS
-lib.commonContent{
-    source.dataWrap = {field:contentId}
-    dontCheckPid = 1
-    tables = tt_content
-    current = 1
+lib {
+    commonContent = RECORDS
+    commonContent {
+        source.dataWrap = {field:contentId}
+        dontCheckPid = 1
+        tables = tt_content
+        current = 1
+    }
 }
 
 page {
@@ -29,33 +36,33 @@ page {
 
 listAction = PAGE
 listAction {
-  typeNum = 875645123
-  config {
-    disableAllHeaderCode = 1
-    additionalHeaders = Content-type:text/html
-    xhtml_cleaning = 0
-    admPanel = 0
-  }
-
-  10 = USER
-  10 < styles.content.get
-  10 {
-    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    extensionName = NsPersonio
-    pluginName = Pi1
-    vendorName = NITSAN
-    controller = Jobs
-    switchableControllerActions {
-      Jobs {
-        1 = list
-      }
+    typeNum = 875645123
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:text/html
+        xhtml_cleaning = 0
+        admPanel = 0
     }
 
-    # This block also added extra for get plugin settings in ajax call...
-    stdWrap.trim = 1
-    select {
-      where = list_type = "nspersonio_pi1"
+    10 = USER
+    10 < styles.content.get
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = NsPersonio
+        pluginName = Pi1
+        vendorName = NITSAN
+        controller = Jobs
+        switchableControllerActions {
+            Jobs {
+                1 = list
+            }
+        }
+
+        # This block also added extra for get plugin settings in ajax call...
+        stdWrap.trim = 1
+        select {
+            where = list_type = "nspersonio_pi1"
+        }
+        renderObj < tt_content.list.10.nspersonio_pi1
     }
-    renderObj < tt_content.list.10.nspersonio_pi1
-  }
 }
