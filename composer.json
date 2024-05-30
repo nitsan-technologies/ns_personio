@@ -16,7 +16,7 @@
     "require": {
         "typo3/cms-core": "^9 || ^10 || ^11 || ^12",
         "typo3/cms-scheduler": "^9 || ^10 || ^11 || ^12",
-        "php": ">= 7.4 < 8.2"
+        "php": ">= 7.4 <= 8.3"
     },
     "autoload": {
         "psr-4": {

@@ -96,55 +96,54 @@ class FetchApiDataCommand extends Command
         $pageId = (int)$input->getArgument('storagePageId');
         if($api == '') {
             return 1;
-        } else {
+        }
+        try {
+            if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
+                $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
+                $jobsRepository = $this->objectManager->get(JobsRepository::class);
+            } else {
+                $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                    DepartmentRepository::class
+                );
+                $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                    JobsRepository::class
+                );
+            }
+
             try {
-                if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
-                    $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
-                    $jobsRepository = $this->objectManager->get(JobsRepository::class);
-                } else {
-                    $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                        DepartmentRepository::class
-                    );
-                    $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                        JobsRepository::class
-                    );
-                }
-
-                try {
-                    $apiData = $this->getApiData($api);
-                } catch (GuzzleException $e) {
-                    return 1;
-                }
-
-                if(isset($apiData['position']['id'])) {
-                    $tempData = $apiData['position'];
-                    $apiData['position'] = [];
-                    $apiData['position'][0] = $tempData;
-                }
-                $categories = [];
-                foreach($apiData['position'] as $item) {
-                    $category = $item['department'] ?? '';
-                    if($category != '') {
-                        $categories[] = $category;
-                    }
-                }
-                $uniqueCategories = array_unique($categories);
-                // Get existing categories(departments)
-                $departmentResult = $departmentRepository->findAll()->toArray();
-                if(!empty($departmentResult)) {
-                    $departmentRepository->deleteAllDepartments($language, $pageId);
-                }
-                $this->addCategories($uniqueCategories, $language, $pageId);
-                // Get existing Jobs
-                $jobsResult = $jobsRepository->findAll()->toArray();
-                if(!empty($jobsResult)) {
-                    $jobsRepository->deleteAllJobs($language, $pageId);
-                }
-                $this->addJobs($apiData['position'], $language, $pageId);
-                return 0;
-            } catch (Exception $e) {
+                $apiData = $this->getApiData($api);
+            } catch (GuzzleException $e) {
                 return 1;
             }
+
+            if(isset($apiData['position']['id'])) {
+                $tempData = $apiData['position'];
+                $apiData['position'] = [];
+                $apiData['position'][0] = $tempData;
+            }
+            $categories = [];
+            foreach($apiData['position'] as $item) {
+                $category = $item['department'] ?? '';
+                if($category != '') {
+                    $categories[] = $category;
+                }
+            }
+            $uniqueCategories = array_unique($categories);
+            // Get existing categories(departments)
+            $departmentResult = $departmentRepository->findAll()->toArray();
+            if(!empty($departmentResult)) {
+                $departmentRepository->deleteAllDepartments($language, $pageId);
+            }
+            $this->addCategories($uniqueCategories, $language, $pageId);
+            // Get existing Jobs
+            $jobsResult = $jobsRepository->findAll()->toArray();
+            if(!empty($jobsResult)) {
+                $jobsRepository->deleteAllJobs($language, $pageId);
+            }
+            $this->addJobs($apiData['position'], $language, $pageId);
+            return 0;
+        } catch (Exception $e) {
+            return 1;
         }
     }
 
