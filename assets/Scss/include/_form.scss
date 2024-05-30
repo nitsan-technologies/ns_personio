@@ -587,7 +587,7 @@
         
         &::after,
         &::before {
-          background-color: $white;
+          background-color: $black;
         }
       }
 
@@ -602,6 +602,10 @@
           color: $black;
         }
       }
+    }
+    
+    input.job-search-input::placeholder {
+      color: $white;
     }
 
     .multiple-select {
