@@ -11,7 +11,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 /**
- * This file is part of the "NsPersonio" Extension for TYPO3 CMS.
+ * This file is part of the "Personio" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
@@ -29,7 +29,7 @@ class DepartmentRepository extends Repository
      *
      * @return void
      */
-    public function initializeObject() : void
+    public function initializeObject(): void
     {
         $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
         $querySettings->setRespectStoragePage(false);
@@ -44,9 +44,10 @@ class DepartmentRepository extends Repository
      * @param int $pageId
      * @return void
      */
-    public function deleteAllDepartments(int $lang, int $pageId) : void
+    public function deleteAllDepartments(int $lang, int $pageId): void
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_nspersonio_domain_model_department');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_nspersonio_domain_model_department');
         $queryBuilder
         ->delete('tx_nspersonio_domain_model_department')
         ->where(
@@ -66,7 +67,8 @@ class DepartmentRepository extends Repository
      */
     public function getUid(string $departmentName, int $language_code)
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_nspersonio_domain_model_department');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_nspersonio_domain_model_department');
         $result = $queryBuilder
         ->select('uid')
         ->from('tx_nspersonio_domain_model_department')
@@ -81,7 +83,7 @@ class DepartmentRepository extends Repository
     }
 
     /**
-     * @param int $languageUid
+     * @param int $lang
      * @param array $storagePid
      * @return array|object[]|QueryResultInterface
      */

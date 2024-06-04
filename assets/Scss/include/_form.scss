@@ -16,6 +16,12 @@
     width: 100%;
   }
 
+  .ns-personio-row {
+    .job-search-input {
+      padding: 8px 100px 8px 18px;
+    }
+  }
+
   input,
   select,
   textarea,
@@ -581,7 +587,7 @@
         
         &::after,
         &::before {
-          background-color: $white;
+          background-color: $black;
         }
       }
 
@@ -596,6 +602,10 @@
           color: $black;
         }
       }
+    }
+    
+    input.job-search-input::placeholder {
+      color: $white;
     }
 
     .multiple-select {

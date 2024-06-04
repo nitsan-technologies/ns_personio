@@ -31,8 +31,15 @@ mod {
         }
         show = *
     }
+    web_layout {
+        tt_content {
+            preview {
+                list {
+                    nspersonio_pi1 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/List.html
+                    nspersonio_pi2 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/Details.html
+                    nspersonio_pi3 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/Application.html
+                }
+            }
+        }
+    }
 }
-
-mod.web_layout.tt_content.preview.list.nspersonio_pi1 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/List.html
-mod.web_layout.tt_content.preview.list.nspersonio_pi2 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/Details.html
-mod.web_layout.tt_content.preview.list.nspersonio_pi3 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/Application.html

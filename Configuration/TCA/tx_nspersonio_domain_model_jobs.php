@@ -313,6 +313,12 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
+                'items' => [
+                    [
+                        'LLL:EXT:ns_personio/Resources/Private/Language/locallang.xlf:nspersonio.no_department',
+                        0,
+                    ]
+                ],
                 'foreign_table' => 'tx_nspersonio_domain_model_department',
                 'default' => 0,
                 'minitems' => 0,

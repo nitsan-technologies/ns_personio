@@ -8,7 +8,7 @@
                     <div class="ns-nspersonio-backto-list">
                         <f:link.page pageUid="{listPid}"  class="jobs-list-btn ns-personio-btn">
                             <svg viewBox="0 0 18 18" width="15" height="15" xmlns="http://www.w3.org/2000/svg"><path fill="#757575" d="M2.34 9l8.968-9L12.6 1.3 4.867 9.02l7.713 7.705L11.308 18z"/></svg>
-                            <span><f:translate key="tx_nspersonio_domain_model_jobs.seeAllPosition" extensionName="ns_personio" /></span>
+                            <span><f:translate key="tx_nspersonio_domain_model_jobs.seeAllPosition"  /></span>
                         </f:link.page>
                     </div>
                     <div class="ns-nspersonio-details">
@@ -34,7 +34,7 @@
                                 </f:if>
                                 <f:if condition="{settings.showApplyButton}">
                                     <f:link.action action="application" pageUid="{settings.applicationPid}" arguments="{job: job.uid}" class="ns-personio-btn career-submit-application-btn remove-speed-boostar">
-                                        <f:translate key="tx_nspersonio_domain_model_jobs.details.applyBtn" extensionName="ns_personio" />
+                                        <f:translate key="tx_nspersonio_domain_model_jobs.details.applyBtn"  />
                                     </f:link.action>
                                 </f:if>
                             </div>
@@ -42,7 +42,7 @@
                     </div>
                 </f:then>
                 <f:else>
-                    <f:translate key="tx_nspersonio_domain_model_jobs.list.noJobs" extensionName="ns_personio" />
+                    <f:translate key="tx_nspersonio_domain_model_jobs.list.noJobs"  />
                 </f:else>
             </f:if>
         </div>

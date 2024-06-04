@@ -10,16 +10,16 @@
 				<source>Jobs</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.jobid" resname="tx_nspersonio_domain_model_jobs.jobid">
-				<source>Jobid</source>
+				<source>Job id</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.jobid.description" resname="tx_nspersonio_domain_model_jobs.jobid.description">
-				<source>Jobid</source>
+				<source>Job id</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.subcompany" resname="tx_nspersonio_domain_model_jobs.subcompany">
-				<source>Subcompany</source>
+				<source>Sub company</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.subcompany.description" resname="tx_nspersonio_domain_model_jobs.subcompany.description">
-				<source>Subcompany</source>
+				<source>Sub company</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.office" resname="tx_nspersonio_domain_model_jobs.office">
 				<source>Office</source>
@@ -28,10 +28,10 @@
 				<source>Office</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.recruitingcategory" resname="tx_nspersonio_domain_model_jobs.recruitingcategory">
-				<source>Recruitingcategory</source>
+				<source>Recruiting category</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.recruitingcategory.description" resname="tx_nspersonio_domain_model_jobs.recruitingcategory.description">
-				<source>Recruitingcategory</source>
+				<source>Recruiting category</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.name" resname="tx_nspersonio_domain_model_jobs.name">
 				<source>Name</source>
@@ -46,10 +46,10 @@
 				<source>Descriptions</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.employmenttype" resname="tx_nspersonio_domain_model_jobs.employmenttype">
-				<source>Employmenttype</source>
+				<source>Employment type</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.employmenttype.description" resname="tx_nspersonio_domain_model_jobs.employmenttype.description">
-				<source>Employmenttype</source>
+				<source>Employment type</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.seniority" resname="tx_nspersonio_domain_model_jobs.seniority">
 				<source>Seniority</source>
@@ -76,16 +76,16 @@
 				<source>Occupation</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.occupationcategory" resname="tx_nspersonio_domain_model_jobs.occupationcategory">
-				<source>Occupationcategory</source>
+				<source>Occupation category</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.occupationcategory.description" resname="tx_nspersonio_domain_model_jobs.occupationcategory.description">
-				<source>Occupationcategory</source>
+				<source>Occupation category</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.createdat" resname="tx_nspersonio_domain_model_jobs.createdat">
-				<source>Createdat</source>
+				<source>Create date</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.createdat.description" resname="tx_nspersonio_domain_model_jobs.createdat.description">
-				<source>Createdat</source>
+				<source>Create date</source>
 			</trans-unit>
 			<trans-unit id="tx_nspersonio_domain_model_jobs.department" resname="tx_nspersonio_domain_model_jobs.department">
 				<source>Department</source>

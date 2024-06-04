@@ -10,12 +10,12 @@ $EM_CONF['ns_personio'] = [
     'author_email' => 'sanjay@nitsantech.com',
     'author_company' => 'T3Planet // NITSAN',
     'state' => 'stable',
-    'version' => '1.0.1',
+    'version' => '1.1.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-12.5.99',
+            'typo3' => '9.5.0-12.4.99',
             'scheduler' => '9.5.0-12.5.99',
-            'php' => '7.4.0-8.2.99',
+            'php' => '7.4.0-8.3.99',
         ],
         'conflicts' => [],
         'suggests' => [],

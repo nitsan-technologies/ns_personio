@@ -72,12 +72,13 @@ class JobsController extends ActionController
         JobsRepository $jobsRepository,
         DepartmentRepository $departmentRepository,
         ExtensionConfiguration $extensionConfiguration
-    )
-    {
+    ) {
         $this->jobsRepository = $jobsRepository;
         $this->departmentRepository = $departmentRepository;
         $this->extensionConfiguration = $extensionConfiguration;
-        $this->typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+        $this->typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
+            VersionNumberUtility::getCurrentTypo3Version()
+        );
     }
 
     /**
@@ -88,17 +89,15 @@ class JobsController extends ActionController
     public function listAction()
     {
         $storagePages = $this->settings['storagePage'];
-        $storagePagesArray = explode (",", $storagePages);
+        $storagePagesArray = explode(",", $storagePages);
         $context = GeneralUtility::makeInstance(Context::class);
         $langId = $context->getPropertyFromAspect('language', 'id');
 
-        $categories = [];
-        $locations = [];
-        $schedules = [];
+        $categories = $locations = $schedules = [];
         $allCategories = $this->departmentRepository->fetchAll($langId, $storagePagesArray);
         $allJobs = $this->jobsRepository->fetchJobs($langId, $storagePagesArray);
         if ($allJobs) {
-            foreach ($allJobs as $key => $job) {
+            foreach ($allJobs as $job) {
                 if($job->getDepartment()) {
                     $departmentId = $job->getDepartment()->getUid();
                     $categories[$departmentId] = $job->getDepartment();
@@ -122,7 +121,7 @@ class JobsController extends ActionController
         }
 
         $filterCategory = [];
-        foreach ($jobs as $key => $job) {
+        foreach ($jobs as $job) {
             if($job->getDepartment()) {
                 $departmentId = $job->getDepartment()->getUid();
                 $filterCategory[$departmentId] = $job->getDepartment();
@@ -152,7 +151,7 @@ class JobsController extends ActionController
             $listPid = $this->settings['listPid'];
             $this->view->assignMultiple([
                 'job' => $job,
-                'contentElementUid' => ($this->settings['contentElements'])??null,
+                'contentElementUid' => ($this->settings['contentElements']) ?? null,
                 'applicationPid' => $this->settings['applicationPid'],
                 'listPid' => $listPid
             ]);
@@ -164,15 +163,16 @@ class JobsController extends ActionController
 
     /**
      * action application
-     * @param Jobs|null $application
+     * @param Jobs|null $job
      */
     public function applicationAction(Jobs $job = null)
     {
-        $jobUid = isset(GeneralUtility::_GP('tx_nspersonio_pi2')['job']) ? GeneralUtility::_GP('tx_nspersonio_pi2')['job'] : null;
-        if($job==null) {
-            if($jobUid){
-                $job = $this->jobsRepository->findByUid($jobUid) ;
-            }
+        $jobUid = isset(GeneralUtility::_GP('tx_nspersonio_pi2')['job'])
+            ? GeneralUtility::_GP('tx_nspersonio_pi2')['job']
+            : null;
+
+        if($job == null && $jobUid) {
+            $job = $this->jobsRepository->findByUid($jobUid) ;
         }
         if ($job) {
             $this->view->assignMultiple([
@@ -202,13 +202,9 @@ class JobsController extends ActionController
         $failurePid = (int) $this->settings['failurePid'];
         $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
         $api = $globalConfiguration['applicationApi'];
-        if ($api === '') {
-            $formValid = false;
-        }
         $companyId = (int) $this->settings['companyId'];
-        if ($companyId === '') {
-            $formValid = false;
-        }
+        $token = $this->settings['accessToken'];
+
         $formData = [
             'jobId' => $this->request->getArgument('jobId'),
             'cv-upload' => GeneralUtility::_GP('cv-upload'),
@@ -221,28 +217,26 @@ class JobsController extends ActionController
             'available_from' => GeneralUtility::_GP('available_from'),
             'salary_expectations' => GeneralUtility::_GP('salary_expectations'),
         ];
-        $token = $this->settings['accessToken'];
-        if ($token === '') {
+
+        $jobId = $formData['jobId'];
+        if ($api === '' ||
+            $companyId === '' ||
+            $token === '' ||
+            $jobId === '' ||
+            $formData['first_name'] === '' ||
+            $formData['last_name'] === '' ||
+            $formData['email'] === ''
+
+        ) {
             $formValid = false;
         }
-        $jobId =$formData['jobId'];
-        if ($jobId === '') {
-            $formValid = false;
-        }
+
         $cvData = json_decode($formData['cv-upload'], true);
         $otherData = [];
         if (!empty($formData['other-upload'])) {
             $otherData = json_decode($formData['other-upload'], true);
         }
-        if ($formData['first_name'] === '') {
-            $formValid = false;
-        }
-        if ($formData['last_name'] === '') {
-            $formValid = false;
-        }
-        if ($formData['email'] === '') {
-            $formValid = false;
-        }
+
         $uriBuilder = $this->uriBuilder;
         if ($formValid) {
             $params = [
@@ -325,21 +319,17 @@ class JobsController extends ActionController
      *
      * @return void
      * @throws GuzzleException
-     * @throws ExtensionConfigurationExtensionNotConfiguredException
-     * @throws ExtensionConfigurationPathDoesNotExistException
      */
     public function fileProcessAction(): void
     {
         $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
         $api = $globalConfiguration['documentApi'];
-        $companyId = $this->settings['companyId'];
-        $token = $this->settings['accessToken'];
 
         $options = [
             'headers' => [
-                'X-Company-ID' => $companyId,
+                'X-Company-ID' => $this->settings['companyId'],
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer '.$token
+                'Authorization' => 'Bearer '.$this->settings['accessToken']
             ],
             'multipart' => [
                 [
@@ -352,7 +342,7 @@ class JobsController extends ActionController
                 ]
             ]
         ];
-        try{
+        try {
             $response = $this->getClient()->post($api, $options);
             $responseBody = $response->getBody()->getContents();
             echo json_encode($responseBody);

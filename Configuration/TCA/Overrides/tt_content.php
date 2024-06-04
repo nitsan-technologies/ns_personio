@@ -29,8 +29,7 @@ $config = [
     'flexform_pi2_jobdetail' => $signatures[1],
     'flexform_pi3_jobapplication' => $signatures[2]
 ];
-foreach($config as $key => $value)
-{
+foreach($config as $key => $value) {
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$value] = 'pages,layout,select_key,recursive';
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$value] = 'pi_flexform';
@@ -59,4 +58,3 @@ foreach ($config as $key => $value) {
         'FILE:EXT:ns_personio/Configuration/FlexForms/'.$key.'.xml'
     );
 }
-
