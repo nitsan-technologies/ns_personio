@@ -16,10 +16,13 @@
             <td><f:translate key="LLL:EXT:ns_personio/Resources/Private/Language/locallang.xlf:nspersonio_pi2.details.applicationPid" /></td>
             <td>{pi_flexform_transformed.settings.applicationPid}</td>
         </tr>
-        <tr>
-            <td><f:translate key="LLL:EXT:ns_personio/Resources/Private/Language/locallang.xlf:nspersonio_pi2.details.contentElementUid" /></td>
-            <td>{pi_flexform_transformed.settings.contentElements}</td>
-        </tr>
+        <f:if condition="{pi_flexform_transformed.settings.contentElements}">
+            <tr>
+                <td><f:translate key="LLL:EXT:ns_personio/Resources/Private/Language/locallang.xlf:nspersonio_pi2.details.contentElementUid" /></td>
+                <td>{pi_flexform_transformed.settings.contentElements}</td>
+            </tr>
+        </f:if>
+
         </tbody>
     </table>
 </html>
