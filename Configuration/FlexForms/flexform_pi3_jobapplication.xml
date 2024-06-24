@@ -115,6 +115,8 @@
                         </label>
                         <config>
                             <type>input</type>
+                            <renderType>inputLink</renderType>
+                            <eval>required</eval>
                         </config>
                     </settings.privacyPolicyURL>
                 </el>
