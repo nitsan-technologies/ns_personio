@@ -27,6 +27,7 @@
                         </label>
                         <config>
                             <type>input</type>
+                            <eval>trim</eval>
                             <required>true</required>
                         </config>
                     </settings.accessToken>
