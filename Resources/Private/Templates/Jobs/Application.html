@@ -27,6 +27,9 @@
                                     <f:if condition="{settings.applicationMessage}">
                                         <f:format.html>{settings.applicationMessage}</f:format.html>
                                     </f:if>
+                                    <f:if condition="{message}">
+                                        <div class="text-danger">{message}</div>
+                                    </f:if>
                                 </div>
                             </div>
                         </f:if>

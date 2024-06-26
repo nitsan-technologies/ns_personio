@@ -19,7 +19,7 @@ use NITSAN\NsPersonio\Domain\Model\Jobs;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
-
+use NITSAN\NsPersonio\Utility\ApiResponseUtility;
 /**
  * This file is part of the "NsPersonio" Extension for TYPO3 CMS.
  *
@@ -171,6 +171,13 @@ class JobsController extends ActionController
             ? GeneralUtility::_GP('tx_nspersonio_pi2')['job']
             : null;
 
+        $message = isset(GeneralUtility::_GP('tx_nspersonio_pi3')['message'])
+            ? GeneralUtility::_GP('tx_nspersonio_pi3')['message']
+            : null;
+
+        if($message){
+            $this->view->assign('message',$message);
+        }
         if($job == null && $jobUid) {
             $job = $this->jobsRepository->findByUid($jobUid) ;
         }
@@ -300,10 +307,22 @@ class JobsController extends ActionController
                     ->build();
                 return $this->redirectToURI($uri);
             } catch (\GuzzleHttp\Exception\RequestException $e) {
-                $uri = $uriBuilder
-                    ->setTargetPageUid($failurePid)
-                    ->build();
-                return $this->redirectToURI($uri);
+                $response = $e->getResponse();
+                $responseBody = $response->getBody()->getContents();
+                $decodedResponse = json_decode($responseBody, true);
+                $responseMessage = ApiResponseUtility::getApiResponse($decodedResponse);
+                if($responseMessage!=''){
+                    return $this->redirect('application',
+                        null,
+                        null,
+                        ['job' => $this->request->getArguments()['jobUid'],'message'=>$responseMessage]
+                    );
+                }else{
+                    $uri = $uriBuilder
+                        ->setTargetPageUid($failurePid)
+                        ->build();
+                    return $this->redirectToURI($uri);
+                }
             }
         } else {
             $uri = $uriBuilder
