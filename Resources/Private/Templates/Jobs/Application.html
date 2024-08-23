@@ -30,6 +30,9 @@
                                 </div>
                             </div>
                         </f:if>
+                        <f:if condition="{message}">
+                            <div class="text-danger mb-3">{message}</div>
+                        </f:if>
                         <f:form method="POST" action="submitApplication" class="form ns-personio-form"  arguments="{jobId: jobId, jobUid: jobUid}" id="apply-form" enctype="multipart/form-data" >
                             <f:variable name="fileProcessLink"><f:uri.action action="fileProcess"></f:uri.action></f:variable>
                             <input type="hidden" value="{fileProcessLink}" id="fileProcessLink">
@@ -176,7 +179,8 @@
                                             <input class="form-check-input" required="" type="checkbox" id="privacy-policy-acceptance" name="privacy-policy-acceptance">
                                             <span class="checkmark"></span>
                                             <f:translate key="tx_nspersonio_domain_model_jobs.application.confirmation"  />
-                                            <a href="{settings.privacyPolicyURL}" onclick="return !window.open(this.href, '', 'width=500,height=500')"
+                                            <f:variable name="privacyPolicyURL">{f:uri.typolink(parameter: settings.privacyPolicyURL)}</f:variable>
+                                            <a href="{privacyPolicyURL}" onclick="return !window.open(this.href, '', 'width=500,height=500')"
                                                target="_blank" data-locale="en" class="privacy-policy-link">
                                                 <f:translate key="tx_nspersonio_domain_model_jobs.application.dataPrivacy"  />
                                             </a>.<span>*</span>
