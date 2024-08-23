@@ -27,11 +27,11 @@
                                     <f:if condition="{settings.applicationMessage}">
                                         <f:format.html>{settings.applicationMessage}</f:format.html>
                                     </f:if>
-                                    <f:if condition="{message}">
-                                        <div class="text-danger">{message}</div>
-                                    </f:if>
                                 </div>
                             </div>
+                        </f:if>
+                        <f:if condition="{message}">
+                            <div class="text-danger mb-3">{message}</div>
                         </f:if>
                         <f:form method="POST" action="submitApplication" class="form ns-personio-form"  arguments="{jobId: jobId, jobUid: jobUid}" id="apply-form" enctype="multipart/form-data" >
                             <f:variable name="fileProcessLink"><f:uri.action action="fileProcess"></f:uri.action></f:variable>
