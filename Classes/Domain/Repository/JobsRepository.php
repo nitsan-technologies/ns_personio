@@ -74,7 +74,7 @@ class JobsRepository extends Repository
             $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang)),
             $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId))
         )
-        ->execute();
+        ->executeQuery();
     }
 
     /**
@@ -86,6 +86,7 @@ class JobsRepository extends Repository
      */
     public function dataFilterAndSort(array $arguments, array $storagePages, int $langId)
     {
+        
         $query = $this->createQuery();
         $constraints = $searchConstraints = $storageConstraints = [];
         foreach ($storagePages as $value) {
@@ -99,6 +100,7 @@ class JobsRepository extends Repository
             $constraints[] = $query->logicalOr(...$searchConstraints);
         }
         $query->matching($query->logicalAnd(...$constraints));
+        
         return $query->execute();
     }
 }

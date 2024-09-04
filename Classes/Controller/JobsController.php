@@ -20,6 +20,7 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use NITSAN\NsPersonio\Utility\ApiResponseUtility;
+
 /**
  * This file is part of the "NsPersonio" Extension for TYPO3 CMS.
  *
@@ -87,7 +88,7 @@ class JobsController extends ActionController
      * @throws AspectNotFoundException|InvalidQueryException
      */
     public function listAction()
-    {
+    {        
         $storagePages = $this->settings['storagePage'];
         $storagePagesArray = explode(",", $storagePages);
         $context = GeneralUtility::makeInstance(Context::class);
@@ -113,8 +114,12 @@ class JobsController extends ActionController
         $uniqueLocations = array_unique($locations);
         $uniqueSchedules = array_unique($schedules);
 
-        $arguments = GeneralUtility::_GP('tx_nspersonio_pi1');
-        if (empty($arguments['search-word'])) {
+        
+        // $arguments = GeneralUtility::_GP('tx_nspersonio_pi1');
+        $arguments = $this->request->getParsedBody()['tx_nspersonio_pi1'] ?? [];
+
+        if(empty($arguments['search-word'])) {
+
             $jobs = $this->jobsRepository->fetchJobs($langId, $storagePagesArray);
         } else {
             $jobs = $this->jobsRepository->dataFilterAndSort($arguments, $storagePagesArray, $langId);
@@ -167,13 +172,18 @@ class JobsController extends ActionController
      */
     public function applicationAction(Jobs $job = null)
     {
-        $jobUid = isset(GeneralUtility::_GP('tx_nspersonio_pi2')['job'])
-            ? GeneralUtility::_GP('tx_nspersonio_pi2')['job']
-            : null;
+        // Use GeneralUtility::_GP merged with request->getQueryParams()/getParsedBody()
+    $jobUid = $this->request->hasArgument('job') 
+    ? $this->request->getArgument('job') 
+    : null;
 
-        $message = isset(GeneralUtility::_GP('tx_nspersonio_pi3')['message'])
-            ? GeneralUtility::_GP('tx_nspersonio_pi3')['message']
-            : null;
+if ($job === null && $jobUid) {
+    $job = $this->jobsRepository->findByUid($jobUid);
+}
+
+$message = $this->request->hasArgument('message') 
+    ? $this->request->getArgument('message') 
+    : null;
 
         if($message){
             $this->view->assign('message',$message);
@@ -214,17 +224,17 @@ class JobsController extends ActionController
 
         $formData = [
             'jobId' => $this->request->getArgument('jobId'),
-            'cv-upload' => GeneralUtility::_GP('cv-upload'),
-            'other-upload' => GeneralUtility::_GP('other-upload'),
-            'first_name' => GeneralUtility::_GP('first_name'),
-            'last_name' => GeneralUtility::_GP('last_name'),
-            'email' => GeneralUtility::_GP('email'),
-            'gender' => GeneralUtility::_GP('gender'),
-            'phone' => GeneralUtility::_GP('phone'),
-            'available_from' => GeneralUtility::_GP('available_from'),
-            'salary_expectations' => GeneralUtility::_GP('salary_expectations'),
+             'cv-upload' => $this->request->getArgument('cv-upload'),
+            'other-upload' => $this->request->getArgument('other-upload'),
+            'first_name' => $this->request->getArgument('first_name'),
+            'last_name' => $this->request->getArgument('last_name'),
+            'email' => $this->request->getArgument('email'),
+            'gender' => $this->request->getArgument('gender'),
+            'phone' => $this->request->getArgument('phone'),
+            'available_from' => $this->request->getArgument('available_from'),
+            'salary_expectations' => $this->request->getArgument('salary_expectations'),
         ];
-
+  
         $jobId = $formData['jobId'];
         if ($api === '' ||
             $companyId === '' ||
@@ -237,7 +247,7 @@ class JobsController extends ActionController
         ) {
             $formValid = false;
         }
-
+        
         $cvData = json_decode($formData['cv-upload'], true);
         $otherData = [];
         if (!empty($formData['other-upload'])) {
@@ -341,7 +351,7 @@ class JobsController extends ActionController
      */
     public function fileProcessAction(): void
     {
-        $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
+        $globalConfiguration = $this->extensionConfiguration->get('ns_personio');     
         $api = $globalConfiguration['documentApi'];
 
         $options = [
@@ -374,7 +384,6 @@ class JobsController extends ActionController
             echo json_encode($return);
             die;
         }
-
     }
 
     /**

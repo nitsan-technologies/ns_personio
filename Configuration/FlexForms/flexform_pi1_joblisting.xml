@@ -23,7 +23,6 @@
                     </settings.storagePage>
 
                     <settings.detailPid>
-                        <TCEforms>
                             <label>LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.detailPid</label>
                             <config>
                                 <type>group</type>
@@ -34,11 +33,9 @@
                                 <minitems>0</minitems>
                                 <required>true</required>
                             </config>
-                        </TCEforms>
                     </settings.detailPid>
 
                     <settings.applicationPid>
-                        <TCEforms>
                             <label>LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.applicationPid</label>
                             <config>
                                 <type>group</type>
@@ -49,7 +46,6 @@
                                 <minitems>0</minitems>
                                 <required>true</required>
                             </config>
-                        </TCEforms>
                     </settings.applicationPid>
 
                 </el>

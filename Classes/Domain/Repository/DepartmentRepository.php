@@ -54,7 +54,7 @@ class DepartmentRepository extends Repository
             $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang)),
             $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId))
         )
-        ->execute();
+        ->executeQuery();
     }
 
     /**
@@ -76,7 +76,7 @@ class DepartmentRepository extends Repository
             $queryBuilder->expr()->eq('name', $queryBuilder->createNamedParameter($departmentName)),
             $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language_code))
         )
-        ->execute()->fetch();
+        ->executeQuery()->fetchOne();
         return $result['uid'] ?? 0;
 
 
