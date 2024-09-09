@@ -45,6 +45,12 @@ class FetchApiDataCommand extends Command
         $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
             VersionNumberUtility::getCurrentTypo3Version()
         );
+        if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
+            // Initiate Global Object Manager
+            $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                ObjectManager::class
+            );
+        }
     }
 
     /**

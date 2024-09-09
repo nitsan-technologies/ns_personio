@@ -88,7 +88,7 @@ class JobsController extends ActionController
      * @throws AspectNotFoundException|InvalidQueryException
      */
     public function listAction()
-    {        
+    {
         $storagePages = $this->settings['storagePage'];
         $storagePagesArray = explode(",", $storagePages);
         $context = GeneralUtility::makeInstance(Context::class);
@@ -99,14 +99,14 @@ class JobsController extends ActionController
         $allJobs = $this->jobsRepository->fetchJobs($langId, $storagePagesArray);
         if ($allJobs) {
             foreach ($allJobs as $job) {
-                if($job->getDepartment()) {
+                if ($job->getDepartment()) {
                     $departmentId = $job->getDepartment()->getUid();
                     $categories[$departmentId] = $job->getDepartment();
                 }
-                if($job->getOffice()) {
+                if ($job->getOffice()) {
                     $locations[] = $job->getOffice();
                 }
-                if($job->getSchedule()) {
+                if ($job->getSchedule()) {
                     $schedules[] = $job->getSchedule();
                 }
             }
@@ -114,11 +114,9 @@ class JobsController extends ActionController
         $uniqueLocations = array_unique($locations);
         $uniqueSchedules = array_unique($schedules);
 
-        
-        // $arguments = GeneralUtility::_GP('tx_nspersonio_pi1');
         $arguments = $this->request->getParsedBody()['tx_nspersonio_pi1'] ?? [];
 
-        if(empty($arguments['search-word'])) {
+        if (empty($arguments['search-word'])) {
 
             $jobs = $this->jobsRepository->fetchJobs($langId, $storagePagesArray);
         } else {
@@ -127,7 +125,7 @@ class JobsController extends ActionController
 
         $filterCategory = [];
         foreach ($jobs as $job) {
-            if($job->getDepartment()) {
+            if ($job->getDepartment()) {
                 $departmentId = $job->getDepartment()->getUid();
                 $filterCategory[$departmentId] = $job->getDepartment();
             }
@@ -152,7 +150,7 @@ class JobsController extends ActionController
      */
     public function detailAction(Jobs $job = null)
     {
-        if($job) {
+        if ($job) {
             $listPid = $this->settings['listPid'];
             $this->view->assignMultiple([
                 'job' => $job,
@@ -172,24 +170,25 @@ class JobsController extends ActionController
      */
     public function applicationAction(Jobs $job = null)
     {
-        // Use GeneralUtility::_GP merged with request->getQueryParams()/getParsedBody()
-    $jobUid = $this->request->hasArgument('job') 
-    ? $this->request->getArgument('job') 
-    : null;
+        
+        $jobUid = $this->request->hasArgument('job')
+            ? $this->request->getArgument('job')
+            : null;
 
-if ($job === null && $jobUid) {
-    $job = $this->jobsRepository->findByUid($jobUid);
-}
-
-$message = $this->request->hasArgument('message') 
-    ? $this->request->getArgument('message') 
-    : null;
-
-        if($message){
-            $this->view->assign('message',$message);
+        if ($job === null && $jobUid) {
+            $job = $this->jobsRepository->findByUid($jobUid);
         }
-        if($job == null && $jobUid) {
-            $job = $this->jobsRepository->findByUid($jobUid) ;
+
+        $message = $this->request->hasArgument('message')
+            ? $this->request->getArgument('message')
+            : null;
+
+
+        if ($message) {
+            $this->view->assign('message', $message);
+        }
+        if ($job == null && $jobUid) {
+            $job = $this->jobsRepository->findByUid($jobUid);
         }
         if ($job) {
             $this->view->assignMultiple([
@@ -224,19 +223,21 @@ $message = $this->request->hasArgument('message')
 
         $formData = [
             'jobId' => $this->request->getArgument('jobId'),
-             'cv-upload' => $this->request->getArgument('cv-upload'),
-            'other-upload' => $this->request->getArgument('other-upload'),
-            'first_name' => $this->request->getArgument('first_name'),
-            'last_name' => $this->request->getArgument('last_name'),
-            'email' => $this->request->getArgument('email'),
-            'gender' => $this->request->getArgument('gender'),
-            'phone' => $this->request->getArgument('phone'),
-            'available_from' => $this->request->getArgument('available_from'),
-            'salary_expectations' => $this->request->getArgument('salary_expectations'),
+            'cv-upload' => $this->request->getParsedBody()['cv-upload'] ?? $this->request->getQueryParams()['cv-upload'] ?? null,
+            'other-upload' => $this->request->getParsedBody()['other-upload'] ?? $this->request->getQueryParams()['other-upload'] ?? null,
+            'first_name' => $this->request->getParsedBody()['first_name'] ?? $this->request->getQueryParams()['first_name'] ?? null,
+            'last_name' => $this->request->getParsedBody()['last_name'] ?? $this->request->getQueryParams()['last_name'] ?? null,
+            'email' => $this->request->getParsedBody()['email'] ?? $this->request->getQueryParams()['email'] ?? null,
+            'gender' => $this->request->getParsedBody()['gender'] ?? $this->request->getQueryParams()['gender'] ?? null,
+            'phone' => $this->request->getParsedBody()['phone'] ?? $this->request->getQueryParams()['phone'] ?? null,
+            'available_from' => $this->request->getParsedBody()['available_from'] ?? $this->request->getQueryParams()['available_from'] ?? null,
+            'salary_expectations' => $this->request->getParsedBody()['salary_expectations'] ?? $this->request->getQueryParams()['salary_expectations'] ?? null,
         ];
-  
+
+
         $jobId = $formData['jobId'];
-        if ($api === '' ||
+        if (
+            $api === '' ||
             $companyId === '' ||
             $token === '' ||
             $jobId === '' ||
@@ -247,7 +248,7 @@ $message = $this->request->hasArgument('message')
         ) {
             $formValid = false;
         }
-        
+
         $cvData = json_decode($formData['cv-upload'], true);
         $otherData = [];
         if (!empty($formData['other-upload'])) {
@@ -321,13 +322,14 @@ $message = $this->request->hasArgument('message')
                 $responseBody = $response->getBody()->getContents();
                 $decodedResponse = json_decode($responseBody, true);
                 $responseMessage = ApiResponseUtility::getApiResponse($decodedResponse);
-                if($responseMessage!=''){
-                    return $this->redirect('application',
+                if ($responseMessage != '') {
+                    return $this->redirect(
+                        'application',
                         null,
                         null,
-                        ['job' => $this->request->getArguments()['jobUid'],'message'=>$responseMessage]
+                        ['job' => $this->request->getArguments()['jobUid'], 'message' => $responseMessage]
                     );
-                }else{
+                } else {
                     $uri = $uriBuilder
                         ->setTargetPageUid($failurePid)
                         ->build();
@@ -351,14 +353,14 @@ $message = $this->request->hasArgument('message')
      */
     public function fileProcessAction(): void
     {
-        $globalConfiguration = $this->extensionConfiguration->get('ns_personio');     
+        $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
         $api = $globalConfiguration['documentApi'];
 
         $options = [
             'headers' => [
                 'X-Company-ID' => $this->settings['companyId'],
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer '.$this->settings['accessToken']
+                'Authorization' => 'Bearer ' . $this->settings['accessToken']
             ],
             'multipart' => [
                 [
