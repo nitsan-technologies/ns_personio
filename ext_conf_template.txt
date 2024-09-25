@@ -2,7 +2,7 @@
 ###########################
 
 # cat=Api Settings; type=text; label=LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:ns_personio.apiSettings.applicationApi
-applicationApi =
+applicationApi = https://api.personio.de/v1/recruiting/applications
 
 # cat=Api Settings; type=text; label=LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:ns_personio.apiSettings.documentApi
-documentApi =
+documentApi = https://api.personio.de/v1/recruiting/applications/documents

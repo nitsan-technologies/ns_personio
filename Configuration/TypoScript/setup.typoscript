@@ -1,4 +1,4 @@
-plugin.tx_nspersonio_pi1 {
+plugin.tx_nspersonio {
     view {
         templateRootPaths {
             0 = EXT:ns_personio/Resources/Private/Templates/
