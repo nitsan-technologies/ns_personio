@@ -9,6 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 /**
  * This file is part of the "Personio" Extension for TYPO3 CMS.
@@ -48,13 +49,15 @@ class DepartmentRepository extends Repository
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_nspersonio_domain_model_department');
-        $queryBuilder
-        ->delete('tx_nspersonio_domain_model_department')
-        ->where(
-            $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang)),
-            $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId))
-        )
-        ->executeQuery();
+
+        $query = $queryBuilder
+            ->delete('tx_nspersonio_domain_model_department')
+            ->where(
+                $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang, \PDO::PARAM_INT)),
+                $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId, \PDO::PARAM_INT))
+            );
+
+        $this->executeQuery($query);
     }
 
     /**
@@ -65,21 +68,38 @@ class DepartmentRepository extends Repository
      * @return int|null
      * @throws Exception
      */
-    public function getUid(string $departmentName, int $language_code)
+    public function getUid(string $departmentName, int $language_code): ?int
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_nspersonio_domain_model_department');
-        $result = $queryBuilder
-        ->select('uid')
-        ->from('tx_nspersonio_domain_model_department')
-        ->where(
-            $queryBuilder->expr()->eq('name', $queryBuilder->createNamedParameter($departmentName)),
-            $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language_code))
-        )
-        ->executeQuery()->fetchOne();
-        return $result['uid'] ?? 0;
 
+        $query = $queryBuilder
+            ->select('uid')
+            ->from('tx_nspersonio_domain_model_department')
+            ->where(
+                $queryBuilder->expr()->eq('name', $queryBuilder->createNamedParameter($departmentName)),
+                $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language_code, \PDO::PARAM_INT))
+            );
 
+        $result = $this->executeQuery($query)->fetch();
+
+        return $result['uid'] ?? null;
+    }
+
+    /**
+     * Executes a query, handling version differences for TYPO3.
+     *
+     * @param QueryBuilder $query
+     * @return \Doctrine\DBAL\Result
+     */
+    private function executeQuery(QueryBuilder $query)
+    {
+        // Check TYPO3 version and execute the query with the appropriate method
+        if (version_compare(TYPO3_branch, '12.0', '<=')) {
+            return $query->execute();
+        } else {
+            return $query->executeQuery();
+        }
     }
 
     /**
@@ -100,5 +120,4 @@ class DepartmentRepository extends Repository
         $query->matching($query->logicalAnd(...array_values($constraints)));
         return $query->execute();
     }
-
 }

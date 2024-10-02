@@ -10,9 +10,10 @@ use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 /**
- * This file is part of the "NsPersonio" Extension for TYPO3 CMS.
+ * This file is part of the "Personio" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
@@ -68,13 +69,15 @@ class JobsRepository extends Repository
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_nspersonio_domain_model_jobs');
-        $queryBuilder
-        ->delete('tx_nspersonio_domain_model_jobs')
-        ->where(
-            $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang)),
-            $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId))
-        )
-        ->executeQuery();
+
+        $query = $queryBuilder
+            ->delete('tx_nspersonio_domain_model_jobs')
+            ->where(
+                $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang, \PDO::PARAM_INT)),
+                $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId, \PDO::PARAM_INT))
+            );
+
+        $this->executeQuery($query);
     }
 
     /**
@@ -86,7 +89,7 @@ class JobsRepository extends Repository
      */
     public function dataFilterAndSort(array $arguments, array $storagePages, int $langId)
     {
-        
+
         $query = $this->createQuery();
         $constraints = $searchConstraints = $storageConstraints = [];
         foreach ($storagePages as $value) {
@@ -100,7 +103,23 @@ class JobsRepository extends Repository
             $constraints[] = $query->logicalOr(...$searchConstraints);
         }
         $query->matching($query->logicalAnd(...$constraints));
-        
+
         return $query->execute();
+    }
+
+    /**
+     * Executes a query, handling version differences for TYPO3.
+     *
+     * @param QueryBuilder $query
+     * @return \Doctrine\DBAL\Result
+     */
+    private function executeQuery(QueryBuilder $query)
+    {
+        // Check TYPO3 version and execute the query with the appropriate method
+        if (version_compare(TYPO3_branch, '12.0', '<=')) {
+            return $query->execute();
+        } else {
+            return $query->executeQuery();
+        }
     }
 }

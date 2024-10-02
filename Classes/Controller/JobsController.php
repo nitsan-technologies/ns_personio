@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use NITSAN\NsPersonio\Utility\ApiResponseUtility;
 
 /**
- * This file is part of the "NsPersonio" Extension for TYPO3 CMS.
+ * This file is part of the "Personio" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
@@ -114,7 +114,8 @@ class JobsController extends ActionController
         $uniqueLocations = array_unique($locations);
         $uniqueSchedules = array_unique($schedules);
 
-        $arguments = $this->request->getParsedBody()['tx_nspersonio_pi1'] ?? [];
+        $arguments = $this->request->getArguments();
+
 
         if (empty($arguments['search-word'])) {
 
@@ -170,7 +171,7 @@ class JobsController extends ActionController
      */
     public function applicationAction(Jobs $job = null)
     {
-        
+
         $jobUid = $this->request->hasArgument('job')
             ? $this->request->getArgument('job')
             : null;
@@ -206,7 +207,6 @@ class JobsController extends ActionController
     /**
      * action submitApplication
      *
-     * @return ResponseInterface
      * @throws ExtensionConfigurationExtensionNotConfiguredException
      * @throws ExtensionConfigurationPathDoesNotExistException
      * @throws GuzzleException
@@ -222,65 +222,85 @@ class JobsController extends ActionController
         $token = $this->settings['accessToken'];
 
         $formData = [
-            'jobId' => $this->request->getArgument('jobId'),
-            'cv-upload' => $this->request->getParsedBody()['cv-upload'] ?? $this->request->getQueryParams()['cv-upload'] ?? null,
-            'other-upload' => $this->request->getParsedBody()['other-upload'] ?? $this->request->getQueryParams()['other-upload'] ?? null,
-            'first_name' => $this->request->getParsedBody()['first_name'] ?? $this->request->getQueryParams()['first_name'] ?? null,
-            'last_name' => $this->request->getParsedBody()['last_name'] ?? $this->request->getQueryParams()['last_name'] ?? null,
-            'email' => $this->request->getParsedBody()['email'] ?? $this->request->getQueryParams()['email'] ?? null,
-            'gender' => $this->request->getParsedBody()['gender'] ?? $this->request->getQueryParams()['gender'] ?? null,
-            'phone' => $this->request->getParsedBody()['phone'] ?? $this->request->getQueryParams()['phone'] ?? null,
-            'available_from' => $this->request->getParsedBody()['available_from'] ?? $this->request->getQueryParams()['available_from'] ?? null,
-            'salary_expectations' => $this->request->getParsedBody()['salary_expectations'] ?? $this->request->getQueryParams()['salary_expectations'] ?? null,
+            'jobId' => $this->request->getArgument('jobId')
         ];
 
+        if (version_compare((string) $this->typo3VersionArray['version_main'], '11', '>=')) {
 
+            $formData = array_merge($formData, $this->request->getParsedBody());
+        } 
+        else {
+
+            $formData = array_merge($formData, [
+                'cv-upload' => GeneralUtility::_GP('cv-upload'),
+                'other-upload' => GeneralUtility::_GP('other-upload'),
+                'first_name' => GeneralUtility::_GP('first_name'),
+                'last_name' => GeneralUtility::_GP('last_name'),
+                'email' => GeneralUtility::_GP('email'),
+            ]);
+        }
+
+        $requiredFields = [
+            'jobId',
+            'first_name',
+            'last_name',
+            'email',
+            'cv-upload',
+            'other-upload'
+        ];
+
+        foreach ($requiredFields as $field) {
+            if (empty($formData[$field])) {
+                $formValid = false;
+                break;
+            }
+        }
+        $attributes = [
+            'gender',
+            'phone',
+            'available_from',
+            'salary_expectations'
+        ];
+
+        $applicationAttribute = [];
+        foreach ($attributes as $attribute) {
+            if (!empty($formData[$attribute])) {
+                $applicationAttribute[] = [
+                    "id" => $attribute,
+                    "value" => $formData[$attribute]
+                ];
+            }
+        }
         $jobId = $formData['jobId'];
-        if (
-            $api === '' ||
-            $companyId === '' ||
-            $token === '' ||
-            $jobId === '' ||
-            $formData['first_name'] === '' ||
-            $formData['last_name'] === '' ||
-            $formData['email'] === ''
-
-        ) {
-            $formValid = false;
-        }
-
-        $cvData = json_decode($formData['cv-upload'], true);
-        $otherData = [];
-        if (!empty($formData['other-upload'])) {
-            $otherData = json_decode($formData['other-upload'], true);
-        }
-
         $uriBuilder = $this->uriBuilder;
         if ($formValid) {
+
+            $cvData = json_decode($formData['cv-upload'], true);
+            $otherData = [];
+            if (!empty($formData['other-upload'])) {
+                $otherData = json_decode($formData['other-upload'], true);
+            }
+
+            $applicationAttribute = [];
+            foreach ($attributes as $attribute) {
+                if (isset($formData[$attribute]) && !empty($formData[$attribute])) {
+                    $applicationAttribute[] = [
+                        "id" => $attribute,
+                        "value" => $formData[$attribute]
+                    ];
+                }
+            }
+
             $params = [
                 "job_position_id" => $jobId,
                 "first_name" => $formData['first_name'],
                 "last_name" => $formData['last_name'],
                 "email" => $formData['email'],
-                "attributes" => [
-                    [
-                        "id" => "gender",
-                        "value" => $formData['gender']
-                    ],
-                    [
-                        "id" => "phone",
-                        "value" => $formData['phone']
-                    ],
-                    [
-                        "id" => "available_from",
-                        "value" => $formData['available_from']
-                    ],
-                    [
-                        "id" => "salary_expectations",
-                        "value" => $formData['salary_expectations']
-                    ],
-                ],
             ];
+            if (!empty($applicationAttribute)) {
+                $params['attributes'] = $applicationAttribute;
+            }
+
             if (!empty($cvData)) {
                 foreach ($cvData as $key => $value) {
                     $params['files'][$key] = [
@@ -290,16 +310,20 @@ class JobsController extends ActionController
                     ];
                 }
             }
-            $lastKey = key(array_slice($params['files'], -1, 1, true)) + 1;
-            if (!empty($otherData)) {
-                foreach ($otherData as $key => $value) {
-                    $params['files'][$key + $lastKey] = [
-                        "uuid" => $value['uuid'],
-                        "original_filename" => $value['original_filename'],
-                        "category" => "work-sample"
-                    ];
+            if (isset($params['files']) && !empty($params['files'])) {
+                $lastKey = key(array_slice($params['files'], -1, 1, true)) + 1;
+
+                if (!empty($otherData)) {
+                    foreach ($otherData as $key => $value) {
+                        $params['files'][$key + $lastKey] = [
+                            "uuid" => $value['uuid'],
+                            "original_filename" => $value['original_filename'],
+                            "category" => "work-sample"
+                        ];
+                    }
                 }
             }
+
             $body = json_encode($params);
             $options = [
                 'http_errors' => true,
