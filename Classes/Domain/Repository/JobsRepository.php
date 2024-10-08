@@ -75,7 +75,7 @@ class JobsRepository extends Repository
             ->delete('tx_nspersonio_domain_model_jobs')
             ->where(
                 $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang, \PDO::PARAM_INT)),
-                $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId))
             );
 
         $this->executeQuery($query);
