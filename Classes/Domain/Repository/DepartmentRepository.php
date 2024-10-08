@@ -54,7 +54,7 @@ class DepartmentRepository extends Repository
         $query = $queryBuilder
             ->delete('tx_nspersonio_domain_model_department')
             ->where(
-                $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang, \PDO::PARAM_INT)),
+                $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang)),
                 $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId))
             );
 
@@ -82,7 +82,7 @@ class DepartmentRepository extends Repository
                 $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language_code))
             );
 
-        $result = $this->executeQuery($query)->fetch();
+        $result = $this->executeQuery($query)->fetchAssociative();
 
         return $result['uid'] ?? null;
     }
