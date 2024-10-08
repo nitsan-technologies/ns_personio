@@ -82,7 +82,16 @@ class DepartmentRepository extends Repository
                 $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language_code))
             );
 
-        $result = $this->executeQuery($query)->fetchAssociative();
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
+            VersionNumberUtility::getCurrentTypo3Version()
+        );
+
+        if (version_compare((string)$typo3VersionArray['version_main'], '11', '<=')) {
+
+            $result = $this->executeQuery($query)->fetch();
+        } else {
+            $result = $this->executeQuery($query)->fetchAssociative();
+        }
 
         return $result['uid'] ?? null;
     }
@@ -95,10 +104,11 @@ class DepartmentRepository extends Repository
      */
     private function executeQuery(QueryBuilder $query)
     {
-      $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
-        VersionNumberUtility::getCurrentTypo3Version()
-    );
-    if (version_compare((string)$typo3VersionArray['version_main'], '12', '<=')) {
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
+            VersionNumberUtility::getCurrentTypo3Version()
+        );
+        if (version_compare((string)$typo3VersionArray['version_main'], '12', '<=')) {
+
             return $query->execute();
         } else {
             return $query->executeQuery();
