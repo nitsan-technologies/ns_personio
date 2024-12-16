@@ -100,12 +100,18 @@ class FetchApiDataCommand extends Command
         }
 
         try {
-            $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                DepartmentRepository::class
-            );
-            $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                JobsRepository::class
-            );
+            if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
+                $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
+                $jobsRepository = $this->objectManager->get(JobsRepository::class);
+            } else {
+                $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                    DepartmentRepository::class
+                );
+                $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                    JobsRepository::class
+                );
+            }
+
 
             $apiData = $this->getApiData($api);
 
