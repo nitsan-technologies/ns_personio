@@ -94,9 +94,11 @@ class FetchApiDataCommand extends Command
         $language = (int)$input->getArgument('languageUid');
         $api = trim($input->getArgument('api'));
         $pageId = (int)$input->getArgument('storagePageId');
-        if($api == '') {
+        if ($api == '') {
+            $output->writeln('<error>API URL cannot be empty.</error>');
             return 1;
         }
+
         try {
             if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
                 $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
@@ -110,43 +112,51 @@ class FetchApiDataCommand extends Command
                 );
             }
 
-            try {
-                $apiData = $this->getApiData($api);
-            } catch (GuzzleException $e) {
+
+            $apiData = $this->getApiData($api);
+
+            // Validate API data
+            if (!isset($apiData['position']) || !is_array($apiData['position'])) {
+                $output->writeln('<error>Invalid API response: "position" key is missing or not an array.</error>');
                 return 1;
             }
 
-            if(isset($apiData['position']['id'])) {
+            if (isset($apiData['position']['id'])) {
                 $tempData = $apiData['position'];
-                $apiData['position'] = [];
-                $apiData['position'][0] = $tempData;
+                $apiData['position'] = [$tempData];
             }
+
             $categories = [];
-            foreach($apiData['position'] as $item) {
+            foreach ($apiData['position'] as $item) {
                 $category = $item['department'] ?? '';
-                if($category != '') {
+                if ($category != '') {
                     $categories[] = $category;
                 }
             }
             $uniqueCategories = array_unique($categories);
-            // Get existing categories(departments)
+
+            // Get existing categories (departments)
             $departmentResult = $departmentRepository->findAll()->toArray();
-            if(!empty($departmentResult)) {
+            if (!empty($departmentResult)) {
                 $departmentRepository->deleteAllDepartments($language, $pageId);
             }
             $this->addCategories($uniqueCategories, $language, $pageId);
+
             // Get existing Jobs
             $jobsResult = $jobsRepository->findAll()->toArray();
-            if(!empty($jobsResult)) {
+            if (!empty($jobsResult)) {
                 $jobsRepository->deleteAllJobs($language, $pageId);
             }
+
+            // Pass validated jobs array
             $this->addJobs($apiData['position'], $language, $pageId);
+
             return 0;
         } catch (Exception $e) {
+            $output->writeln('<error>' . $e->getMessage() . '</error>');
             return 1;
         }
     }
-
     /**
      * addCategories
      *
@@ -171,7 +181,7 @@ class FetchApiDataCommand extends Command
         $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
             PersistenceManager::class
         );
-        foreach($uniqueCategories as $category) {
+        foreach ($uniqueCategories as $category) {
             $departmentObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Department::class);
             $departmentObj->setName($category);
             $departmentObj->setPid($pageId);
@@ -208,7 +218,7 @@ class FetchApiDataCommand extends Command
             );
         }
         $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(PersistenceManager::class);
-        foreach($jobs as $job) {
+        foreach ($jobs as $job) {
             $jobObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Jobs::class);
             $jobObj->setJobid($job['id']);
             isset($job['subcompany'])
@@ -219,7 +229,7 @@ class FetchApiDataCommand extends Command
                 ? $jobObj->setOffice($job['office'])
                 : $jobObj->setOffice('');
 
-            if(isset($job['department'])) {
+            if (isset($job['department'])) {
                 $department = $departmentRepository->getUid($job['department'], $language);
                 $dept = $departmentRepository->findByUid($department);
                 if ($dept) {
@@ -236,22 +246,23 @@ class FetchApiDataCommand extends Command
 
             if (isset($job['jobDescriptions']['jobDescription'])) {
                 $fullDescription = '';
-                if(is_array($job['jobDescriptions']['jobDescription']) &&
+                if (
+                    is_array($job['jobDescriptions']['jobDescription']) &&
                     !isset($job['jobDescriptions']['jobDescription']['name'])
                 ) {
-                    foreach($job['jobDescriptions']['jobDescription'] as $data) {
+                    foreach ($job['jobDescriptions']['jobDescription'] as $data) {
                         if ($data['name'] != '') {
-                            $fullDescription .= '<h3 class="headline-with-list">'.$data['name'].'</h3>';
+                            $fullDescription .= '<h3 class="headline-with-list">' . $data['name'] . '</h3>';
                         }
-                        $fullDescription .= '<p class="ns-nspersonio-detail-desc">'.$data['value'].'</p>';
+                        $fullDescription .= '<p class="ns-nspersonio-detail-desc">' . $data['value'] . '</p>';
                     }
                     $description = preg_replace('/ style=("|\')(.*?)("|\')/', '', $fullDescription);
                     $jobObj->setDescriptions($description);
                 } else {
-                    if(isset($job['jobDescriptions']['jobDescription']['value'])) {
+                    if (isset($job['jobDescriptions']['jobDescription']['value'])) {
                         if (isset($job['jobDescriptions']['jobDescription']['name'])) {
                             $fullDescription .= '<h3 class="headline-with-list">'
-                                .$job['jobDescriptions']['jobDescription']['name'].'</h3>';
+                                . $job['jobDescriptions']['jobDescription']['name'] . '</h3>';
                         }
                         $fullDescription .= preg_replace(
                             '/ style=("|\')(.*?)("|\')/',

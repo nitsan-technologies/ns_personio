@@ -1,7 +1,7 @@
 mod {
     wizards.newContentElement.wizardItems.plugins {
         elements {
-            pi1 {
+            nspersonio_pi1 {
                 iconIdentifier = ns-personio-plugin
                 title = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi1.name
                 description = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi1.description
@@ -10,7 +10,7 @@ mod {
                     list_type = nspersonio_pi1
                 }
             }
-            pi2 {
+           nspersonio_pi2{
                 iconIdentifier = ns-personio-plugin
                 title = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi2.name
                 description = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi2.description
@@ -19,7 +19,7 @@ mod {
                     list_type = nspersonio_pi2
                 }
             }
-            pi3 {
+           nspersonio_pi3{
                 iconIdentifier = ns-personio-plugin
                 title = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi3.name
                 description = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi3.description

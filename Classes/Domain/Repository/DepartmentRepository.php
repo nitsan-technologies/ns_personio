@@ -9,6 +9,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * This file is part of the "Personio" Extension for TYPO3 CMS.
@@ -48,13 +50,15 @@ class DepartmentRepository extends Repository
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_nspersonio_domain_model_department');
-        $queryBuilder
-        ->delete('tx_nspersonio_domain_model_department')
-        ->where(
-            $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang)),
-            $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId))
-        )
-        ->execute();
+
+        $query = $queryBuilder
+            ->delete('tx_nspersonio_domain_model_department')
+            ->where(
+                $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($lang)),
+                $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId))
+            );
+
+        $this->executeQuery($query);
     }
 
     /**
@@ -65,21 +69,50 @@ class DepartmentRepository extends Repository
      * @return int|null
      * @throws Exception
      */
-    public function getUid(string $departmentName, int $language_code)
+    public function getUid(string $departmentName, int $language_code): ?int
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_nspersonio_domain_model_department');
-        $result = $queryBuilder
-        ->select('uid')
-        ->from('tx_nspersonio_domain_model_department')
-        ->where(
-            $queryBuilder->expr()->eq('name', $queryBuilder->createNamedParameter($departmentName)),
-            $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language_code))
-        )
-        ->execute()->fetch();
-        return $result['uid'] ?? 0;
 
+        $query = $queryBuilder
+            ->select('uid')
+            ->from('tx_nspersonio_domain_model_department')
+            ->where(
+                $queryBuilder->expr()->eq('name', $queryBuilder->createNamedParameter($departmentName)),
+                $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language_code))
+            );
 
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
+            VersionNumberUtility::getCurrentTypo3Version()
+        );
+
+        if (version_compare((string)$typo3VersionArray['version_main'], '11', '<=')) {
+
+            $result = $this->executeQuery($query)->fetch();
+        } else {
+            $result = $this->executeQuery($query)->fetchAssociative();
+        }
+
+        return $result['uid'] ?? null;
+    }
+
+    /**
+     * Executes a query, handling version differences for TYPO3.
+     *
+     * @param QueryBuilder $query
+     * @return \Doctrine\DBAL\Result
+     */
+    private function executeQuery(QueryBuilder $query)
+    {
+        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
+            VersionNumberUtility::getCurrentTypo3Version()
+        );
+        if (version_compare((string)$typo3VersionArray['version_main'], '12', '<=')) {
+
+            return $query->execute();
+        } else {
+            return $query->executeQuery();
+        }
     }
 
     /**
@@ -100,5 +133,4 @@ class DepartmentRepository extends Repository
         $query->matching($query->logicalAnd(...array_values($constraints)));
         return $query->execute();
     }
-
 }

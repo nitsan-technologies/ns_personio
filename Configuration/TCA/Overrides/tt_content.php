@@ -9,6 +9,7 @@ $plugins = [
     ['Pi1', 'Personio Jobs List', 'flexform_pi1_joblisting'],
     ['Pi2', 'Personio Jobs Details', 'flexform_pi2_jobdetail'],
     ['Pi3', 'Personio Jobs Application', 'flexform_pi3_jobapplication']
+    
 ];
 
 $signatures = [
@@ -20,7 +21,9 @@ foreach ($plugins as $plugin) {
     ExtensionUtility::registerPlugin(
         'NsPersonio',
         $plugin[0],
-        $plugin[1]
+        $plugin[1],
+        '',
+        'plugins'
     );
 }
 

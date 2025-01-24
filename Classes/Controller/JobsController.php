@@ -20,8 +20,9 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use NITSAN\NsPersonio\Utility\ApiResponseUtility;
+
 /**
- * This file is part of the "NsPersonio" Extension for TYPO3 CMS.
+ * This file is part of the "Personio" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
@@ -98,14 +99,14 @@ class JobsController extends ActionController
         $allJobs = $this->jobsRepository->fetchJobs($langId, $storagePagesArray);
         if ($allJobs) {
             foreach ($allJobs as $job) {
-                if($job->getDepartment()) {
+                if ($job->getDepartment()) {
                     $departmentId = $job->getDepartment()->getUid();
                     $categories[$departmentId] = $job->getDepartment();
                 }
-                if($job->getOffice()) {
+                if ($job->getOffice()) {
                     $locations[] = $job->getOffice();
                 }
-                if($job->getSchedule()) {
+                if ($job->getSchedule()) {
                     $schedules[] = $job->getSchedule();
                 }
             }
@@ -113,8 +114,11 @@ class JobsController extends ActionController
         $uniqueLocations = array_unique($locations);
         $uniqueSchedules = array_unique($schedules);
 
-        $arguments = GeneralUtility::_GP('tx_nspersonio_pi1');
+        $arguments = $this->request->getArguments();
+
+
         if (empty($arguments['search-word'])) {
+
             $jobs = $this->jobsRepository->fetchJobs($langId, $storagePagesArray);
         } else {
             $jobs = $this->jobsRepository->dataFilterAndSort($arguments, $storagePagesArray, $langId);
@@ -122,7 +126,7 @@ class JobsController extends ActionController
 
         $filterCategory = [];
         foreach ($jobs as $job) {
-            if($job->getDepartment()) {
+            if ($job->getDepartment()) {
                 $departmentId = $job->getDepartment()->getUid();
                 $filterCategory[$departmentId] = $job->getDepartment();
             }
@@ -147,7 +151,7 @@ class JobsController extends ActionController
      */
     public function detailAction(Jobs $job = null)
     {
-        if($job) {
+        if ($job) {
             $listPid = $this->settings['listPid'];
             $this->view->assignMultiple([
                 'job' => $job,
@@ -167,19 +171,25 @@ class JobsController extends ActionController
      */
     public function applicationAction(Jobs $job = null)
     {
-        $jobUid = isset(GeneralUtility::_GP('tx_nspersonio_pi2')['job'])
-            ? GeneralUtility::_GP('tx_nspersonio_pi2')['job']
+
+        $jobUid = $this->request->hasArgument('job')
+            ? $this->request->getArgument('job')
             : null;
 
-        $message = isset(GeneralUtility::_GP('tx_nspersonio_pi3')['message'])
-            ? GeneralUtility::_GP('tx_nspersonio_pi3')['message']
-            : null;
-
-        if($message){
-            $this->view->assign('message',$message);
+        if ($job === null && $jobUid) {
+            $job = $this->jobsRepository->findByUid($jobUid);
         }
-        if($job == null && $jobUid) {
-            $job = $this->jobsRepository->findByUid($jobUid) ;
+
+        $message = $this->request->hasArgument('message')
+            ? $this->request->getArgument('message')
+            : null;
+
+
+        if ($message) {
+            $this->view->assign('message', $message);
+        }
+        if ($job == null && $jobUid) {
+            $job = $this->jobsRepository->findByUid($jobUid);
         }
         if ($job) {
             $this->view->assignMultiple([
@@ -197,7 +207,6 @@ class JobsController extends ActionController
     /**
      * action submitApplication
      *
-     * @return ResponseInterface
      * @throws ExtensionConfigurationExtensionNotConfiguredException
      * @throws ExtensionConfigurationPathDoesNotExistException
      * @throws GuzzleException
@@ -213,63 +222,85 @@ class JobsController extends ActionController
         $token = $this->settings['accessToken'];
 
         $formData = [
-            'jobId' => $this->request->getArgument('jobId'),
-            'cv-upload' => GeneralUtility::_GP('cv-upload'),
-            'other-upload' => GeneralUtility::_GP('other-upload'),
-            'first_name' => GeneralUtility::_GP('first_name'),
-            'last_name' => GeneralUtility::_GP('last_name'),
-            'email' => GeneralUtility::_GP('email'),
-            'gender' => GeneralUtility::_GP('gender'),
-            'phone' => GeneralUtility::_GP('phone'),
-            'available_from' => GeneralUtility::_GP('available_from'),
-            'salary_expectations' => GeneralUtility::_GP('salary_expectations'),
+            'jobId' => $this->request->getArgument('jobId')
         ];
 
+        if (version_compare((string) $this->typo3VersionArray['version_main'], '11', '>=')) {
+
+            $formData = array_merge($formData, $this->request->getParsedBody());
+        } 
+        else {
+
+            $formData = array_merge($formData, [
+                'cv-upload' => GeneralUtility::_GP('cv-upload'),
+                'other-upload' => GeneralUtility::_GP('other-upload'),
+                'first_name' => GeneralUtility::_GP('first_name'),
+                'last_name' => GeneralUtility::_GP('last_name'),
+                'email' => GeneralUtility::_GP('email'),
+            ]);
+        }
+
+        $requiredFields = [
+            'jobId',
+            'first_name',
+            'last_name',
+            'email',
+            'cv-upload',
+            'other-upload'
+        ];
+
+        foreach ($requiredFields as $field) {
+            if (empty($formData[$field])) {
+                $formValid = false;
+                break;
+            }
+        }
+        $attributes = [
+            'gender',
+            'phone',
+            'available_from',
+            'salary_expectations'
+        ];
+
+        $applicationAttribute = [];
+        foreach ($attributes as $attribute) {
+            if (!empty($formData[$attribute])) {
+                $applicationAttribute[] = [
+                    "id" => $attribute,
+                    "value" => $formData[$attribute]
+                ];
+            }
+        }
         $jobId = $formData['jobId'];
-        if ($api === '' ||
-            $companyId === '' ||
-            $token === '' ||
-            $jobId === '' ||
-            $formData['first_name'] === '' ||
-            $formData['last_name'] === '' ||
-            $formData['email'] === ''
-
-        ) {
-            $formValid = false;
-        }
-
-        $cvData = json_decode($formData['cv-upload'], true);
-        $otherData = [];
-        if (!empty($formData['other-upload'])) {
-            $otherData = json_decode($formData['other-upload'], true);
-        }
-
         $uriBuilder = $this->uriBuilder;
         if ($formValid) {
+
+            $cvData = json_decode($formData['cv-upload'], true);
+            $otherData = [];
+            if (!empty($formData['other-upload'])) {
+                $otherData = json_decode($formData['other-upload'], true);
+            }
+
+            $applicationAttribute = [];
+            foreach ($attributes as $attribute) {
+                if (isset($formData[$attribute]) && !empty($formData[$attribute])) {
+                    $applicationAttribute[] = [
+                        "id" => $attribute,
+                        "value" => $formData[$attribute]
+                    ];
+                }
+            }
+
             $params = [
                 "job_position_id" => $jobId,
                 "first_name" => $formData['first_name'],
                 "last_name" => $formData['last_name'],
                 "email" => $formData['email'],
-                "attributes" => [
-                    [
-                        "id" => "gender",
-                        "value" => $formData['gender']
-                    ],
-                    [
-                        "id" => "phone",
-                        "value" => $formData['phone']
-                    ],
-                    [
-                        "id" => "available_from",
-                        "value" => $formData['available_from']
-                    ],
-                    [
-                        "id" => "salary_expectations",
-                        "value" => $formData['salary_expectations']
-                    ],
-                ],
             ];
+            if (!empty($applicationAttribute)) {
+                $params['attributes'] = $applicationAttribute;
+            }
+
             if (!empty($cvData)) {
                 foreach ($cvData as $key => $value) {
                     $params['files'][$key] = [
@@ -279,16 +310,20 @@ class JobsController extends ActionController
                     ];
                 }
             }
-            $lastKey = key(array_slice($params['files'], -1, 1, true)) + 1;
-            if (!empty($otherData)) {
-                foreach ($otherData as $key => $value) {
-                    $params['files'][$key + $lastKey] = [
-                        "uuid" => $value['uuid'],
-                        "original_filename" => $value['original_filename'],
-                        "category" => "work-sample"
-                    ];
+            if (isset($params['files']) && !empty($params['files'])) {
+                $lastKey = key(array_slice($params['files'], -1, 1, true)) + 1;
+
+                if (!empty($otherData)) {
+                    foreach ($otherData as $key => $value) {
+                        $params['files'][$key + $lastKey] = [
+                            "uuid" => $value['uuid'],
+                            "original_filename" => $value['original_filename'],
+                            "category" => "work-sample"
+                        ];
+                    }
                 }
             }
+
             $body = json_encode($params);
             $options = [
                 'http_errors' => true,
@@ -311,13 +346,14 @@ class JobsController extends ActionController
                 $responseBody = $response->getBody()->getContents();
                 $decodedResponse = json_decode($responseBody, true);
                 $responseMessage = ApiResponseUtility::getApiResponse($decodedResponse);
-                if($responseMessage!=''){
-                    return $this->redirect('application',
+                if ($responseMessage != '') {
+                    return $this->redirect(
+                        'application',
                         null,
                         null,
-                        ['job' => $this->request->getArguments()['jobUid'],'message'=>$responseMessage]
+                        ['job' => $this->request->getArguments()['jobUid'], 'message' => $responseMessage]
                     );
-                }else{
+                } else {
                     $uri = $uriBuilder
                         ->setTargetPageUid($failurePid)
                         ->build();
@@ -348,7 +384,7 @@ class JobsController extends ActionController
             'headers' => [
                 'X-Company-ID' => $this->settings['companyId'],
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer '.$this->settings['accessToken']
+                'Authorization' => 'Bearer ' . $this->settings['accessToken']
             ],
             'multipart' => [
                 [
@@ -374,7 +410,6 @@ class JobsController extends ActionController
             echo json_encode($return);
             die;
         }
-
     }
 
     /**
