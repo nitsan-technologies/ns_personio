@@ -1,14 +1,13 @@
 <?php
 
 $EM_CONF['ns_personio'] = [
-    'title' => 'Personio',
-    'description' => 'The extension offers various customization options for job listing, detail, and application pages on the frontend. Additionally, a scheduler ensures data synchronization. Directly list, view, and apply to Personio vacancies through the TYPO3 Backend. 
+    'title' => 'TYPO3 Personio Integration',
+    'description' => 'Seamlessly integrate Personio job listings into your TYPO3 website. Customize job listings, detail pages, and application forms with real-time synchronization via TYPO3 Scheduler. Enables direct interaction with Personio from the TYPO3 backend.',
     
-    *** Live Demo: https://demo.t3planet.com/t3-extensions/pro/typo3-personio/ *** Premium Version, Documentation & Free Support: https://t3planet.com/typo3-personio-extension',
     'category' => 'plugin',
-    'author' => 'T3: Nilesh Malankiya, T3: Parth Parmar, T3: Rohan Parmar, QA: Krishna Dhapa',
-    'author_email' => 'sanjay@nitsantech.com',
-    'author_company' => 'T3Planet // NITSAN',
+    'author' => 'Team T3Planet',
+    'author_email' => 'info@t3planet.de',
+    'author_company' => 'T3Planet',
     'state' => 'stable',
     'version' => '2.0.0',
     'constraints' => [
