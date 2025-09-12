@@ -135,17 +135,17 @@
         <source>Uploading document. Please wait.</source>
         <target state="final">gelesen und verstanden habe.</target>
       </trans-unit>
-      <trans-unit id="tx_nspersonio_domain_model_jobs.application.sendApplication" resname="tx_nspersonio_domain_model_jobs.application.sendApplication">
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.sendApplication" resname="tx_nspersonio_domain_model_jobs.application.sendApplication" approved="yes">
         <source>Send application</source>
-        <target state="translated">Dokument wird hochgeladen. Bitte warten.</target>
+        <target state="final">Dokument wird hochgeladen. Bitte warten.</target>
       </trans-unit>
-      <trans-unit id="tx_nspersonio_domain_model_jobs.list.noJobs" resname="tx_nspersonio_domain_model_jobs.list.noJobs">
+      <trans-unit id="tx_nspersonio_domain_model_jobs.list.noJobs" resname="tx_nspersonio_domain_model_jobs.list.noJobs" approved="yes">
         <source>No Jobs Found!</source>
-        <target state="translated">Bewerbung senden</target>
+        <target state="final">Bewerbung senden</target>
       </trans-unit>
-      <trans-unit id="tx_nspersonio_domain_model_jobs.application.required" resname="tx_nspersonio_domain_model_jobs.application.required">
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.required" resname="tx_nspersonio_domain_model_jobs.application.required" approved="yes">
         <source>This field is required.</source>
-        <target state="translated">Keine Jobs gefunden!</target>
+        <target state="final">Keine Jobs gefunden!</target>
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_jobs.application.requiredphone" resname="tx_nspersonio_domain_model_jobs.application.required" approved="yes">
         <source>Please enter a valid phone number.</source>
@@ -155,13 +155,13 @@
         <source>Please enter a valid email address.</source>
         <target state="final">Bitte geben Sie eine gültige Telefonnummer ein.</target>
       </trans-unit>
-      <trans-unit id="tx_nspersonio_domain_model_jobs.application.uploadingfile" resname="tx_nspersonio_domain_model_jobs.application.uploadingfile">
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.uploadingfile" resname="tx_nspersonio_domain_model_jobs.application.uploadingfile" approved="yes">
         <source>Please upload at least one file in CV field</source>
-        <target state="translated">Bitte geben Sie eine gültige E-Mail-Adresse ein.</target>
+        <target state="final">Bitte geben Sie eine gültige E-Mail-Adresse ein.</target>
       </trans-unit>
-      <trans-unit id="nspersonio_pi1.list.title" resname="nspersonio_pi1.list.title">
+      <trans-unit id="nspersonio_pi1.list.title" resname="nspersonio_pi1.list.title" approved="yes">
         <source>Job Listing</source>
-        <target state="translated">Bitte laden Sie mindestens eine Datei im Lebenslauf-Feld hoch.</target>
+        <target state="final">Bitte laden Sie mindestens eine Datei im Lebenslauf-Feld hoch.</target>
       </trans-unit>
       <trans-unit id="nspersonio_pi1.list.listHeader" resname="nspersonio_pi1.list.listHeader" approved="yes">
         <source>Heading</source>
@@ -203,41 +203,41 @@
         <source>Heading</source>
         <target state="final">Stellendetails</target>
       </trans-unit>
-      <trans-unit id="nspersonio_pi2.details.applicationPid" resname="nspersonio_pi2.details.applicationPid">
+      <trans-unit id="nspersonio_pi2.details.applicationPid" resname="nspersonio_pi2.details.applicationPid" approved="yes">
         <source>Application Page</source>
-        <target state="translated">Überschrift</target>
+        <target state="final">Überschrift</target>
       </trans-unit>
-      <trans-unit id="nspersonio_pi2.details.contentElementUid" resname="nspersonio_pi2.details.contentElementUid">
+      <trans-unit id="nspersonio_pi2.details.contentElementUid" resname="nspersonio_pi2.details.contentElementUid" approved="yes">
         <source>Content Elements</source>
-        <target state="translated">Bewerbungsseite</target>
+        <target state="final">Bewerbungsseite</target>
       </trans-unit>
-      <trans-unit id="nspersonio_pi3.application.title" resname="nspersonio_pi3.application.title">
+      <trans-unit id="nspersonio_pi3.application.title" resname="nspersonio_pi3.application.title" approved="yes">
         <source>Job Application</source>
-        <target state="translated">Inhaltslemente</target>
+        <target state="final">Inhaltslemente</target>
       </trans-unit>
-      <trans-unit id="nspersonio_pi3.application.listPid" resname="nspersonio_pi3.application.listPid">
+      <trans-unit id="nspersonio_pi3.application.listPid" resname="nspersonio_pi3.application.listPid" approved="yes">
         <source>List Page</source>
-        <target state="translated">Bewerbung</target>
+        <target state="final">Bewerbung</target>
       </trans-unit>
-      <trans-unit id="nspersonio_pi3.application.companyId" resname="nspersonio_pi3.application.companyId">
+      <trans-unit id="nspersonio_pi3.application.companyId" resname="nspersonio_pi3.application.companyId" approved="yes">
         <source>Company Id</source>
-        <target state="translated">Listenansicht</target>
+        <target state="final">Listenansicht</target>
       </trans-unit>
-      <trans-unit id="nspersonio_pi3.application.accessToken" resname="nspersonio_pi3.application.accessToken">
+      <trans-unit id="nspersonio_pi3.application.accessToken" resname="nspersonio_pi3.application.accessToken" approved="yes">
         <source>Access Token</source>
-        <target state="translated">Firmen-ID</target>
+        <target state="final">Firmen-ID</target>
       </trans-unit>
-      <trans-unit id="nspersonio_pi3.application.successPID" resname="nspersonio_pi3.application.successPID">
+      <trans-unit id="nspersonio_pi3.application.successPID" resname="nspersonio_pi3.application.successPID" approved="yes">
         <source>Success Page</source>
-        <target state="translated">Zugriffstoken</target>
+        <target state="final">Zugriffstoken</target>
       </trans-unit>
-      <trans-unit id="nspersonio_pi3.application.failurPID" resname="nspersonio_pi3.application.failurPID">
+      <trans-unit id="nspersonio_pi3.application.failurPID" resname="nspersonio_pi3.application.failurPID" approved="yes">
         <source>Failure Page</source>
-        <target state="translated">Erfolgseite</target>
+        <target state="final">Erfolgseite</target>
       </trans-unit>
-      <trans-unit id="nspersonio.no_department" resname="nspersonio.no_department">
+      <trans-unit id="nspersonio.no_department" resname="nspersonio.no_department" approved="yes">
         <source>No Department</source>
-        <target state="translated">Fehlerseite</target>
+        <target state="final">Fehlerseite</target>
       </trans-unit>
     </body>
   </file>
