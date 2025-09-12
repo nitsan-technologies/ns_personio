@@ -3,81 +3,81 @@
   <file source-language="en" datatype="plaintext" original="EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf" date="2023-09-05T07:07:25Z" product-name="ns_personio" target-language="de">
     <header/>
     <body>
-      <trans-unit id="ns_personio_pi1.settings" resname="ns_personio_pi1.settings">
+      <trans-unit id="ns_personio_pi1.settings" resname="ns_personio_pi1.settings" approved="yes">
         <source>General</source>
-        <target state="needs-translation">General</target>
+        <target state="final">Allgemein</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.listHeader" resname="ns_personio_pi1.listHeader">
+      <trans-unit id="ns_personio_pi1.listHeader" resname="ns_personio_pi1.listHeader" approved="yes">
         <source>Heading</source>
-        <target state="needs-translation">Heading</target>
+        <target state="final">Überschrift</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.listDescription" resname="ns_personio_pi1.listDescription">
+      <trans-unit id="ns_personio_pi1.listDescription" resname="ns_personio_pi1.listDescription" approved="yes">
         <source>Description</source>
-        <target state="needs-translation">Description</target>
+        <target state="final">Beschreibung</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.storagePage" resname="ns_personio_pi1.storagePage">
+      <trans-unit id="ns_personio_pi1.storagePage" resname="ns_personio_pi1.storagePage" approved="yes">
         <source>Storage Page</source>
-        <target state="needs-translation">Storage Page</target>
+        <target state="final">Speicherseite</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.companyId" resname="ns_personio_pi1.companyId">
+      <trans-unit id="ns_personio_pi1.companyId" resname="ns_personio_pi1.companyId" approved="yes">
         <source>Company ID</source>
-        <target state="needs-translation">Company ID</target>
+        <target state="final">Firmen-ID</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.accessToken" resname="ns_personio_pi1.accessToken">
+      <trans-unit id="ns_personio_pi1.accessToken" resname="ns_personio_pi1.accessToken" approved="yes">
         <source>Access Token</source>
-        <target state="needs-translation">Access Token</target>
+        <target state="final">Zugriffstoken</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.contentElementId" resname="ns_personio_pi1.contentElementId">
+      <trans-unit id="ns_personio_pi1.contentElementId" resname="ns_personio_pi1.contentElementId" approved="yes">
         <source>Content Elements</source>
-        <target state="needs-translation">Content Elements</target>
+        <target state="final">Inhaltselemente</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.detailPid" resname="ns_personio_pi1.detailPid">
+      <trans-unit id="ns_personio_pi1.detailPid" resname="ns_personio_pi1.detailPid" approved="yes">
         <source>Details Page</source>
-        <target state="needs-translation">Details Page</target>
+        <target state="final">Detailseite</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.showApplyButton" resname="ns_personio_pi1.showApplyButton">
+      <trans-unit id="ns_personio_pi1.showApplyButton" resname="ns_personio_pi1.showApplyButton" approved="yes">
         <source>Show Apply Button</source>
-        <target state="needs-translation">Show Apply Button</target>
+        <target state="final">Bewerbungs-Button anzeigen</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.showHeader" resname="ns_personio_pi1.showHeader">
+      <trans-unit id="ns_personio_pi1.showHeader" resname="ns_personio_pi1.showHeader" approved="yes">
         <source>Show Header</source>
-        <target state="needs-translation">Show Header</target>
+        <target state="final">Header anzeigen</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.applicationPid" resname="ns_personio_pi1.applicationPid">
+      <trans-unit id="ns_personio_pi1.applicationPid" resname="ns_personio_pi1.applicationPid" approved="yes">
         <source>Application Page</source>
-        <target state="needs-translation">Application Page</target>
+        <target state="final">Bewerbungsseite</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.listPid" resname="ns_personio_pi1.listPid">
+      <trans-unit id="ns_personio_pi1.listPid" resname="ns_personio_pi1.listPid" approved="yes">
         <source>List Page</source>
-        <target state="needs-translation">List Page</target>
+        <target state="final">Listen-Seite</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.applicationMessage" resname="ns_personio_pi1.applicationMessage">
+      <trans-unit id="ns_personio_pi1.applicationMessage" resname="ns_personio_pi1.applicationMessage" approved="yes">
         <source>Application Message</source>
-        <target state="needs-translation">Application Message</target>
+        <target state="final">Bewerbungsnachricht</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.successPID" resname="ns_personio_pi1.successPID">
+      <trans-unit id="ns_personio_pi1.successPID" resname="ns_personio_pi1.successPID" approved="yes">
         <source>After Successful Application Redirect to Page</source>
-        <target state="needs-translation">After Successful Application Redirect to Page</target>
+        <target state="final">Nach erfolgreicher Bewerbung weiterleiten zur Seite</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.failurePid" resname="ns_personio_pi1.failurePid">
+      <trans-unit id="ns_personio_pi1.failurePid" resname="ns_personio_pi1.failurePid" approved="yes">
         <source>After Failed Application Redirect to Page</source>
-        <target state="needs-translation">After Failed Application Redirect to Page</target>
+        <target state="final">Nach fehlgeschlagener Bewerbung weiterleiten zur Seite</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.listdetails" resname="ns_personio_pi1.listdetails">
         <source>Details</source>
         <target state="needs-translation">Details</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.applyNow" resname="ns_personio_pi1.applyNow">
+      <trans-unit id="ns_personio_pi1.applyNow" resname="ns_personio_pi1.applyNow" approved="yes">
         <source>Apply Now</source>
-        <target state="needs-translation">Apply Now</target>
+        <target state="final">Jetzt bewerben</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.applicationView" resname="ns_personio_pi1.applicationView">
+      <trans-unit id="ns_personio_pi1.applicationView" resname="ns_personio_pi1.applicationView" approved="yes">
         <source>View</source>
-        <target state="needs-translation">View</target>
+        <target state="final">Anzeigen</target>
       </trans-unit>
-      <trans-unit id="ns_personio_pi1.privacyPolicyURL" resname="ns_personio_pi1.privacyPolicyURL">
+      <trans-unit id="ns_personio_pi1.privacyPolicyURL" resname="ns_personio_pi1.privacyPolicyURL" approved="yes">
         <source>Privacy Policy URL</source>
-        <target state="needs-translation">Privacy Policy URL</target>
+        <target state="final">Datenschutzrichtlinien URL</target>
       </trans-unit>
     </body>
   </file>
