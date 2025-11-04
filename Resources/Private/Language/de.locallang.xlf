@@ -13,7 +13,7 @@
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_department.name.description" resname="tx_nspersonio_domain_model_department.name.description">
         <source>Name</source>
-        <target state="needs-translation">Name</target>
+        <target state="translated">Name</target>
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_jobs.details.permanentEmployee" resname="tx_nspersonio_domain_model_jobs.details.permanentEmployee" approved="yes">
         <source>Permanent Employee</source>
@@ -29,7 +29,7 @@
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_jobs.application.name" resname="tx_nspersonio_domain_model_jobs.application.name">
         <source>Name</source>
-        <target state="needs-translation">Name</target>
+        <target state="translated">Name</target>
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_jobs.application.first" resname="tx_nspersonio_domain_model_jobs.application.first" approved="yes">
         <source>First Name</source>
@@ -53,7 +53,7 @@
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_jobs.application.phoneex" resname="tx_nspersonio_domain_model_jobs.application.phoneex">
         <source>+49 (000-000-00-00)</source>
-        <target state="needs-translation">+49 (000-000-00-00)</target>
+        <target state="translated">+49 (000-000-00-00)</target>
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_jobs.application.availableFrom" resname="tx_nspersonio_domain_model_jobs.application.availableFrom" approved="yes">
         <source>Available from</source>
@@ -77,7 +77,7 @@
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_jobs.application.linkedin" resname="tx_nspersonio_domain_model_jobs.application.linkedin">
         <source>LinkedIn</source>
-        <target state="needs-translation">LinkedIn</target>
+        <target state="translated">LinkedIn</target>
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_jobs.application.website" resname="tx_nspersonio_domain_model_jobs.application.website" approved="yes">
         <source>Website</source>
