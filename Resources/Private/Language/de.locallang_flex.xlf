@@ -65,7 +65,7 @@
       </trans-unit>
       <trans-unit id="ns_personio_pi1.listdetails" resname="ns_personio_pi1.listdetails">
         <source>Details</source>
-        <target state="needs-translation">Details</target>
+        <target state="translated">Details</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.applyNow" resname="ns_personio_pi1.applyNow" approved="yes">
         <source>Apply Now</source>
