@@ -45,11 +45,11 @@
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_jobs.name" resname="tx_nspersonio_domain_model_jobs.name">
         <source>Name</source>
-        <target state="needs-translation">Name</target>
+        <target state="translated">Name</target>
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_jobs.name.description" resname="tx_nspersonio_domain_model_jobs.name.description">
         <source>Name</source>
-        <target state="needs-translation">Name</target>
+        <target state="translated">Name</target>
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_jobs.descriptions" resname="tx_nspersonio_domain_model_jobs.descriptions" approved="yes">
         <source>Descriptions</source>
@@ -137,11 +137,11 @@
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_department.name" resname="tx_nspersonio_domain_model_department.name">
         <source>Name</source>
-        <target state="needs-translation">Name</target>
+        <target state="translated">Name</target>
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_department.name.description" resname="tx_nspersonio_domain_model_department.name.description">
         <source>Name</source>
-        <target state="needs-translation">Name</target>
+        <target state="translated">Name</target>
       </trans-unit>
       <trans-unit id="tx_nspersonio_domain_model_department.language_code" resname="tx_nspersonio_domain_model_department.language_code" approved="yes">
         <source>Language Code</source>
