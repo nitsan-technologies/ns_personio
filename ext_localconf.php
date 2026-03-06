@@ -1,4 +1,5 @@
 <?php
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3_MODE') || defined('TYPO3') || die();
 
@@ -23,7 +24,8 @@ if (version_compare((string)$typo3VersionArray['version_main'], '10', '<')) {
     // non-cacheable actions
     [
         $jobsController => 'list'
-    ]
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -32,6 +34,10 @@ if (version_compare((string)$typo3VersionArray['version_main'], '10', '<')) {
     [
         $jobsController => 'detail'
     ],
+    [
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -43,22 +49,24 @@ if (version_compare((string)$typo3VersionArray['version_main'], '10', '<')) {
     // non-cacheable actions
     [
         $jobsController => 'application, submitApplication, fileProcess'
-    ]
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+
 );
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
-    '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ns_personio/Configuration/page.tsconfig">'
-);
-$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-    \TYPO3\CMS\Core\Imaging\IconRegistry::class
-);
-$iconRegistry->registerIcon(
-    'ns-personio-plugin-pi1',
-    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-    ['source' => 'EXT:ns_personio/ext_icon.svg']
-);
-$iconRegistry->registerIcon(
-    'ns-personio-plugin',
-    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-    ['source' => 'EXT:ns_personio/Resources/Public/Icons/Extension.svg']
-);
+// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+//     '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ns_personio/Configuration/page.tsconfig">'
+// );
+// $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+//     \TYPO3\CMS\Core\Imaging\IconRegistry::class
+// );
+// $iconRegistry->registerIcon(
+//     'ns-personio-plugin-pi1',
+//     \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+//     ['source' => 'EXT:ns_personio/ext_icon.svg']
+// );
+// $iconRegistry->registerIcon(
+//     'ns-personio-plugin',
+//     \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+//     ['source' => 'EXT:ns_personio/Resources/Public/Icons/Extension.svg']
+// );

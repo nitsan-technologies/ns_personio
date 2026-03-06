@@ -6,8 +6,7 @@ mod {
                 title = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi1.name
                 description = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi1.description
                 tt_content_defValues {
-                    CType = list
-                    list_type = nspersonio_pi1
+                    CType = nspersonio_pi1
                 }
             }
            nspersonio_pi2{
@@ -15,8 +14,7 @@ mod {
                 title = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi2.name
                 description = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi2.description
                 tt_content_defValues {
-                    CType = list
-                    list_type = nspersonio_pi2
+                    CType = nspersonio_pi2
                 }
             }
            nspersonio_pi3{
@@ -24,8 +22,7 @@ mod {
                 title = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi3.name
                 description = LLL:EXT:ns_personio/Resources/Private/Language/locallang_db.xlf:tx_ns_personio_pi3.description
                 tt_content_defValues {
-                    CType = list
-                    list_type = nspersonio_pi3
+                    CType = nspersonio_pi3
                 }
             }
         }
@@ -42,4 +39,14 @@ mod {
             }
         }
     }
-}
+     web_layout {
+        tt_content {
+            preview {
+                
+                    nspersonio_pi1 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/List.html
+                    nspersonio_pi2 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/Details.html
+                    nspersonio_pi3 = EXT:ns_personio/Resources/Private/Backend/BackendPreview/Application.html
+                }
+            }
+        }
+    }

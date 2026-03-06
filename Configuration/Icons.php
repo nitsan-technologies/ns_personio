@@ -6,7 +6,7 @@ return [
    // use same identifier as used in TSconfig for icon
    'ns-personio-plugin-pi1' => [
       'provider' => SvgIconProvider::class,
-      'source' => 'EXT:ns_personio/ext_icon.svg',
+      'source' => 'EXT:ns_personio/Resources/Public/Icons/ext_icon.svg',
    ],
    'ns-personio-plugin' => [
       'provider' => SvgIconProvider::class,

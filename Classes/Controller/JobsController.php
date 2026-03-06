@@ -140,16 +140,16 @@ class JobsController extends ActionController
             'locations' => $uniqueLocations,
             'schedules' => $uniqueSchedules,
         ]);
-        if (version_compare((string)$this->typo3VersionArray['version_main'], '12', '>=')) {
+        
             return $this->htmlResponse();
-        }
+        
     }
 
     /**
      * action detail
      * @param Jobs|null $job
      */
-    public function detailAction(Jobs $job = null)
+    public function detailAction(?Jobs $job = null)
     {
         if ($job) {
             $listPid = $this->settings['listPid'];
@@ -160,16 +160,16 @@ class JobsController extends ActionController
                 'listPid' => $listPid
             ]);
         }
-        if (version_compare((string)$this->typo3VersionArray['version_main'], '12', '>=')) {
+       
             return $this->htmlResponse();
-        }
+        
     }
 
     /**
      * action application
      * @param Jobs|null $job
      */
-    public function applicationAction(Jobs $job = null)
+    public function applicationAction(?Jobs $job = null)
     {
 
         $jobUid = $this->request->hasArgument('job')
@@ -199,9 +199,9 @@ class JobsController extends ActionController
                 'settings' => $this->settings,
             ]);
         }
-        if (version_compare((string)$this->typo3VersionArray['version_main'], '12', '>=')) {
+        
             return $this->htmlResponse();
-        }
+        
     }
 
     /**
@@ -225,20 +225,22 @@ class JobsController extends ActionController
             'jobId' => $this->request->getArgument('jobId')
         ];
 
-        if (version_compare((string) $this->typo3VersionArray['version_main'], '11', '>=')) {
+        // if (version_compare((string) $this->typo3VersionArray['version_main'], '11', '>=')) {
 
             $formData = array_merge($formData, $this->request->getParsedBody());
-        } 
-        else {
+        // } 
+        // else {
+        //     $parsedBody = $request->getParsedBody() ?? [];
+        //     $queryParams = $request->getQueryParams() ?? [];
 
-            $formData = array_merge($formData, [
-                'cv-upload' => GeneralUtility::_GP('cv-upload'),
-                'other-upload' => GeneralUtility::_GP('other-upload'),
-                'first_name' => GeneralUtility::_GP('first_name'),
-                'last_name' => GeneralUtility::_GP('last_name'),
-                'email' => GeneralUtility::_GP('email'),
-            ]);
-        }
+        //     $formData = array_merge($formData, [
+        //         'cv-upload' => $parsedBody['cv-upload'] ?? $queryParams['cv-upload'] ?? null,
+        //         'other-upload' => $parsedBody['other-upload'] ?? $queryParams['other-upload'] ?? null,
+        //         'first_name' => $parsedBody['first_name'] ?? $queryParams['first_name'] ?? null,
+        //         'last_name' => $parsedBody['last_name'] ?? $queryParams['last_name'] ?? null,
+        //         'email' => $parsedBody['email'] ?? $queryParams['email'] ?? null,
+        //     ]);
+// }
 
         $requiredFields = [
             'jobId',
