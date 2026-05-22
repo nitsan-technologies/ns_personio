@@ -271,9 +271,8 @@ class FetchApiDataCommand extends Command
                 ? $jobObj->setExperience($job['yearsOfExperience'])
                 : $jobObj->setExperience('');
 
-            isset($job['bookkeeping'])
-                ? $jobObj->setOccupation($job['bookkeeping'])
-                : $jobObj->setOccupation('');
+            $occupation = $job['occupation'] ?? $job['bookkeeping'] ?? '';
+            $jobObj->setOccupation(is_scalar($occupation) ? (string)$occupation : '');
 
             isset($job['occupationCategory'])
                 ? $jobObj->setOccupationcategory($job['occupationCategory'])

@@ -97,6 +97,7 @@ class JobsController extends ActionController
         $categories = $locations = $schedules = [];
         $allCategories = $this->departmentRepository->fetchAll($langId, $storagePagesArray);
         $allJobs = $this->jobsRepository->fetchJobs($langId, $storagePagesArray);
+        // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($allJobs, __FILE__.' '.__LINE__);die;
         if ($allJobs) {
             foreach ($allJobs as $job) {
                 if ($job->getDepartment()) {
