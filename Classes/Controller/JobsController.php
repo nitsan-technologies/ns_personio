@@ -97,7 +97,6 @@ class JobsController extends ActionController
         $categories = $locations = $schedules = [];
         $allCategories = $this->departmentRepository->fetchAll($langId, $storagePagesArray);
         $allJobs = $this->jobsRepository->fetchJobs($langId, $storagePagesArray);
-        // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($allJobs, __FILE__.' '.__LINE__);die;
         if ($allJobs) {
             foreach ($allJobs as $job) {
                 if ($job->getDepartment()) {
@@ -226,22 +225,7 @@ class JobsController extends ActionController
             'jobId' => $this->request->getArgument('jobId')
         ];
 
-        // if (version_compare((string) $this->typo3VersionArray['version_main'], '11', '>=')) {
-
             $formData = array_merge($formData, $this->request->getParsedBody());
-        // } 
-        // else {
-        //     $parsedBody = $request->getParsedBody() ?? [];
-        //     $queryParams = $request->getQueryParams() ?? [];
-
-        //     $formData = array_merge($formData, [
-        //         'cv-upload' => $parsedBody['cv-upload'] ?? $queryParams['cv-upload'] ?? null,
-        //         'other-upload' => $parsedBody['other-upload'] ?? $queryParams['other-upload'] ?? null,
-        //         'first_name' => $parsedBody['first_name'] ?? $queryParams['first_name'] ?? null,
-        //         'last_name' => $parsedBody['last_name'] ?? $queryParams['last_name'] ?? null,
-        //         'email' => $parsedBody['email'] ?? $queryParams['email'] ?? null,
-        //     ]);
-// }
 
         $requiredFields = [
             'jobId',

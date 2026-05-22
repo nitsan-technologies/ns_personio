@@ -17,8 +17,6 @@ use NITSAN\NsPersonio\Domain\Repository\JobsRepository;
 use NITSAN\NsPersonio\Domain\Repository\DepartmentRepository;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 class FetchApiDataCommand extends Command
 {
@@ -39,18 +37,6 @@ class FetchApiDataCommand extends Command
      * @see InputInterface::input()
      * @see InputInterface::output()
      */
-    // protected function initialize(InputInterface $input, OutputInterface $output)
-    // {
-    //     $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
-    //         VersionNumberUtility::getCurrentTypo3Version()
-    //     );
-    //     if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
-    //         // Initiate Global Object Manager
-    //         $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-    //             ObjectManager::class
-    //         );
-    //     }
-    // }
 
     /**
      * Configure the command by defining the name, options and arguments
