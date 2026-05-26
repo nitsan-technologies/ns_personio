@@ -9,12 +9,12 @@ $EM_CONF['ns_personio'] = [
     'author_email' => 'info@t3planet.de',
     'author_company' => 'T3Planet',
     'state' => 'stable',
-    'version' => '2.0.1',
+    'version' => '14.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-13.9.99',
-            'scheduler' => '9.5.0-13.9.99',
-            'php' => '7.4.0-8.3.99',
+            'typo3' => '13.0.0-14.9.99',
+            'scheduler' => '13.0.0-14.9.99',
+            'php' => '7.4.0-8.4.99',
         ],
         'conflicts' => [],
         'suggests' => [],

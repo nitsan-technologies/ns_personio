@@ -11,7 +11,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+// use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * This file is part of the "Personio" Extension for TYPO3 CMS.
@@ -116,13 +116,6 @@ class JobsRepository extends Repository
      */
     private function executeQuery(QueryBuilder $query)
     {
-        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
-            VersionNumberUtility::getCurrentTypo3Version()
-        );
-        if (version_compare((string)$typo3VersionArray['version_main'], '12', '<=')) {
-            return $query->execute();
-        } else {
-            return $query->executeQuery();
-        }
+           return $query->executeQuery();
     }
 }

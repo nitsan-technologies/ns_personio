@@ -17,8 +17,6 @@ use NITSAN\NsPersonio\Domain\Repository\JobsRepository;
 use NITSAN\NsPersonio\Domain\Repository\DepartmentRepository;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 class FetchApiDataCommand extends Command
 {
@@ -27,7 +25,6 @@ class FetchApiDataCommand extends Command
      * @var Client
      */
     protected Client $client;
-
 
     /**
      * objectManager
@@ -40,18 +37,6 @@ class FetchApiDataCommand extends Command
      * @see InputInterface::input()
      * @see InputInterface::output()
      */
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
-            VersionNumberUtility::getCurrentTypo3Version()
-        );
-        if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
-            // Initiate Global Object Manager
-            $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                ObjectManager::class
-            );
-        }
-    }
 
     /**
      * Configure the command by defining the name, options and arguments
@@ -88,9 +73,7 @@ class FetchApiDataCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
-            VersionNumberUtility::getCurrentTypo3Version()
-        );
+        
         $language = (int)$input->getArgument('languageUid');
         $api = trim($input->getArgument('api'));
         $pageId = (int)$input->getArgument('storagePageId');
@@ -100,17 +83,13 @@ class FetchApiDataCommand extends Command
         }
 
         try {
-            if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
-                $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
-                $jobsRepository = $this->objectManager->get(JobsRepository::class);
-            } else {
                 $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
                     DepartmentRepository::class
                 );
                 $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
                     JobsRepository::class
                 );
-            }
+            
 
 
             $apiData = $this->getApiData($api);
@@ -168,16 +147,11 @@ class FetchApiDataCommand extends Command
      */
     public function addCategories(array $uniqueCategories, int $language, int $pageId): void
     {
-        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
-            VersionNumberUtility::getCurrentTypo3Version()
-        );
-        if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
-            $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
-        } else {
+       
             $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
                 DepartmentRepository::class
             );
-        }
+        
         $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
             PersistenceManager::class
         );
@@ -203,20 +177,14 @@ class FetchApiDataCommand extends Command
      */
     public function addJobs(array $jobs, int $language, int $pageId): void
     {
-        $typo3VersionArray = VersionNumberUtility::convertVersionStringToArray(
-            VersionNumberUtility::getCurrentTypo3Version()
-        );
-        if (version_compare((string)$typo3VersionArray['version_main'], '12', '<')) {
-            $departmentRepository = $this->objectManager->get(DepartmentRepository::class);
-            $jobsRepository = $this->objectManager->get(JobsRepository::class);
-        } else {
+       
             $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
                 DepartmentRepository::class
             );
             $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
                 JobsRepository::class
             );
-        }
+        
         $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(PersistenceManager::class);
         foreach ($jobs as $job) {
             $jobObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Jobs::class);
@@ -251,7 +219,7 @@ class FetchApiDataCommand extends Command
                     !isset($job['jobDescriptions']['jobDescription']['name'])
                 ) {
                     foreach ($job['jobDescriptions']['jobDescription'] as $data) {
-                        if ($data['name'] != '') {
+                        if ($data['name'] != '' && $data['name']) {
                             $fullDescription .= '<h3 class="headline-with-list">' . $data['name'] . '</h3>';
                         }
                         $fullDescription .= '<p class="ns-nspersonio-detail-desc">' . $data['value'] . '</p>';
@@ -289,9 +257,8 @@ class FetchApiDataCommand extends Command
                 ? $jobObj->setExperience($job['yearsOfExperience'])
                 : $jobObj->setExperience('');
 
-            isset($job['bookkeeping'])
-                ? $jobObj->setOccupation($job['bookkeeping'])
-                : $jobObj->setOccupation('');
+            $occupation = $job['occupation'] ?? $job['bookkeeping'] ?? '';
+            $jobObj->setOccupation(is_scalar($occupation) ? (string)$occupation : '');
 
             isset($job['occupationCategory'])
                 ? $jobObj->setOccupationcategory($job['occupationCategory'])

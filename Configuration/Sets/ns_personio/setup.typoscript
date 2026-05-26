@@ -1,3 +1,4 @@
+@import 'EXT:ns_personio/Configuration/TypoScript/setup.typoscript'
 plugin.tx_nspersonio {
     view {
         templateRootPaths {
