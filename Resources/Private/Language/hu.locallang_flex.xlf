@@ -5,79 +5,79 @@
     <body>
       <trans-unit id="ns_personio_pi1.settings" resname="ns_personio_pi1.settings">
         <source>General</source>
-        <target state="needs-translation">General</target>
+        <target state="translated">Általános</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.listHeader" resname="ns_personio_pi1.listHeader">
         <source>Heading</source>
-        <target state="needs-translation">Heading</target>
+        <target state="translated">Címsor</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.listDescription" resname="ns_personio_pi1.listDescription">
         <source>Description</source>
-        <target state="needs-translation">Description</target>
+        <target state="translated">Leírás</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.storagePage" resname="ns_personio_pi1.storagePage">
         <source>Storage Page</source>
-        <target state="needs-translation">Storage Page</target>
+        <target state="translated">Tároló oldal</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.companyId" resname="ns_personio_pi1.companyId">
         <source>Company ID</source>
-        <target state="needs-translation">Company ID</target>
+        <target state="translated">Cégazonosító</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.accessToken" resname="ns_personio_pi1.accessToken">
         <source>Access Token</source>
-        <target state="needs-translation">Access Token</target>
+        <target state="translated">Hozzáférési token</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.contentElementId" resname="ns_personio_pi1.contentElementId">
         <source>Content Elements</source>
-        <target state="needs-translation">Content Elements</target>
+        <target state="translated">Tartalomelemek</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.detailPid" resname="ns_personio_pi1.detailPid">
         <source>Details Page</source>
-        <target state="needs-translation">Details Page</target>
+        <target state="translated">Részletek oldala</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.showApplyButton" resname="ns_personio_pi1.showApplyButton">
         <source>Show Apply Button</source>
-        <target state="needs-translation">Show Apply Button</target>
+        <target state="translated">Jelentkezés gomb megjelenítése</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.showHeader" resname="ns_personio_pi1.showHeader">
         <source>Show Header</source>
-        <target state="needs-translation">Show Header</target>
+        <target state="translated">Fejléc megjelenítése</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.applicationPid" resname="ns_personio_pi1.applicationPid">
         <source>Application Page</source>
-        <target state="needs-translation">Application Page</target>
+        <target state="translated">Jelentkezési oldal</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.listPid" resname="ns_personio_pi1.listPid">
         <source>List Page</source>
-        <target state="needs-translation">List Page</target>
+        <target state="translated">Listaoldal</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.applicationMessage" resname="ns_personio_pi1.applicationMessage">
         <source>Application Message</source>
-        <target state="needs-translation">Application Message</target>
+        <target state="translated">Jelentkezési üzenet</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.successPID" resname="ns_personio_pi1.successPID">
         <source>After Successful Application Redirect to Page</source>
-        <target state="needs-translation">After Successful Application Redirect to Page</target>
+        <target state="translated">Átirányítási oldal sikeres jelentkezés után</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.failurePid" resname="ns_personio_pi1.failurePid">
         <source>After Failed Application Redirect to Page</source>
-        <target state="needs-translation">After Failed Application Redirect to Page</target>
+        <target state="translated">Átirányítási oldal sikertelen jelentkezés után</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.listdetails" resname="ns_personio_pi1.listdetails">
         <source>Details</source>
-        <target state="needs-translation">Details</target>
+        <target state="translated">Részletek</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.applyNow" resname="ns_personio_pi1.applyNow">
         <source>Apply Now</source>
-        <target state="needs-translation">Apply Now</target>
+        <target state="translated">Jelentkezés most</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.applicationView" resname="ns_personio_pi1.applicationView">
         <source>View</source>
-        <target state="needs-translation">View</target>
+        <target state="translated">Megtekintés</target>
       </trans-unit>
       <trans-unit id="ns_personio_pi1.privacyPolicyURL" resname="ns_personio_pi1.privacyPolicyURL">
         <source>Privacy Policy URL</source>
-        <target state="needs-translation">Privacy Policy URL</target>
+        <target state="translated">Adatvédelmi nyilatkozat URL-címe</target>
       </trans-unit>
     </body>
   </file>
