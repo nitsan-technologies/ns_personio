@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:ns_personio/Resources/Private/Language/locallang.xlf" date="2023-09-05T07:07:25Z" product-name="ns_personio" target-language="da">
+    <header/>
+    <body>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.seeAllPosition" resname="tx_nspersonio_domain_model_jobs.seeAllPosition">
+        <source>See all position</source>
+        <target state="needs-translation">See all position</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.seeAll" resname="tx_nspersonio_domain_model_jobs.seeAll">
+        <source>See All</source>
+        <target state="needs-translation">See All</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_department.name.description" resname="tx_nspersonio_domain_model_department.name.description">
+        <source>Name</source>
+        <target state="needs-translation">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.details.permanentEmployee" resname="tx_nspersonio_domain_model_jobs.details.permanentEmployee">
+        <source>Permanent Employee</source>
+        <target state="needs-translation">Permanent Employee</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.details.partTime" resname="tx_nspersonio_domain_model_jobs.details.partTime">
+        <source>Part Time</source>
+        <target state="needs-translation">Part Time</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.details.applyBtn" resname="tx_nspersonio_domain_model_jobs.details.applyBtn">
+        <source>Apply Now</source>
+        <target state="needs-translation">Apply Now</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.name" resname="tx_nspersonio_domain_model_jobs.application.name">
+        <source>Name</source>
+        <target state="needs-translation">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.first" resname="tx_nspersonio_domain_model_jobs.application.first">
+        <source>First Name</source>
+        <target state="needs-translation">First Name</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.last" resname="tx_nspersonio_domain_model_jobs.application.last">
+        <source>Last Name</source>
+        <target state="needs-translation">Last Name</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.email" resname="tx_nspersonio_domain_model_jobs.application.email">
+        <source>Email</source>
+        <target state="needs-translation">Email</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.emailex" resname="tx_nspersonio_domain_model_jobs.application.emailex">
+        <source>yourmail@domain.com</source>
+        <target state="needs-translation">yourmail@domain.com</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.phone" resname="tx_nspersonio_domain_model_jobs.application.phone">
+        <source>Phone</source>
+        <target state="needs-translation">Phone</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.phoneex" resname="tx_nspersonio_domain_model_jobs.application.phoneex">
+        <source>+49 (000-000-00-00)</source>
+        <target state="needs-translation">+49 (000-000-00-00)</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.availableFrom" resname="tx_nspersonio_domain_model_jobs.application.availableFrom">
+        <source>Available from</source>
+        <target state="needs-translation">Available from</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.expectedSalary" resname="tx_nspersonio_domain_model_jobs.application.expectedSalary">
+        <source>Expected salary</source>
+        <target state="needs-translation">Expected salary</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.workingRights" resname="tx_nspersonio_domain_model_jobs.application.workingRights">
+        <source>Working rights</source>
+        <target state="needs-translation">Working rights</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.whereDidYouHere" resname="tx_nspersonio_domain_model_jobs.application.whereDidYouHere">
+        <source>Where did you hear about us?</source>
+        <target state="needs-translation">Where did you hear about us?</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.pleaseSelect" resname="tx_nspersonio_domain_model_jobs.application.pleaseSelect">
+        <source>Please select …</source>
+        <target state="needs-translation">Please select …</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.linkedin" resname="tx_nspersonio_domain_model_jobs.application.linkedin">
+        <source>LinkedIn</source>
+        <target state="needs-translation">LinkedIn</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.website" resname="tx_nspersonio_domain_model_jobs.application.website">
+        <source>Website</source>
+        <target state="needs-translation">Website</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.gender" resname="tx_nspersonio_domain_model_jobs.application.male">
+        <source>Gender</source>
+        <target state="needs-translation">Gender</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.male" resname="tx_nspersonio_domain_model_jobs.application.male">
+        <source>Male</source>
+        <target state="needs-translation">Male</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.female" resname="tx_nspersonio_domain_model_jobs.application.female">
+        <source>Female</source>
+        <target state="needs-translation">Female</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.diverse" resname="tx_nspersonio_domain_model_jobs.application.diverse">
+        <source>Diverse</source>
+        <target state="needs-translation">Diverse</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.undefined" resname="tx_nspersonio_domain_model_jobs.application.undefined">
+        <source>Undefined</source>
+        <target state="needs-translation">Undefined</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.documents" resname="tx_nspersonio_domain_model_jobs.application.documents">
+        <source>Documents</source>
+        <target state="needs-translation">Documents</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.uploadCV" resname="tx_nspersonio_domain_model_jobs.application.uploadCV">
+        <source>Please upload your CV, recent certificates and a short cover letter (max. 20 MB in total).</source>
+        <target state="needs-translation">Please upload your CV, recent certificates and a short cover letter (max. 20 MB in total).</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.CV" resname="tx_nspersonio_domain_model_jobs.application.CV">
+        <source>CV</source>
+        <target state="needs-translation">CV</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.other" resname="tx_nspersonio_domain_model_jobs.application.other">
+        <source>Other</source>
+        <target state="needs-translation">Other</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.selectMultiple" resname="tx_nspersonio_domain_model_jobs.application.selectMultiple">
+        <source>Click to select multiple files or use drag-and-drop</source>
+        <target state="needs-translation">Click to select multiple files or use drag-and-drop</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.confirmation" resname="tx_nspersonio_domain_model_jobs.application.confirmation">
+        <source>I hereby confirm that I have read and understood the</source>
+        <target state="needs-translation">I hereby confirm that I have read and understood the</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.dataPrivacy" resname="tx_nspersonio_domain_model_jobs.application.dataPrivacy">
+        <source>Data privacy statement</source>
+        <target state="needs-translation">Data privacy statement</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.uploading" resname="tx_nspersonio_domain_model_jobs.application.uploading">
+        <source>Uploading document. Please wait.</source>
+        <target state="needs-translation">Uploading document. Please wait.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.sendApplication" resname="tx_nspersonio_domain_model_jobs.application.sendApplication">
+        <source>Send application</source>
+        <target state="needs-translation">Send application</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.list.noJobs" resname="tx_nspersonio_domain_model_jobs.list.noJobs">
+        <source>No Jobs Found!</source>
+        <target state="needs-translation">No Jobs Found!</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.required" resname="tx_nspersonio_domain_model_jobs.application.required">
+        <source>This field is required.</source>
+        <target state="needs-translation">This field is required.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.requiredphone" resname="tx_nspersonio_domain_model_jobs.application.required">
+        <source>Please enter a valid phone number.</source>
+        <target state="needs-translation">Please enter a valid phone number.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.requiredemail" resname="tx_nspersonio_domain_model_jobs.application.required">
+        <source>Please enter a valid email address.</source>
+        <target state="needs-translation">Please enter a valid email address.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.uploadingfile" resname="tx_nspersonio_domain_model_jobs.application.uploadingfile">
+        <source>Please upload at least one file in CV field</source>
+        <target state="needs-translation">Please upload at least one file in CV field</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.title" resname="nspersonio_pi1.list.title">
+        <source>Job Listing</source>
+        <target state="needs-translation">Job Listing</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.listHeader" resname="nspersonio_pi1.list.listHeader">
+        <source>Heading</source>
+        <target state="needs-translation">Heading</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.detailPid" resname="nspersonio_pi1.list.detailPid">
+        <source>Detail Page</source>
+        <target state="needs-translation">Detail Page</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.filterSubmit" resname="nspersonio_pi1.list.filterSubmit">
+        <source>Search</source>
+        <target state="needs-translation">Search</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.filterReset" resname="nspersonio_pi1.list.filterReset">
+        <source>Reset</source>
+        <target state="needs-translation">Reset</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.search" resname="nspersonio_pi1.list.search">
+        <source>Search</source>
+        <target state="needs-translation">Search</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.allCategory" resname="nspersonio_pi1.list.allCategory">
+        <source>All</source>
+        <target state="needs-translation">All</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.applicationPid" resname="nspersonio_pi1.list.applicationPid">
+        <source>Application Page</source>
+        <target state="needs-translation">Application Page</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.storagePage" resname="nspersonio_pi1.list.storagePage">
+        <source>Storage</source>
+        <target state="needs-translation">Storage</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.title" resname="nspersonio_pi2.details.title">
+        <source>Job Details</source>
+        <target state="needs-translation">Job Details</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.listHeader" resname="nspersonio_pi2.details.listHeader">
+        <source>Heading</source>
+        <target state="needs-translation">Heading</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.applicationPid" resname="nspersonio_pi2.details.applicationPid">
+        <source>Application Page</source>
+        <target state="needs-translation">Application Page</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.contentElementUid" resname="nspersonio_pi2.details.contentElementUid">
+        <source>Content Elements</source>
+        <target state="needs-translation">Content Elements</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.title" resname="nspersonio_pi3.application.title">
+        <source>Job Application</source>
+        <target state="needs-translation">Job Application</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.listPid" resname="nspersonio_pi3.application.listPid">
+        <source>List Page</source>
+        <target state="needs-translation">List Page</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.companyId" resname="nspersonio_pi3.application.companyId">
+        <source>Company Id</source>
+        <target state="needs-translation">Company Id</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.accessToken" resname="nspersonio_pi3.application.accessToken">
+        <source>Access Token</source>
+        <target state="needs-translation">Access Token</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.successPID" resname="nspersonio_pi3.application.successPID">
+        <source>Success Page</source>
+        <target state="needs-translation">Success Page</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.failurPID" resname="nspersonio_pi3.application.failurPID">
+        <source>Failure Page</source>
+        <target state="needs-translation">Failure Page</target>
+      </trans-unit>
+      <trans-unit id="nspersonio.no_department" resname="nspersonio.no_department">
+        <source>No Department</source>
+        <target state="needs-translation">No Department</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

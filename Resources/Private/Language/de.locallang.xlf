@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:ns_personio/Resources/Private/Language/locallang.xlf" date="2023-09-05T07:07:25Z" product-name="ns_personio" target-language="de">
+    <header/>
+    <body>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.seeAllPosition" resname="tx_nspersonio_domain_model_jobs.seeAllPosition" approved="yes">
+        <source>See all position</source>
+        <target state="final">Alle Positionen anzeigen</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.seeAll" resname="tx_nspersonio_domain_model_jobs.seeAll" approved="yes">
+        <source>See All</source>
+        <target state="final">Alle anzeigen</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_department.name.description" resname="tx_nspersonio_domain_model_department.name.description">
+        <source>Name</source>
+        <target state="translated">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.details.permanentEmployee" resname="tx_nspersonio_domain_model_jobs.details.permanentEmployee" approved="yes">
+        <source>Permanent Employee</source>
+        <target state="final">Festangestellter</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.details.partTime" resname="tx_nspersonio_domain_model_jobs.details.partTime" approved="yes">
+        <source>Part Time</source>
+        <target state="final">Teilzeit</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.details.applyBtn" resname="tx_nspersonio_domain_model_jobs.details.applyBtn" approved="yes">
+        <source>Apply Now</source>
+        <target state="final">Jetzt bewerben</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.name" resname="tx_nspersonio_domain_model_jobs.application.name">
+        <source>Name</source>
+        <target state="translated">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.first" resname="tx_nspersonio_domain_model_jobs.application.first" approved="yes">
+        <source>First Name</source>
+        <target state="final">Vorname</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.last" resname="tx_nspersonio_domain_model_jobs.application.last" approved="yes">
+        <source>Last Name</source>
+        <target state="final">Nachname</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.email" resname="tx_nspersonio_domain_model_jobs.application.email" approved="yes">
+        <source>Email</source>
+        <target state="final">E-Mail</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.emailex" resname="tx_nspersonio_domain_model_jobs.application.emailex" approved="yes">
+        <source>yourmail@domain.com</source>
+        <target state="final">deineemail@domain.com</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.phone" resname="tx_nspersonio_domain_model_jobs.application.phone" approved="yes">
+        <source>Phone</source>
+        <target state="final">Telefon</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.phoneex" resname="tx_nspersonio_domain_model_jobs.application.phoneex">
+        <source>+49 (000-000-00-00)</source>
+        <target state="translated">+49 (000-000-00-00)</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.availableFrom" resname="tx_nspersonio_domain_model_jobs.application.availableFrom" approved="yes">
+        <source>Available from</source>
+        <target state="final">Verfügbar ab</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.expectedSalary" resname="tx_nspersonio_domain_model_jobs.application.expectedSalary" approved="yes">
+        <source>Expected salary</source>
+        <target state="final">Erwartetes Gehalt</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.workingRights" resname="tx_nspersonio_domain_model_jobs.application.workingRights" approved="yes">
+        <source>Working rights</source>
+        <target state="final">Arbeitserlaubnis</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.whereDidYouHere" resname="tx_nspersonio_domain_model_jobs.application.whereDidYouHere" approved="yes">
+        <source>Where did you hear about us?</source>
+        <target state="final">Wo haben Sie von uns erfahren?</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.pleaseSelect" resname="tx_nspersonio_domain_model_jobs.application.pleaseSelect" approved="yes">
+        <source>Please select …</source>
+        <target state="final">Bitte auswählen …</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.linkedin" resname="tx_nspersonio_domain_model_jobs.application.linkedin">
+        <source>LinkedIn</source>
+        <target state="translated">LinkedIn</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.website" resname="tx_nspersonio_domain_model_jobs.application.website" approved="yes">
+        <source>Website</source>
+        <target state="final">Webseite</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.gender" resname="tx_nspersonio_domain_model_jobs.application.male" approved="yes">
+        <source>Gender</source>
+        <target state="final">Geschlecht</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.male" resname="tx_nspersonio_domain_model_jobs.application.male" approved="yes">
+        <source>Male</source>
+        <target state="final">Männlich</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.female" resname="tx_nspersonio_domain_model_jobs.application.female" approved="yes">
+        <source>Female</source>
+        <target state="final">Weiblich</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.diverse" resname="tx_nspersonio_domain_model_jobs.application.diverse" approved="yes">
+        <source>Diverse</source>
+        <target state="final">Divers</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.undefined" resname="tx_nspersonio_domain_model_jobs.application.undefined" approved="yes">
+        <source>Undefined</source>
+        <target state="final">Undefiniert</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.documents" resname="tx_nspersonio_domain_model_jobs.application.documents" approved="yes">
+        <source>Documents</source>
+        <target state="final">Dokumente</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.uploadCV" resname="tx_nspersonio_domain_model_jobs.application.uploadCV" approved="yes">
+        <source>Please upload your CV, recent certificates and a short cover letter (max. 20 MB in total).</source>
+        <target state="final">Bitte laden Sie Ihren Lebenslauf, aktuelle Zeugnisse und ein kurzes Anschreiben hoch (max. 20 MB insgesamt).</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.CV" resname="tx_nspersonio_domain_model_jobs.application.CV" approved="yes">
+        <source>CV</source>
+        <target state="final">Lebenslauf</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.other" resname="tx_nspersonio_domain_model_jobs.application.other" approved="yes">
+        <source>Other</source>
+        <target state="final">Sonstiges</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.selectMultiple" resname="tx_nspersonio_domain_model_jobs.application.selectMultiple" approved="yes">
+        <source>Click to select multiple files or use drag-and-drop</source>
+        <target state="final">Klicken Sie hier, um mehrere Dateien auszuwählen oder ziehen Sie sie per Drag-and-Drop</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.confirmation" resname="tx_nspersonio_domain_model_jobs.application.confirmation" approved="yes">
+        <source>I hereby confirm that I have read and understood the</source>
+        <target state="final">Hiermit bestätige ich, dass ich die</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.dataPrivacy" resname="tx_nspersonio_domain_model_jobs.application.dataPrivacy" approved="yes">
+        <source>Data privacy statement</source>
+        <target state="final">Datenschutzerklärung</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.uploading" resname="tx_nspersonio_domain_model_jobs.application.uploading" approved="yes">
+        <source>Uploading document. Please wait.</source>
+        <target state="final">gelesen und verstanden habe.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.sendApplication" resname="tx_nspersonio_domain_model_jobs.application.sendApplication" approved="yes">
+        <source>Send application</source>
+        <target state="final">Dokument wird hochgeladen. Bitte warten.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.list.noJobs" resname="tx_nspersonio_domain_model_jobs.list.noJobs" approved="yes">
+        <source>No Jobs Found!</source>
+        <target state="final">Bewerbung senden</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.required" resname="tx_nspersonio_domain_model_jobs.application.required" approved="yes">
+        <source>This field is required.</source>
+        <target state="final">Keine Jobs gefunden!</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.requiredphone" resname="tx_nspersonio_domain_model_jobs.application.required" approved="yes">
+        <source>Please enter a valid phone number.</source>
+        <target state="final">Dieses Feld ist erforderlich.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.requiredemail" resname="tx_nspersonio_domain_model_jobs.application.required" approved="yes">
+        <source>Please enter a valid email address.</source>
+        <target state="final">Bitte geben Sie eine gültige Telefonnummer ein.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.uploadingfile" resname="tx_nspersonio_domain_model_jobs.application.uploadingfile" approved="yes">
+        <source>Please upload at least one file in CV field</source>
+        <target state="final">Bitte geben Sie eine gültige E-Mail-Adresse ein.</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.title" resname="nspersonio_pi1.list.title" approved="yes">
+        <source>Job Listing</source>
+        <target state="final">Bitte laden Sie mindestens eine Datei im Lebenslauf-Feld hoch.</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.listHeader" resname="nspersonio_pi1.list.listHeader" approved="yes">
+        <source>Heading</source>
+        <target state="final">Stellenangebot</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.detailPid" resname="nspersonio_pi1.list.detailPid" approved="yes">
+        <source>Detail Page</source>
+        <target state="final">Überschrift</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.filterSubmit" resname="nspersonio_pi1.list.filterSubmit" approved="yes">
+        <source>Search</source>
+        <target state="final">Detailseite</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.filterReset" resname="nspersonio_pi1.list.filterReset" approved="yes">
+        <source>Reset</source>
+        <target state="final">Suche</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.search" resname="nspersonio_pi1.list.search" approved="yes">
+        <source>Search</source>
+        <target state="final">Zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.allCategory" resname="nspersonio_pi1.list.allCategory" approved="yes">
+        <source>All</source>
+        <target state="final">Suche</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.applicationPid" resname="nspersonio_pi1.list.applicationPid" approved="yes">
+        <source>Application Page</source>
+        <target state="final">Alle</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.storagePage" resname="nspersonio_pi1.list.storagePage" approved="yes">
+        <source>Storage</source>
+        <target state="final">Bewerbungsseite</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.title" resname="nspersonio_pi2.details.title" approved="yes">
+        <source>Job Details</source>
+        <target state="final">Speicher</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.listHeader" resname="nspersonio_pi2.details.listHeader" approved="yes">
+        <source>Heading</source>
+        <target state="final">Stellendetails</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.applicationPid" resname="nspersonio_pi2.details.applicationPid" approved="yes">
+        <source>Application Page</source>
+        <target state="final">Überschrift</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.contentElementUid" resname="nspersonio_pi2.details.contentElementUid" approved="yes">
+        <source>Content Elements</source>
+        <target state="final">Bewerbungsseite</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.title" resname="nspersonio_pi3.application.title" approved="yes">
+        <source>Job Application</source>
+        <target state="final">Inhaltslemente</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.listPid" resname="nspersonio_pi3.application.listPid" approved="yes">
+        <source>List Page</source>
+        <target state="final">Bewerbung</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.companyId" resname="nspersonio_pi3.application.companyId" approved="yes">
+        <source>Company Id</source>
+        <target state="final">Listenansicht</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.accessToken" resname="nspersonio_pi3.application.accessToken" approved="yes">
+        <source>Access Token</source>
+        <target state="final">Firmen-ID</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.successPID" resname="nspersonio_pi3.application.successPID" approved="yes">
+        <source>Success Page</source>
+        <target state="final">Zugriffstoken</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.failurPID" resname="nspersonio_pi3.application.failurPID" approved="yes">
+        <source>Failure Page</source>
+        <target state="final">Erfolgseite</target>
+      </trans-unit>
+      <trans-unit id="nspersonio.no_department" resname="nspersonio.no_department" approved="yes">
+        <source>No Department</source>
+        <target state="final">Fehlerseite</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

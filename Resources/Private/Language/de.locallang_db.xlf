@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:ns_personio/Resources/Private/Language/locallang_db.xlf" date="2023-09-05T07:07:25Z" product-name="ns_personio" target-language="de">
+    <header/>
+    <body>
+      <trans-unit id="tx_nspersonio_domain_model_jobs" resname="tx_nspersonio_domain_model_jobs" approved="yes">
+        <source>Jobs</source>
+        <target state="final">Stellenangebote</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.description" resname="tx_nspersonio_domain_model_jobs.description" approved="yes">
+        <source>Jobs</source>
+        <target state="final">Stellenangebote</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.jobid" resname="tx_nspersonio_domain_model_jobs.jobid" approved="yes">
+        <source>Job id</source>
+        <target state="final">Job-ID</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.jobid.description" resname="tx_nspersonio_domain_model_jobs.jobid.description" approved="yes">
+        <source>Job id</source>
+        <target state="final">Job-ID</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.subcompany" resname="tx_nspersonio_domain_model_jobs.subcompany" approved="yes">
+        <source>Sub company</source>
+        <target state="final">Tochtergesellschaft</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.subcompany.description" resname="tx_nspersonio_domain_model_jobs.subcompany.description" approved="yes">
+        <source>Sub company</source>
+        <target state="final">Tochtergesellschaft</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.office" resname="tx_nspersonio_domain_model_jobs.office" approved="yes">
+        <source>Office</source>
+        <target state="final">Büro</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.office.description" resname="tx_nspersonio_domain_model_jobs.office.description" approved="yes">
+        <source>Office</source>
+        <target state="final">Büro</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.recruitingcategory" resname="tx_nspersonio_domain_model_jobs.recruitingcategory" approved="yes">
+        <source>Recruiting category</source>
+        <target state="final">Recruiting-Kategorie</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.recruitingcategory.description" resname="tx_nspersonio_domain_model_jobs.recruitingcategory.description" approved="yes">
+        <source>Recruiting category</source>
+        <target state="final">Recruiting-Kategorie</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.name" resname="tx_nspersonio_domain_model_jobs.name">
+        <source>Name</source>
+        <target state="translated">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.name.description" resname="tx_nspersonio_domain_model_jobs.name.description">
+        <source>Name</source>
+        <target state="translated">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.descriptions" resname="tx_nspersonio_domain_model_jobs.descriptions" approved="yes">
+        <source>Descriptions</source>
+        <target state="final">Beschreibungen</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.descriptions.description" resname="tx_nspersonio_domain_model_jobs.descriptions.description" approved="yes">
+        <source>Descriptions</source>
+        <target state="final">Beschreibungen</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.employmenttype" resname="tx_nspersonio_domain_model_jobs.employmenttype" approved="yes">
+        <source>Employment type</source>
+        <target state="final">Beschäftigungsart</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.employmenttype.description" resname="tx_nspersonio_domain_model_jobs.employmenttype.description" approved="yes">
+        <source>Employment type</source>
+        <target state="final">Beschäftigungsart</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.seniority" resname="tx_nspersonio_domain_model_jobs.seniority" approved="yes">
+        <source>Seniority</source>
+        <target state="final">Seniorität</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.seniority.description" resname="tx_nspersonio_domain_model_jobs.seniority.description" approved="yes">
+        <source>Seniority</source>
+        <target state="final">Seniorität</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.schedule" resname="tx_nspersonio_domain_model_jobs.schedule" approved="yes">
+        <source>Schedule</source>
+        <target state="final">Zeitplan</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.schedule.description" resname="tx_nspersonio_domain_model_jobs.schedule.description" approved="yes">
+        <source>Schedule</source>
+        <target state="final">Zeitplan</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.experience" resname="tx_nspersonio_domain_model_jobs.experience" approved="yes">
+        <source>Experience</source>
+        <target state="final">Erfahrung</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.experience.description" resname="tx_nspersonio_domain_model_jobs.experience.description" approved="yes">
+        <source>Experience</source>
+        <target state="final">Erfahrung</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.occupation" resname="tx_nspersonio_domain_model_jobs.occupation" approved="yes">
+        <source>Occupation</source>
+        <target state="final">Berufung</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.occupation.description" resname="tx_nspersonio_domain_model_jobs.occupation.description" approved="yes">
+        <source>Occupation</source>
+        <target state="final">Berufung</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.occupationcategory" resname="tx_nspersonio_domain_model_jobs.occupationcategory" approved="yes">
+        <source>Occupation category</source>
+        <target state="final">Berufskategorie</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.occupationcategory.description" resname="tx_nspersonio_domain_model_jobs.occupationcategory.description" approved="yes">
+        <source>Occupation category</source>
+        <target state="final">Berufskategorie</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.createdat" resname="tx_nspersonio_domain_model_jobs.createdat" approved="yes">
+        <source>Create date</source>
+        <target state="final">Erstellungsdatum</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.createdat.description" resname="tx_nspersonio_domain_model_jobs.createdat.description" approved="yes">
+        <source>Create date</source>
+        <target state="final">Erstellungsdatum</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.department" resname="tx_nspersonio_domain_model_jobs.department" approved="yes">
+        <source>Department</source>
+        <target state="final">Abteilung</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.department.description" resname="tx_nspersonio_domain_model_jobs.department.description" approved="yes">
+        <source>Department</source>
+        <target state="final">Abteilung</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.language_code" resname="tx_nspersonio_domain_model_jobs.language_code" approved="yes">
+        <source>Language Code</source>
+        <target state="final">Sprachcode</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_department" resname="tx_nspersonio_domain_model_department" approved="yes">
+        <source>Department</source>
+        <target state="final">Abteilung</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_department.description" resname="tx_nspersonio_domain_model_department.description" approved="yes">
+        <source>Department</source>
+        <target state="final">Abteilung</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_department.name" resname="tx_nspersonio_domain_model_department.name">
+        <source>Name</source>
+        <target state="translated">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_department.name.description" resname="tx_nspersonio_domain_model_department.name.description">
+        <source>Name</source>
+        <target state="translated">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_department.language_code" resname="tx_nspersonio_domain_model_department.language_code" approved="yes">
+        <source>Language Code</source>
+        <target state="final">Sprachcode</target>
+      </trans-unit>
+      <trans-unit id="tx_ns_personio_pi1.name" resname="tx_ns_personio_pi1.name" approved="yes">
+        <source>Personio Jobs List</source>
+        <target state="final">Personio Stellenangebote Liste</target>
+      </trans-unit>
+      <trans-unit id="tx_ns_personio_pi2.name" resname="tx_ns_personio_pi2.name" approved="yes">
+        <source>Personio Jobs Details</source>
+        <target state="final">Personio Stellenangebote Details</target>
+      </trans-unit>
+      <trans-unit id="tx_ns_personio_pi3.name" resname="tx_ns_personio_pi3.name" approved="yes">
+        <source>Personio Jobs Application</source>
+        <target state="final">Personio Stellenangebote Bewerbung</target>
+      </trans-unit>
+      <trans-unit id="tx_ns_personio_pi1.description" resname="tx_ns_personio_pi1.description" approved="yes">
+        <source>This plugin is use for job listing</source>
+        <target state="final">Dieses Plugin wird zur Stellenanzeigenliste verwendet</target>
+      </trans-unit>
+      <trans-unit id="tx_ns_personio_pi2.description" resname="tx_ns_personio_pi2.description" approved="yes">
+        <source>This plugin is use for display details of particular job</source>
+        <target state="final">Dieses Plugin wird zur Anzeige von Details einer bestimmten Stelle verwendet</target>
+      </trans-unit>
+      <trans-unit id="tx_ns_personio_pi3.description" resname="tx_ns_personio_pi3.description" approved="yes">
+        <source>This plugin is use for submit the job application form</source>
+        <target state="final">Dieses Plugin wird zur Einreichung des Stellenbewerbungsformulars verwendet</target>
+      </trans-unit>
+      <trans-unit id="tx_ns_personio_pi1.pi_flexform.settings" resname="tx_ns_personio_pi1.pi_flexform.settings" approved="yes">
+        <source>Settings</source>
+        <target state="final">Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="ns_personio.apiSettings.applicationApi" resname="ns_personio.apiSettings.applicationApi" approved="yes">
+        <source>Application Submit API</source>
+        <target state="final">Bewerbung einreichen API</target>
+      </trans-unit>
+      <trans-unit id="ns_personio.apiSettings.documentApi" resname="ns_personio.apiSettings.documentApi" approved="yes">
+        <source>Document Submit API</source>
+        <target state="final">Dokument einreichen API</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

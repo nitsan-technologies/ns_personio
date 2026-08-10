@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:ns_personio/Resources/Private/Language/locallang.xlf" date="2023-09-05T07:07:25Z" product-name="ns_personio" target-language="hu">
+    <header/>
+    <body>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.seeAllPosition" resname="tx_nspersonio_domain_model_jobs.seeAllPosition">
+        <source>See all position</source>
+        <target state="translated">Összes pozíció megtekintése</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.seeAll" resname="tx_nspersonio_domain_model_jobs.seeAll">
+        <source>See All</source>
+        <target state="translated">Összes megtekintése</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_department.name.description" resname="tx_nspersonio_domain_model_department.name.description">
+        <source>Name</source>
+        <target state="translated">Név</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.details.permanentEmployee" resname="tx_nspersonio_domain_model_jobs.details.permanentEmployee">
+        <source>Permanent Employee</source>
+        <target state="translated">Teljes munkaidő</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.details.partTime" resname="tx_nspersonio_domain_model_jobs.details.partTime">
+        <source>Part Time</source>
+        <target state="translated">Részmunkaidő</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.details.applyBtn" resname="tx_nspersonio_domain_model_jobs.details.applyBtn">
+        <source>Apply Now</source>
+        <target state="translated">Jelentkezés most</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.name" resname="tx_nspersonio_domain_model_jobs.application.name">
+        <source>Name</source>
+        <target state="translated">Név</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.first" resname="tx_nspersonio_domain_model_jobs.application.first">
+        <source>First Name</source>
+        <target state="translated">Keresztnév</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.last" resname="tx_nspersonio_domain_model_jobs.application.last">
+        <source>Last Name</source>
+        <target state="translated">Vezetéknév</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.email" resname="tx_nspersonio_domain_model_jobs.application.email">
+        <source>Email</source>
+        <target state="translated">E-mail</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.emailex" resname="tx_nspersonio_domain_model_jobs.application.emailex">
+        <source>yourmail@domain.com</source>
+        <target state="translated">yourmail@domain.com</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.phone" resname="tx_nspersonio_domain_model_jobs.application.phone">
+        <source>Phone</source>
+        <target state="translated">Telefon</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.phoneex" resname="tx_nspersonio_domain_model_jobs.application.phoneex">
+        <source>+49 (000-000-00-00)</source>
+        <target state="translated">+49 (000-000-00-00)</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.availableFrom" resname="tx_nspersonio_domain_model_jobs.application.availableFrom">
+        <source>Available from</source>
+        <target state="translated">Rendelkezésre állás kezdete</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.expectedSalary" resname="tx_nspersonio_domain_model_jobs.application.expectedSalary">
+        <source>Expected salary</source>
+        <target state="translated">Elvárt fizetés</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.workingRights" resname="tx_nspersonio_domain_model_jobs.application.workingRights">
+        <source>Working rights</source>
+        <target state="translated">Munkavállalási jogosultság</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.whereDidYouHere" resname="tx_nspersonio_domain_model_jobs.application.whereDidYouHere">
+        <source>Where did you hear about us?</source>
+        <target state="translated">Honnan hallott rólunk?</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.pleaseSelect" resname="tx_nspersonio_domain_model_jobs.application.pleaseSelect">
+        <source>Please select …</source>
+        <target state="translated">Kérjük, válasszon …</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.linkedin" resname="tx_nspersonio_domain_model_jobs.application.linkedin">
+        <source>LinkedIn</source>
+        <target state="translated">LinkedIn</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.website" resname="tx_nspersonio_domain_model_jobs.application.website">
+        <source>Website</source>
+        <target state="translated">Weboldal</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.gender" resname="tx_nspersonio_domain_model_jobs.application.male">
+        <source>Gender</source>
+        <target state="translated">Nem</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.male" resname="tx_nspersonio_domain_model_jobs.application.male">
+        <source>Male</source>
+        <target state="translated">Férfi</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.female" resname="tx_nspersonio_domain_model_jobs.application.female">
+        <source>Female</source>
+        <target state="translated">Nő</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.diverse" resname="tx_nspersonio_domain_model_jobs.application.diverse">
+        <source>Diverse</source>
+        <target state="translated">Diverz</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.undefined" resname="tx_nspersonio_domain_model_jobs.application.undefined">
+        <source>Undefined</source>
+        <target state="translated">Meghatározatlan</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.documents" resname="tx_nspersonio_domain_model_jobs.application.documents">
+        <source>Documents</source>
+        <target state="translated">Dokumentumok</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.uploadCV" resname="tx_nspersonio_domain_model_jobs.application.uploadCV">
+        <source>Please upload your CV, recent certificates and a short cover letter (max. 20 MB in total).</source>
+        <target state="translated">Kérjük, töltse fel önéletrajzát, friss bizonyítványait és egy rövid motivációs levelet (összesen max. 20 MB).</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.CV" resname="tx_nspersonio_domain_model_jobs.application.CV">
+        <source>CV</source>
+        <target state="translated">Önéletrajz</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.other" resname="tx_nspersonio_domain_model_jobs.application.other">
+        <source>Other</source>
+        <target state="translated">Egyéb</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.selectMultiple" resname="tx_nspersonio_domain_model_jobs.application.selectMultiple">
+        <source>Click to select multiple files or use drag-and-drop</source>
+        <target state="translated">Kattintson a több fájl kiválasztásához, vagy használja a fogd és vidd funkciót</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.confirmation" resname="tx_nspersonio_domain_model_jobs.application.confirmation">
+        <source>I hereby confirm that I have read and understood the</source>
+        <target state="translated">Ezúton igazolom, hogy elolvastam és megértettem a</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.dataPrivacy" resname="tx_nspersonio_domain_model_jobs.application.dataPrivacy">
+        <source>Data privacy statement</source>
+        <target state="translated">Adatvédelmi nyilatkozat</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.uploading" resname="tx_nspersonio_domain_model_jobs.application.uploading">
+        <source>Uploading document. Please wait.</source>
+        <target state="translated">Dokumentum feltöltése folyamatban. Kérjük, várjon.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.sendApplication" resname="tx_nspersonio_domain_model_jobs.application.sendApplication">
+        <source>Send application</source>
+        <target state="translated">Jelentkezés elküldése</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.list.noJobs" resname="tx_nspersonio_domain_model_jobs.list.noJobs">
+        <source>No Jobs Found!</source>
+        <target state="translated">Nem található állás!</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.required" resname="tx_nspersonio_domain_model_jobs.application.required">
+        <source>This field is required.</source>
+        <target state="translated">Ez a mező kötelező.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.requiredphone" resname="tx_nspersonio_domain_model_jobs.application.required">
+        <source>Please enter a valid phone number.</source>
+        <target state="translated">Kérjük, adjon meg érvényes telefonszámot.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.requiredemail" resname="tx_nspersonio_domain_model_jobs.application.required">
+        <source>Please enter a valid email address.</source>
+        <target state="translated">Kérjük, adjon meg érvényes e-mail címet.</target>
+      </trans-unit>
+      <trans-unit id="tx_nspersonio_domain_model_jobs.application.uploadingfile" resname="tx_nspersonio_domain_model_jobs.application.uploadingfile">
+        <source>Please upload at least one file in CV field</source>
+        <target state="translated">Kérjük, töltsön fel legalább egy fájlt az önéletrajz mezőben</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.title" resname="nspersonio_pi1.list.title">
+        <source>Job Listing</source>
+        <target state="translated">Álláslista</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.listHeader" resname="nspersonio_pi1.list.listHeader">
+        <source>Heading</source>
+        <target state="translated">Címsor</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.detailPid" resname="nspersonio_pi1.list.detailPid">
+        <source>Detail Page</source>
+        <target state="translated">Részletoldal</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.filterSubmit" resname="nspersonio_pi1.list.filterSubmit">
+        <source>Search</source>
+        <target state="translated">Keresés</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.filterReset" resname="nspersonio_pi1.list.filterReset">
+        <source>Reset</source>
+        <target state="translated">Visszaállítás</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.search" resname="nspersonio_pi1.list.search">
+        <source>Search</source>
+        <target state="translated">Keresés</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.allCategory" resname="nspersonio_pi1.list.allCategory">
+        <source>All</source>
+        <target state="translated">Összes</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.applicationPid" resname="nspersonio_pi1.list.applicationPid">
+        <source>Application Page</source>
+        <target state="translated">Jelentkezési oldal</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi1.list.storagePage" resname="nspersonio_pi1.list.storagePage">
+        <source>Storage</source>
+        <target state="translated">Tároló</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.title" resname="nspersonio_pi2.details.title">
+        <source>Job Details</source>
+        <target state="translated">Állás részletei</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.listHeader" resname="nspersonio_pi2.details.listHeader">
+        <source>Heading</source>
+        <target state="translated">Címsor</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.applicationPid" resname="nspersonio_pi2.details.applicationPid">
+        <source>Application Page</source>
+        <target state="translated">Jelentkezési oldal</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi2.details.contentElementUid" resname="nspersonio_pi2.details.contentElementUid">
+        <source>Content Elements</source>
+        <target state="translated">Tartalomelemek</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.title" resname="nspersonio_pi3.application.title">
+        <source>Job Application</source>
+        <target state="translated">Állásjelentkezés</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.listPid" resname="nspersonio_pi3.application.listPid">
+        <source>List Page</source>
+        <target state="translated">Listaoldal</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.companyId" resname="nspersonio_pi3.application.companyId">
+        <source>Company Id</source>
+        <target state="translated">Cégazonosító</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.accessToken" resname="nspersonio_pi3.application.accessToken">
+        <source>Access Token</source>
+        <target state="translated">Hozzáférési token</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.successPID" resname="nspersonio_pi3.application.successPID">
+        <source>Success Page</source>
+        <target state="translated">Sikeres oldal</target>
+      </trans-unit>
+      <trans-unit id="nspersonio_pi3.application.failurPID" resname="nspersonio_pi3.application.failurPID">
+        <source>Failure Page</source>
+        <target state="translated">Sikertelen oldal</target>
+      </trans-unit>
+      <trans-unit id="nspersonio.no_department" resname="nspersonio.no_department">
+        <source>No Department</source>
+        <target state="translated">Nincs osztály</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
