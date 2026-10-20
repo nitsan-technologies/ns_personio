@@ -6,6 +6,19 @@ window.onload = () => {
   if (document.getElementById('fileProcessLink')) {
     const url = document.getElementById('fileProcessLink').value;
     Dropzone.autoDiscover = false;
+    const normalizeUploadResponse = (response) => {
+      if (typeof response === 'string') {
+        try {
+          return JSON.parse(response);
+        } catch (error) {
+          return { success: false };
+        }
+      }
+      return response || { success: false };
+    };
+    const uploadPayloadText = (payload) => (
+      typeof payload === 'string' ? payload : JSON.stringify(payload)
+    );
     let totalSizeCV = 0;
     let totalSizeOther = 0;
     const respondArr = [];
@@ -74,9 +87,9 @@ window.onload = () => {
         });
       },
       success(file, response) {
-        const jsonResponse = JSON.parse(response);
-        if (file.status !== 'error' && jsonResponse.success !== 'false') {
-          respondArr.push(JSON.parse(response));
+        const jsonResponse = normalizeUploadResponse(response);
+        if (file.status !== 'error' && jsonResponse.success !== false && jsonResponse.success !== 'false') {
+          respondArr.push(uploadPayloadText(jsonResponse));
           document.getElementById('dropzone-error').style.display = 'none';
           flag = true;
         }
@@ -186,10 +199,10 @@ window.onload = () => {
         });
       },
       success: function (file, response) {
-        if (file.status != 'error') {
-          respondArrOther.push(JSON.parse(response));
+        const jsonResponse = normalizeUploadResponse(response);
+        if (file.status != 'error' && jsonResponse.success !== false) {
+          respondArrOther.push(uploadPayloadText(jsonResponse));
         }
-        // document.getElementById('other-upload').setAttribute('value', JSON.parse(response))
       },
     });
 

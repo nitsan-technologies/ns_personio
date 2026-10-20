@@ -10,6 +10,9 @@ use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotCon
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Core\Context\Context;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UploadedFileInterface;
+use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -330,22 +333,29 @@ class JobsController extends ActionController
                 return $this->redirectToURI($uri);
             } catch (\GuzzleHttp\Exception\RequestException $e) {
                 $response = $e->getResponse();
-                $responseBody = $response->getBody()->getContents();
-                $decodedResponse = json_decode($responseBody, true);
-                $responseMessage = ApiResponseUtility::getApiResponse($decodedResponse);
-                if ($responseMessage != '') {
-                    return $this->redirect(
-                        'application',
-                        null,
-                        null,
-                        ['job' => $this->request->getArguments()['jobUid'], 'message' => $responseMessage]
-                    );
-                } else {
+                if ($response === null) {
                     $uri = $uriBuilder
                         ->setTargetPageUid($failurePid)
                         ->build();
                     return $this->redirectToURI($uri);
                 }
+                $responseBody = $response->getBody()->getContents();
+                $decodedResponse = json_decode($responseBody, true);
+                $responseMessage = is_array($decodedResponse)
+                    ? ApiResponseUtility::getApiResponse($decodedResponse)
+                    : $this->plainPersonioErrorMessage($responseBody);
+                if ($responseMessage != '') {
+                    return $this->redirect(
+                        'application',
+                        null,
+                        null,
+                        ['job' => $this->request->getArguments()['jobUid'] ?? null, 'message' => $responseMessage]
+                    );
+                }
+                $uri = $uriBuilder
+                    ->setTargetPageUid($failurePid)
+                    ->build();
+                return $this->redirectToURI($uri);
             }
         } else {
             $uri = $uriBuilder
@@ -359,44 +369,112 @@ class JobsController extends ActionController
     /**
      * fileProcessAction
      *
-     * @return void
      * @throws GuzzleException
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
+     * @throws PropagateResponseException
      */
-    public function fileProcessAction(): void
+    public function fileProcessAction(): never
     {
         $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
-        $api = $globalConfiguration['documentApi'];
+        $api = $globalConfiguration['documentApi'] ?? '';
+        $uploadedFile = $this->getFirstUploadedFile('file');
+
+        if ($uploadedFile === null || $uploadedFile->getError() !== UPLOAD_ERR_OK) {
+            $this->emitJsonResponse([
+                'success' => false,
+                'message' => 'No file uploaded',
+            ]);
+        }
+
+        $uploadedName = $uploadedFile->getClientFilename() ?? '';
+        $contents = $uploadedFile->getStream()->getContents();
+        if ($uploadedName === '' || $contents === '') {
+            $this->emitJsonResponse([
+                'success' => false,
+                'message' => 'Unable to read uploaded file',
+            ]);
+        }
 
         $options = [
             'headers' => [
-                'X-Company-ID' => $this->settings['companyId'],
+                'X-Company-ID' => $this->settings['companyId'] ?? '',
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer ' . $this->settings['accessToken']
+                'Authorization' => 'Bearer ' . ($this->settings['accessToken'] ?? ''),
             ],
             'multipart' => [
                 [
-                    'name'     => 'file',
-                    'filename' => $_FILES['file']['name'][0],
-                    'contents' => fopen($_FILES['file']['tmp_name'][0], 'r'),
+                    'name' => 'file',
+                    'filename' => $uploadedName,
+                    'contents' => $contents,
                     'headers' => [
-                        'Content-Type' => $_FILES['file']['type'][0]
-                    ]
-                ]
-            ]
+                        'Content-Type' => $uploadedFile->getClientMediaType() ?? 'application/octet-stream',
+                    ],
+                ],
+            ],
         ];
         try {
-            $response = $this->getClient()->post($api, $options);
-            $responseBody = $response->getBody()->getContents();
-            echo json_encode($responseBody);
-            die;
+            $responseBody = $this->getClient()->post($api, $options)->getBody()->getContents();
+            $decodedBody = json_decode($responseBody, true);
+            if (!is_array($decodedBody)) {
+                $this->emitJsonResponse([
+                    'success' => false,
+                    'message' => 'Invalid document API response',
+                ]);
+            }
+            $this->emitJsonResponse($decodedBody);
         } catch (\GuzzleHttp\Exception\RequestException $e) {
-            $return = [
+            $message = $e->getMessage();
+            $errorResponse = $e->getResponse();
+            if ($errorResponse !== null) {
+                $plain = $this->plainPersonioErrorMessage($errorResponse->getBody()->getContents());
+                if ($plain !== '') {
+                    $message = $plain;
+                }
+            }
+            $this->emitJsonResponse([
                 'success' => false,
-                'message' => $e
-            ];
-            echo json_encode($return);
-            die;
+                'message' => $message,
+            ]);
         }
+    }
+
+    private function getFirstUploadedFile(string $key): ?UploadedFileInterface
+    {
+        $serverRequest = $GLOBALS['TYPO3_REQUEST'] ?? null;
+        $uploadedFiles = $serverRequest instanceof ServerRequestInterface
+            ? $serverRequest->getUploadedFiles()
+            : [];
+        if ($uploadedFiles === []) {
+            $uploadedFiles = $this->request->getUploadedFiles();
+        }
+        $uploaded = $uploadedFiles[$key] ?? ($uploadedFiles === [] ? null : reset($uploadedFiles));
+        while (is_array($uploaded)) {
+            $uploaded = reset($uploaded);
+        }
+        return $uploaded instanceof UploadedFileInterface ? $uploaded : null;
+    }
+
+    private function plainPersonioErrorMessage(string $responseBody): string
+    {
+        $plain = trim($responseBody);
+        if ($plain === '' || str_starts_with($plain, '<')) {
+            return '';
+        }
+        return $plain;
+    }
+
+    /**
+     * Stop page rendering and send JSON. echo/die from a plugin hangs TYPO3 shutdown.
+     *
+     * @throws PropagateResponseException
+     */
+    private function emitJsonResponse(array $payload): never
+    {
+        throw new PropagateResponseException(
+            $this->jsonResponse((string)json_encode($payload)),
+            1760943512
+        );
     }
 
     /**

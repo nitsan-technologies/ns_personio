@@ -41,9 +41,9 @@
                                     <label for="gender" class="form-label">
                                         <f:translate key="tx_nspersonio_domain_model_jobs.application.gender"/><span>*</span>
                                     </label>
-                                    <div id="gender" data-target-input="nearest">
+                                    <div data-target-input="nearest">
                                         <div class="select-wrapper">
-                                            <select class="form-control select-input" required="" data-target="#gender"
+                                            <select class="form-control select-input" required="" id="gender" data-target="#gender"
                                                     name="gender">
                                                 <option selected="selected" value=""><f:translate key="tx_nspersonio_domain_model_jobs.application.pleaseSelect" /></option>
                                                 <option value="male"><f:translate key="tx_nspersonio_domain_model_jobs.application.male" /></option>
@@ -60,14 +60,14 @@
                                     <label for="first_name" class="form-label">
                                         <f:translate key="tx_nspersonio_domain_model_jobs.application.name"/> <span>*</span>
                                     </label>
-                                    <input class="form-control" required placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.first')}" name="first_name" type="text" value="" required>
+                                    <input class="form-control" required id="first_name" placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.first')}" name="first_name" type="text" value="" required>
                                     <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required"/></div>
                                 </div>
                                 <div class="form-group ns-personio-col ns-personio-col-4">
                                     <label for="last_name" class="form-label">
                                         <f:translate key="tx_nspersonio_domain_model_jobs.application.last"/> <span>*</span>
                                     </label>
-                                    <input class="form-control" placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.last')}" name="last_name" type="text" value="" required>
+                                    <input class="form-control" id="last_name" placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.last')}" name="last_name" type="text" value="" required>
                                     <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required"/></div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                     <label for="form-email" class="form-label">
                                         <f:translate key="tx_nspersonio_domain_model_jobs.application.email"/> <span>*</span>
                                     </label>
-                                    <input class="form-control" required placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.emailex')}" name="email" type="email" value="" required>
+                                    <input class="form-control" required id="form-email" placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.emailex')}" name="email" type="email" value="" required>
                                     <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required"/></div>
                                     <f:comment>
                                         <div class="custome-email"> <f:translate key="tx_nspersonio_domain_model_jobs.application.requiredemail"/></div>
@@ -88,7 +88,7 @@
                                     <label for="phone" class="form-label">
                                         <f:translate key="tx_nspersonio_domain_model_jobs.application.phone"/><span>*</span>
                                     </label>
-                                    <input class="form-control" required placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.phoneex')}" name="phone" type="tel" value="">
+                                    <input class="form-control" required id="phone" placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.phoneex')}" name="phone" type="tel" value="">
                                     <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required"/></div>
                                     <f:comment>
                                         <div class="custome-phone"> <f:translate key="tx_nspersonio_domain_model_jobs.application.requiredphone"/></div>
@@ -100,14 +100,14 @@
                                     <label for="available_from" class="form-label">
                                         <f:translate key="tx_nspersonio_domain_model_jobs.application.availableFrom"/><span>*</span>
                                     </label>
-                                    <input class="form-control" required name="available_from" type="date" value="" >
+                                    <input class="form-control" required id="available_from" name="available_from" type="date" value="" >
                                     <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required"/></div>
                                 </div>
                                 <div class="form-group ns-personio-col-6 ns-personio-col">
                                     <label for="salary_expectations" class="form-label">
                                         <f:translate key="tx_nspersonio_domain_model_jobs.application.expectedSalary"/>
                                     </label>
-                                    <input name="salary_expectations" placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.expectedSalary')}" type="number" value="" class="form-control">
+                                    <input id="salary_expectations" name="salary_expectations" placeholder="{f:translate(key: 'tx_nspersonio_domain_model_jobs.application.expectedSalary')}" type="number" value="" class="form-control">
                                     <div class="error-msg"><f:translate key="tx_nspersonio_domain_model_jobs.application.required" /></div>
                                 </div>
                             </div>
@@ -140,9 +140,9 @@
                             </f:comment>
                             <div class="ns-personio-row">
                                 <div class="form-group ns-personio-col">
-                                    <label class="form-label">
+                                    <p class="form-label">
                                         <f:translate key="tx_nspersonio_domain_model_jobs.application.documents"  />
-                                    </label>
+                                    </p>
                                     <h6><f:translate key="tx_nspersonio_domain_model_jobs.application.uploadCV"  /></h6>
                                     <div id="document-categories" class="dropzone">
                                         <div class="category">

@@ -1,17 +1,20 @@
 <?php
 
-namespace NITSAN\NsPersonio\Utility;
+declare(strict_types=1);
 
+namespace NITSAN\NsPersonio\Utility;
 
 class ApiResponseUtility
 {
-
     /**
-     * @param array $apiResponse
-     * @return string
+     * Maps a Personio error payload to a frontend message.
+     * Non-array bodies (HTML, plain text, invalid JSON) must not TypeError.
      */
-    public static function getApiResponse(array $apiResponse): string
+    public static function getApiResponse(mixed $apiResponse): string
     {
+        if (!is_array($apiResponse)) {
+            return '';
+        }
         if (isset($apiResponse['errors']) && is_array($apiResponse['errors'])) {
             foreach ($apiResponse['errors'] as $error) {
                 if (isset($error['field']) && isset($error['errors']) && is_array($error['errors'])) {

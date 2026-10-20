@@ -180,6 +180,12 @@
 			 <trans-unit id="nspersonio.no_department" resname="nspersonio.no_department">
 				<source>No Department</source>
 			</trans-unit>
+			<trans-unit id="nspersonio.yes" resname="nspersonio.yes">
+				<source>Yes</source>
+			</trans-unit>
+			<trans-unit id="nspersonio.no" resname="nspersonio.no">
+				<source>No</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
