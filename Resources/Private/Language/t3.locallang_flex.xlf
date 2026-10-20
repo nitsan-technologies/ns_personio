@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf" date="2023-09-05T07:07:25Z" product-name="ns_personio" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="ns_personio_pi1.settings" resname="ns_personio_pi1.settings">
+        <source>General</source>
+        <target>crwdns374930:0crwdne374930:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.listHeader" resname="ns_personio_pi1.listHeader">
+        <source>Heading</source>
+        <target>crwdns374932:0crwdne374932:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.listDescription" resname="ns_personio_pi1.listDescription">
+        <source>Description</source>
+        <target>crwdns374934:0crwdne374934:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.storagePage" resname="ns_personio_pi1.storagePage">
+        <source>Storage Page</source>
+        <target>crwdns374936:0crwdne374936:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.companyId" resname="ns_personio_pi1.companyId">
+        <source>Company ID</source>
+        <target>crwdns374938:0crwdne374938:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.accessToken" resname="ns_personio_pi1.accessToken">
+        <source>Access Token</source>
+        <target>crwdns374940:0crwdne374940:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.contentElementId" resname="ns_personio_pi1.contentElementId">
+        <source>Content Elements</source>
+        <target>crwdns374942:0crwdne374942:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.detailPid" resname="ns_personio_pi1.detailPid">
+        <source>Details Page</source>
+        <target>crwdns374944:0crwdne374944:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.showApplyButton" resname="ns_personio_pi1.showApplyButton">
+        <source>Show Apply Button</source>
+        <target>crwdns374946:0crwdne374946:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.showHeader" resname="ns_personio_pi1.showHeader">
+        <source>Show Header</source>
+        <target>crwdns374948:0crwdne374948:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.applicationPid" resname="ns_personio_pi1.applicationPid">
+        <source>Application Page</source>
+        <target>crwdns374950:0crwdne374950:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.listPid" resname="ns_personio_pi1.listPid">
+        <source>List Page</source>
+        <target>crwdns374952:0crwdne374952:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.applicationMessage" resname="ns_personio_pi1.applicationMessage">
+        <source>Application Message</source>
+        <target>crwdns374954:0crwdne374954:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.successPID" resname="ns_personio_pi1.successPID">
+        <source>After Successful Application Redirect to Page</source>
+        <target>crwdns374956:0crwdne374956:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.failurePid" resname="ns_personio_pi1.failurePid">
+        <source>After Failed Application Redirect to Page</source>
+        <target>crwdns374958:0crwdne374958:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.listdetails" resname="ns_personio_pi1.listdetails">
+        <source>Details</source>
+        <target>crwdns374960:0crwdne374960:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.applyNow" resname="ns_personio_pi1.applyNow">
+        <source>Apply Now</source>
+        <target>crwdns374962:0crwdne374962:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.applicationView" resname="ns_personio_pi1.applicationView">
+        <source>View</source>
+        <target>crwdns374964:0crwdne374964:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.privacyPolicyURL" resname="ns_personio_pi1.privacyPolicyURL">
+        <source>Privacy Policy URL</source>
+        <target>crwdns374966:0crwdne374966:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
