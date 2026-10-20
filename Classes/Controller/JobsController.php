@@ -221,8 +221,6 @@ class JobsController extends ActionController
         $failurePid = (int) $this->settings['failurePid'];
         $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
         $api = $globalConfiguration['applicationApi'];
-        $companyId = (int) $this->settings['companyId'];
-        $token = $this->settings['accessToken'];
 
         $formData = [
             'jobId' => $this->request->getArgument('jobId')
@@ -317,12 +315,9 @@ class JobsController extends ActionController
             $body = json_encode($params);
             $options = [
                 'http_errors' => true,
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'X-Company-ID' => $companyId,
-                    'Authorization' => 'Bearer ' . $token,
+                'headers' => $this->personioRequestHeaders([
                     'Content-Type' => 'application/json',
-                ],
+                ]),
                 'body' => $body,
             ];
             try {
@@ -397,11 +392,7 @@ class JobsController extends ActionController
         }
 
         $options = [
-            'headers' => [
-                'X-Company-ID' => $this->settings['companyId'] ?? '',
-                'Accept' => 'application/json',
-                'Authorization' => 'Bearer ' . ($this->settings['accessToken'] ?? ''),
-            ],
+            'headers' => $this->personioRequestHeaders(),
             'multipart' => [
                 [
                     'name' => 'file',
@@ -462,6 +453,21 @@ class JobsController extends ActionController
             return '';
         }
         return $plain;
+    }
+
+    /**
+     * Guzzle 7.9+/8 rejects non-string header values (e.g. int company id).
+     *
+     * @param array<string, string> $extra
+     * @return array<string, string>
+     */
+    private function personioRequestHeaders(array $extra = []): array
+    {
+        return array_merge([
+            'Accept' => 'application/json',
+            'X-Company-ID' => (string) ($this->settings['companyId'] ?? ''),
+            'Authorization' => 'Bearer ' . (string) ($this->settings['accessToken'] ?? ''),
+        ], $extra);
     }
 
     /**
