@@ -239,6 +239,14 @@
         <source>No Department</source>
         <target>crwdns374838:0crwdne374838:0</target>
       </trans-unit>
+      <trans-unit id="nspersonio.yes" resname="nspersonio.yes">
+        <source>Yes</source>
+        <target>crwdns416001:0crwdne416001:0</target>
+      </trans-unit>
+      <trans-unit id="nspersonio.no" resname="nspersonio.no">
+        <source>No</source>
+        <target>crwdns416003:0crwdne416003:0</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
