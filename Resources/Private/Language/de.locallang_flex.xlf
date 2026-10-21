@@ -79,6 +79,14 @@
         <source>Privacy Policy URL</source>
         <target state="final">Datenschutzrichtlinien URL</target>
       </trans-unit>
+      <trans-unit id="ns_personio_pi1.showLabel" resname="ns_personio_pi1.showLabel">
+        <source>Show label</source>
+        <target state="needs-translation">Show label</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.showLabel.description" resname="ns_personio_pi1.showLabel.description">
+        <source>Show accessible form labels for job filters (recommended for WAVE / screen readers).</source>
+        <target state="needs-translation">Show accessible form labels for job filters (recommended for WAVE / screen readers).</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
