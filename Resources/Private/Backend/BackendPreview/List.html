@@ -24,6 +24,15 @@
             <td><f:translate key="LLL:EXT:ns_personio/Resources/Private/Language/locallang.xlf:nspersonio_pi1.list.storagePage" /></td>
             <td>{pi_flexform_transformed.settings.storagePage}</td>
         </tr>
+        <tr>
+            <td><f:translate key="LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.showLabel" /></td>
+            <td>
+                <f:if condition="{pi_flexform_transformed.settings.showLabel} == 1">
+                    <f:then><f:translate key="LLL:EXT:ns_personio/Resources/Private/Language/locallang.xlf:nspersonio.yes" /></f:then>
+                    <f:else><f:translate key="LLL:EXT:ns_personio/Resources/Private/Language/locallang.xlf:nspersonio.no" /></f:else>
+                </f:if>
+            </td>
+        </tr>
         </tbody>
     </table>
 </html>

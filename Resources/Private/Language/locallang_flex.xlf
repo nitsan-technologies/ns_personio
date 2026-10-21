@@ -58,8 +58,14 @@
                 <source>View</source>
             </trans-unit>
             <trans-unit id="ns_personio_pi1.privacyPolicyURL" resname="ns_personio_pi1.privacyPolicyURL">
-                <source>Privacy Policy URL</source>
-            </trans-unit>
+				<source>Privacy Policy URL</source>
+			</trans-unit>
+			<trans-unit id="ns_personio_pi1.showLabel" resname="ns_personio_pi1.showLabel">
+				<source>Show label</source>
+			</trans-unit>
+			<trans-unit id="ns_personio_pi1.showLabel.description" resname="ns_personio_pi1.showLabel.description">
+				<source>Show accessible form labels for job filters (recommended for WAVE / screen readers).</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

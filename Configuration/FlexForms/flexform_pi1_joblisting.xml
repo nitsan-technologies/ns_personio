@@ -76,6 +76,20 @@
                             <enableRichtext>true</enableRichtext>
                         </config>
                     </settings.listDescription>
+
+                    <settings.showLabel>
+                        <label>
+                            LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.showLabel
+                        </label>
+                        <description>
+                            LLL:EXT:ns_personio/Resources/Private/Language/locallang_flex.xlf:ns_personio_pi1.showLabel.description
+                        </description>
+                        <config>
+                            <type>check</type>
+                            <renderType>checkboxToggle</renderType>
+                            <default>0</default>
+                        </config>
+                    </settings.showLabel>
                 </el>
             </ROOT>
         </listDetails>
