@@ -79,6 +79,14 @@
         <source>Privacy Policy URL</source>
         <target>crwdns374966:0crwdne374966:0</target>
       </trans-unit>
+      <trans-unit id="ns_personio_pi1.showLabel" resname="ns_personio_pi1.showLabel">
+        <source>Show label</source>
+        <target>crwdns416005:0crwdne416005:0</target>
+      </trans-unit>
+      <trans-unit id="ns_personio_pi1.showLabel.description" resname="ns_personio_pi1.showLabel.description">
+        <source>Show accessible form labels for job filters (recommended for WAVE / screen readers).</source>
+        <target>crwdns416007:0crwdne416007:0</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
