@@ -4,7 +4,7 @@
     "description": "The extension offers various customization options for job listing, detail, and application pages on the frontend. Additionally, a scheduler ensures data synchronization. Directly list, view, and apply to Personio vacancies through the TYPO3 Backend.",
     "authors": [
         {
-            "name": "Team NITSAN"
+            "name": "Team T3Planet"
         }
     ],
     "keywords": [
