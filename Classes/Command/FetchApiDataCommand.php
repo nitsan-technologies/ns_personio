@@ -15,8 +15,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use NITSAN\NsPersonio\Domain\Repository\JobsRepository;
 use NITSAN\NsPersonio\Domain\Repository\DepartmentRepository;
+use TYPO3\CMS\Core\Html\SanitizerInitiator;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\HtmlSanitizer\Builder\CommonBuilder;
 
 class FetchApiDataCommand extends Command
 {
@@ -77,16 +80,20 @@ class FetchApiDataCommand extends Command
         $language = (int)$input->getArgument('languageUid');
         $api = trim($input->getArgument('api'));
         $pageId = (int)$input->getArgument('storagePageId');
-        if ($api == '') {
+        if ($api === '') {
             $output->writeln('<error>API URL cannot be empty.</error>');
+            return 1;
+        }
+        if (!$this->isAllowedPersonioApiUrl($api)) {
+            $output->writeln('<error>API URL must be an https://*.personio.de endpoint.</error>');
             return 1;
         }
 
         try {
-                $departmentRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                $departmentRepository = GeneralUtility::makeInstance(
                     DepartmentRepository::class
                 );
-                $jobsRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                $jobsRepository = GeneralUtility::makeInstance(
                     JobsRepository::class
                 );
             
@@ -224,8 +231,8 @@ class FetchApiDataCommand extends Command
                         }
                         $fullDescription .= '<p class="ns-nspersonio-detail-desc">' . $data['value'] . '</p>';
                     }
-                    $description = preg_replace('/ style=("|\')(.*?)("|\')/', '', $fullDescription);
-                    $jobObj->setDescriptions($description);
+                    $description = preg_replace('/ style=("|\')(.*?)("|\')/', '', $fullDescription) ?? $fullDescription;
+                    $jobObj->setDescriptions($this->sanitizeHtmlContent($description));
                 } else {
                     if (isset($job['jobDescriptions']['jobDescription']['value'])) {
                         if (isset($job['jobDescriptions']['jobDescription']['name'])) {
@@ -236,9 +243,9 @@ class FetchApiDataCommand extends Command
                             '/ style=("|\')(.*?)("|\')/',
                             '',
                             $job['jobDescriptions']['jobDescription']['value']
-                        );
+                        ) ?? (string)$job['jobDescriptions']['jobDescription']['value'];
                     }
-                    $jobObj->setDescriptions($fullDescription);
+                    $jobObj->setDescriptions($this->sanitizeHtmlContent($fullDescription));
                 }
             }
             isset($job['employmentType'])
@@ -297,11 +304,58 @@ class FetchApiDataCommand extends Command
      */
     public function getApiData(string $api): array
     {
+        if (!$this->isAllowedPersonioApiUrl($api)) {
+            throw new \InvalidArgumentException('API URL must be an https://*.personio.de endpoint.', 1764076201);
+        }
         $response = $this->getClient()->get($api)->getBody()->getContents();
-        $xmlToString = simplexml_load_string($response, null, LIBXML_NOCDATA);
+        $previous = libxml_use_internal_errors(true);
+        try {
+            $xmlToString = simplexml_load_string($response, \SimpleXMLElement::class, LIBXML_NONET | LIBXML_NOCDATA);
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($previous);
+        }
+        if ($xmlToString === false) {
+            return [];
+        }
         $apiJsonData = json_encode($xmlToString);
-        $dataArray = json_decode($apiJsonData, true);
+        $dataArray = json_decode((string)$apiJsonData, true);
         return empty($dataArray) ? [] : $dataArray;
+    }
+
+    private function isAllowedPersonioApiUrl(string $url): bool
+    {
+        $url = trim($url);
+        if ($url === '') {
+            return false;
+        }
+        $parts = parse_url($url);
+        if (!is_array($parts)) {
+            return false;
+        }
+        if (($parts['scheme'] ?? '') !== 'https') {
+            return false;
+        }
+        $host = strtolower((string)($parts['host'] ?? ''));
+        if ($host === '') {
+            return false;
+        }
+        return $host === 'personio.de' || str_ends_with($host, '.personio.de');
+    }
+
+    /**
+     * Sanitizes Personio HTML while keeping normal markup and external links.
+     */
+    private function sanitizeHtmlContent(string $html): string
+    {
+        if ($html === '') {
+            return '';
+        }
+        $sanitizer = GeneralUtility::makeInstance(CommonBuilder::class)->build();
+        return $sanitizer->sanitize(
+            $html,
+            GeneralUtility::makeInstance(SanitizerInitiator::class, self::class)
+        );
     }
 
     /**

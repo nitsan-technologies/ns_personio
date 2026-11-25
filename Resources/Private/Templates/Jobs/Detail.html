@@ -27,7 +27,7 @@
                             </div>
                             <div id="job-details" class="job-details__content">
                                 <f:if condition="{job.descriptions}">
-                                    <f:format.raw>{job.descriptions}</f:format.raw>
+                                    <f:sanitize.html build="TYPO3\HtmlSanitizer\Builder\CommonBuilder">{job.descriptions}</f:sanitize.html>
                                 </f:if>
                                 <f:if condition="{settings.contentElements}">
                                     <f:cObject typoscriptObjectPath="lib.commonContent"  data="{contentId:settings.contentElements}"  />

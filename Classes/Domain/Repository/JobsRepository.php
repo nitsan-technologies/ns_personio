@@ -99,8 +99,11 @@ class JobsRepository extends Repository
         $constraints[] = $query->logicalOr(...$storageConstraints);
         $constraints[] = $query->equals('sys_language_uid', $langId);
         if (!empty($arguments['search-word'])) {
-            $searchConstraints[] = $query->like('name', '%' . $arguments['search-word'] . '%');
-            $searchConstraints[] = $query->like('descriptions', '%' . $arguments['search-word'] . '%');
+            $connection = GeneralUtility::makeInstance(ConnectionPool::class)
+                ->getConnectionForTable('tx_nspersonio_domain_model_jobs');
+            $searchTerm = $connection->escapeLikeWildcards((string)$arguments['search-word']);
+            $searchConstraints[] = $query->like('name', '%' . $searchTerm . '%');
+            $searchConstraints[] = $query->like('descriptions', '%' . $searchTerm . '%');
             $constraints[] = $query->logicalOr(...$searchConstraints);
         }
         $query->matching($query->logicalAnd(...$constraints));

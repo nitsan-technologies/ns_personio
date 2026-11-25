@@ -36,6 +36,7 @@
                         <f:form method="POST" action="submitApplication" class="form ns-personio-form"  arguments="{jobId: jobId, jobUid: jobUid}" id="apply-form" enctype="multipart/form-data" >
                             <f:variable name="fileProcessLink"><f:uri.action action="fileProcess"></f:uri.action></f:variable>
                             <input type="hidden" value="{fileProcessLink}" id="fileProcessLink">
+                            <input type="hidden" value="{fileProcessToken}" id="fileProcessToken" name="ns_personio_fileProcessToken">
                             <div class="form-row ns-personio-row">
                                 <div class="form-group ns-personio-col ns-personio-col-4">
                                     <label for="gender" class="form-label">

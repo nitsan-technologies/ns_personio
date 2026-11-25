@@ -10,7 +10,7 @@
                             <h2>{settings.listHeader}</h2>
                         </f:if>
                         <f:if condition="{settings.listDescription}">
-                            <f:format.raw>{settings.listDescription}</f:format.raw>
+                            <f:format.html>{settings.listDescription}</f:format.html>
                         </f:if>
                     </div>
                 </f:if>
@@ -81,7 +81,7 @@
                 </f:if>
                 <f:if condition="{jobData.descriptions}">
                     <div class="jobs-content__description">
-                        <f:format.crop maxCharacters="120" append="..."><f:format.raw>{jobData.descriptions}</f:format.raw></f:format.crop>
+                        <f:format.crop maxCharacters="120" append="..."><f:sanitize.html build="TYPO3\HtmlSanitizer\Builder\CommonBuilder">{jobData.descriptions}</f:sanitize.html></f:format.crop>
                     </div>
                 </f:if>
             </f:section>

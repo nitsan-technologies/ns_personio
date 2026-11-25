@@ -24,16 +24,21 @@ window.onload = () => {
     const respondArr = [];
     const respondArrOther = [];
     let flag = false;
+    const fileProcessTokenInput = document.getElementById('fileProcessToken');
+    const fileProcessToken = fileProcessTokenInput ? fileProcessTokenInput.value : '';
     const cvDropzone = new Dropzone('#document-dropzone-cv', {
       url, // Set the url for your upload script location
       paramName: 'file', // The name that will be used to transfer the file
+      params: {
+        ns_personio_fileProcessToken: fileProcessToken,
+      },
       filesizeBase: 100000000000,
       maxFilesize: 20, // MB
       uploadMultiple: true,
       addRemoveLinks: true,
       dictTotalUploadMessage: 'Upload size exceeded',
       acceptedFiles:
-                '.pdf, .pptx, .xlsx, .docx, .doc, .xls, .ppt, .ods, .odt, .7z, .gz, .rar, .zip, .bmp, .gif, .jpg, .png, .tif, .csv, .txt, .rtf, .mp4, .3gp, .mov, .avi, .wmv',
+                '.pdf, .pptx, .xlsx, .docx, .doc, .xls, .ppt, .ods, .odt, .7z, .gz, .rar, .zip, .bmp, .gif, .jpg, .jpeg, .png, .tif, .tiff, .csv, .txt, .rtf, .mp4, .3gp, .mov, .avi, .wmv',
       accept(file, done) {
         if (totalSizeCV >= (1024999 * this.options.maxFilesize)) {
           // eslint-disable-next-line no-param-reassign
@@ -141,13 +146,16 @@ window.onload = () => {
     const otherDropzone = new Dropzone('#document-dropzone-other', {
       url, // Set the url for your upload script location
       paramName: 'file', // The name that will be used to transfer the file
+      params: {
+        ns_personio_fileProcessToken: fileProcessToken,
+      },
       filesizeBase: 100000000000,
       maxFilesize: 20, // MB
       uploadMultiple: true,
       addRemoveLinks: true,
       dictTotalUploadMessage: 'Upload size exceeded',
       acceptedFiles:
-          '.pdf, .pptx, .xlsx, .docx, .doc, .xls, .ppt, .ods, .odt, .7z, .gz, .rar, .zip, .bmp, .gif, .jpg, .png, .tif, .csv, .txt, .rtf, .mp4, .3gp, .mov, .avi, .wmv',
+          '.pdf, .pptx, .xlsx, .docx, .doc, .xls, .ppt, .ods, .odt, .7z, .gz, .rar, .zip, .bmp, .gif, .jpg, .jpeg, .png, .tif, .tiff, .csv, .txt, .rtf, .mp4, .3gp, .mov, .avi, .wmv',
       accept(file, done) {
         if (totalSizeOther >= (1024999 * this.options.maxFilesize)) {
           file.status = Dropzone.CANCELED;

@@ -200,11 +200,11 @@ class JobsController extends ActionController
                 'jobUid' => $job->getUid(),
                 'job' => $job,
                 'settings' => $this->settings,
+                'fileProcessToken' => $this->createFileProcessToken(),
             ]);
         }
-        
-            return $this->htmlResponse();
-        
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -220,13 +220,22 @@ class JobsController extends ActionController
         $successPid = (int) $this->settings['successPID'];
         $failurePid = (int) $this->settings['failurePid'];
         $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
-        $api = $globalConfiguration['applicationApi'];
+        $api = trim((string)($globalConfiguration['applicationApi'] ?? ''));
+        $uriBuilder = $this->uriBuilder;
+        if (!$this->isAllowedPersonioApiUrl($api)) {
+            return $this->redirectToURI(
+                $uriBuilder->setTargetPageUid($failurePid)->build()
+            );
+        }
 
         $formData = [
             'jobId' => $this->request->getArgument('jobId')
         ];
 
-            $formData = array_merge($formData, $this->request->getParsedBody());
+        $parsedBody = $this->request->getParsedBody();
+        if (is_array($parsedBody)) {
+            $formData = array_merge($formData, $parsedBody);
+        }
 
         $requiredFields = [
             'jobId',
@@ -259,8 +268,7 @@ class JobsController extends ActionController
                 ];
             }
         }
-        $jobId = $formData['jobId'];
-        $uriBuilder = $this->uriBuilder;
+            $jobId = $formData['jobId'];
         if ($formValid) {
 
             $cvData = json_decode($formData['cv-upload'], true);
@@ -371,18 +379,39 @@ class JobsController extends ActionController
      */
     public function fileProcessAction(): never
     {
-        $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
-        $api = $globalConfiguration['documentApi'] ?? '';
-        $uploadedFile = $this->getFirstUploadedFile('file');
+        if (!$this->isValidFileProcessToken()) {
+            $this->emitJsonResponse([
+                'success' => false,
+                'message' => 'Invalid security token',
+            ]);
+        }
 
-        if ($uploadedFile === null || $uploadedFile->getError() !== UPLOAD_ERR_OK) {
+        $globalConfiguration = $this->extensionConfiguration->get('ns_personio');
+        $api = trim((string)($globalConfiguration['documentApi'] ?? ''));
+        if (!$this->isAllowedPersonioApiUrl($api)) {
+            $this->emitJsonResponse([
+                'success' => false,
+                'message' => 'Document API is not configured correctly',
+            ]);
+        }
+
+        $uploadedFile = $this->getFirstUploadedFile('file');
+        if ($uploadedFile === null) {
             $this->emitJsonResponse([
                 'success' => false,
                 'message' => 'No file uploaded',
             ]);
         }
 
-        $uploadedName = $uploadedFile->getClientFilename() ?? '';
+        $validationError = $this->validateUploadedApplicationFile($uploadedFile);
+        if ($validationError !== null) {
+            $this->emitJsonResponse([
+                'success' => false,
+                'message' => $validationError,
+            ]);
+        }
+
+        $uploadedName = basename((string)$uploadedFile->getClientFilename());
         $contents = $uploadedFile->getStream()->getContents();
         if ($uploadedName === '' || $contents === '') {
             $this->emitJsonResponse([
@@ -415,12 +444,16 @@ class JobsController extends ActionController
             }
             $this->emitJsonResponse($decodedBody);
         } catch (\GuzzleHttp\Exception\RequestException $e) {
-            $message = $e->getMessage();
+            $message = 'Upload failed';
             $errorResponse = $e->getResponse();
             if ($errorResponse !== null) {
-                $plain = $this->plainPersonioErrorMessage($errorResponse->getBody()->getContents());
-                if ($plain !== '') {
-                    $message = $plain;
+                $responseBody = $errorResponse->getBody()->getContents();
+                $decoded = json_decode($responseBody, true);
+                if (is_array($decoded)) {
+                    $mapped = ApiResponseUtility::getApiResponse($decoded);
+                    if ($mapped !== '') {
+                        $message = $mapped;
+                    }
                 }
             }
             $this->emitJsonResponse([
@@ -428,6 +461,100 @@ class JobsController extends ActionController
                 'message' => $message,
             ]);
         }
+    }
+
+    private function isAllowedPersonioApiUrl(string $url): bool
+    {
+        $url = trim($url);
+        if ($url === '') {
+            return false;
+        }
+        $parts = parse_url($url);
+        if (!is_array($parts)) {
+            return false;
+        }
+        if (($parts['scheme'] ?? '') !== 'https') {
+            return false;
+        }
+        $host = strtolower((string)($parts['host'] ?? ''));
+        if ($host === '') {
+            return false;
+        }
+        return $host === 'personio.de' || str_ends_with($host, '.personio.de');
+    }
+
+    /**
+     * Server-side checks aligned with the Dropzone allow-list (type + 20 MB).
+     */
+    private function validateUploadedApplicationFile(UploadedFileInterface $uploadedFile): ?string
+    {
+        if ($uploadedFile->getError() !== UPLOAD_ERR_OK) {
+            return 'No file uploaded';
+        }
+        $size = $uploadedFile->getSize();
+        if ($size === null || $size < 1) {
+            return 'Unable to read uploaded file';
+        }
+        if ($size > 20 * 1024 * 1024) {
+            return 'File is too big';
+        }
+        $filename = $uploadedFile->getClientFilename() ?? '';
+        if ($filename === '' || str_contains($filename, '..') || str_contains($filename, '/') || str_contains($filename, '\\')) {
+            return 'Invalid file name';
+        }
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        $allowedExtensions = [
+            'pdf', 'pptx', 'xlsx', 'docx', 'doc', 'xls', 'ppt', 'ods', 'odt',
+            '7z', 'gz', 'rar', 'zip',
+            'bmp', 'gif', 'jpg', 'jpeg', 'png', 'tif', 'tiff',
+            'csv', 'txt', 'rtf',
+            'mp4', '3gp', 'mov', 'avi', 'wmv',
+        ];
+        if ($extension === '' || !in_array($extension, $allowedExtensions, true)) {
+            return 'Invalid file type';
+        }
+        return null;
+    }
+
+    private function resolveContentElementUid(): int
+    {
+        $candidates = [
+            $this->request->getAttribute('currentContentObject'),
+        ];
+        $typo3Request = $GLOBALS['TYPO3_REQUEST'] ?? null;
+        if ($typo3Request instanceof ServerRequestInterface) {
+            $candidates[] = $typo3Request->getAttribute('currentContentObject');
+        }
+        foreach ($candidates as $contentObject) {
+            if (is_object($contentObject) && isset($contentObject->data['uid'])) {
+                return (int)$contentObject->data['uid'];
+            }
+        }
+        return 0;
+    }
+
+    private function createFileProcessToken(): string
+    {
+        return $this->hashService->hmac(
+            'ns_personio|fileProcess|' . $this->resolveContentElementUid(),
+            self::class
+        );
+    }
+
+    private function isValidFileProcessToken(): bool
+    {
+        $token = '';
+        $parsedBody = $this->request->getParsedBody();
+        if (is_array($parsedBody) && isset($parsedBody['ns_personio_fileProcessToken'])) {
+            $token = (string)$parsedBody['ns_personio_fileProcessToken'];
+        }
+        if ($token === '' && $this->request->hasArgument('ns_personio_fileProcessToken')) {
+            $token = (string)$this->request->getArgument('ns_personio_fileProcessToken');
+        }
+        if ($token === '') {
+            return false;
+        }
+        return hash_equals($this->createFileProcessToken(), $token);
     }
 
     private function getFirstUploadedFile(string $key): ?UploadedFileInterface
